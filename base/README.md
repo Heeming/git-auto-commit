@@ -20,3 +20,6 @@
     * auto-commit?[y/n] y입력 시 현재까지의 변경사항이 auto-commit branch에 "Auto Commit"이란 commit message로 commit & push 됨
     * push to other branch?[y/n] y입력 시 commit&push할 branch명, commit message입력.
     * 입력한 branch에는 최종 결과만 commit됨
+
+## 추가 구현 예정
+* 사용자 입력에 따라 autoCommit.sh를 background에서 반복적으로 실행시키고 background 실행을 중단하는 shell 혹은 python 코드
