@@ -1,0 +1,66 @@
+name: Git Auto Commit
+description: "Automatically commits files which have been changed during the workflow run and push changes back to remote repository."
+
+author: Stefan Zweifel <hello@stefanzweifel.io>
+
+inputs:
+  commit_message:
+    description: Commit message
+    required: false
+    default: Apply automatic changes
+  branch:
+    description: Git branch name, where changes should be pushed too. Required if Action is used on the `pull_request` event
+    required: false
+    default: ${{ github.head_ref }}
+  commit_options:
+    description: Commit options (eg. --no-verify)
+    required: false
+    default: ""
+  file_pattern:
+    description: File pattern used for `git add`. For example `src/\*.js`
+    required: false
+    default: "."
+  repository:
+    description: Local file path to the git repository. Defaults to the current directory (`.`)
+    required: false
+    default: "."
+  commit_user_name:
+    description: Name used for the commit user
+    required: false
+    default: GitHub Actions
+  commit_user_email:
+    description: Email address used for the commit user
+    required: false
+    default: actions@github.com
+  commit_author:
+    description: Value used for the commit author. Defaults to the username of whoever triggered this workflow run.
+    required: false
+    default: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+  tagging_message:
+    description: Message used to create a new git tag with the commit. Keep this empty, if no tag should be created.
+    required: false
+    default: ""
+  push_options:
+    description: Push options (eg. --force)
+    required: false
+    default: ""
+  skip_dirty_check:
+    description: Skip the check if the git repository is dirty and always try to create a commit.
+    required: false
+    default: false
+  skip_fetch:
+    description: Skip the call to git-fetch.
+    required: false
+    default: false
+
+outputs:
+  changes_detected:
+    description: Value is "true", if the repository was dirty and file changes have been detected. Value is "false", if no changes have been detected.
+
+runs:
+  using: "node12"
+  main: "index.js"
+
+branding:
+  icon: "git-commit"
+  color: orange
