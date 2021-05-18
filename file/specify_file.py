@@ -8,6 +8,8 @@ def specify_filename():
 
 # 특정 파일의 특정 구간 지정
 def specify_filesection():
+    specify_filename()
+    
     file_section = str(input('Do you want to specify section? [y/n] '))
 
     if file_section == "y" or file_section == "Y":
