@@ -1,7 +1,7 @@
 echo "Checking file change for n%"
 
-file_name = "$FILE_NAME"
+percent = "$PERCENT"
 
-git add $file_name
+#git add $percent
 
-# commit과 push는?
+# n%만 변경 감지 어떻게?
