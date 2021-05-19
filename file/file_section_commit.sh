@@ -1,7 +1,12 @@
 echo "Specify filesection"
 
-file_section_start = "$FILE_SECTION_START"
-file_section_finish = "$FILE_SECTION_FINISH"
+file_name = "$1"
+
+file_section_start = "$2"
+
+file_section_finish = "$3"
+
+git add $file_name
 
 #git add $FILE_SECTION_START to $FILE_SECTION_FINISH ??
 

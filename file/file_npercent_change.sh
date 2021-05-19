@@ -1,7 +1,11 @@
 echo "Checking file change for n%"
 
-percent = "$PERCENT"
+file_name = "$1"
 
-#git add $percent
+percent = "$2"
+
+git add $file_name
+
+git diff $file_name
 
 # n%만 변경 감지 어떻게?

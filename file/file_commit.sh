@@ -1,7 +1,5 @@
 echo "Specify file"
 
-file_name = "$FILE_NAME"
+file_name = "$1"
 
 git add $file_name
-
-# commit과 push는?
