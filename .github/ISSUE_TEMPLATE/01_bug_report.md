@@ -1,6 +1,10 @@
+# Bug Report
+
 ---
+
 name: 🐜 Bug report
 about: If something isn't working 🔧
+
 ---
 
 ### Version Information
