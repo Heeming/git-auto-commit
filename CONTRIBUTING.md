@@ -8,7 +8,7 @@ Before sending your pull requests, make sure you do the following:
 -   Read the [Code of Conduct](CODE_OF_CONDUCT.md).
 -   Check if your changes are consistent with the
     [guidelines](#general-guidelines-and-philosophy-for-contribution).
--   Changes are consistent with the [Coding Style](#c-coding-style).
+-   Changes are consistent with the [Coding Style](CODING_STYLE.md).
 
 ## How to become a contributor and submit your own code
 
