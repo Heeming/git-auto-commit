@@ -22,7 +22,7 @@ Project maintainers have the right and responsibility to remove, edit, or reject
   
 ## Scope  
 This Code of Conduct applies to all content on our organization.  
-The Code of Conduct also applies within project spaces and in public spaces whenever an individual is representing TensorFlow or its community.  
+The Code of Conduct also applies within project spaces and in public spaces whenever an individual is representing its community.  
   
 ## Conflict Resolution    
 Conflicts in an open source project can take many forms, from someone having a bad day and using harsh and hurtful language in the issue queue, to more serious instances such as sexist/racist statements or threats of violence, and everything in between.  
