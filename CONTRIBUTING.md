@@ -6,7 +6,7 @@ Before sending your pull requests, make sure you do the following:
 
 -   Read the [contributing guidelines](CONTRIBUTING.md).
 -   Read the [Code of Conduct](CODE_OF_CONDUCT.md).
--   Changes are consistent with the [Coding Style](CODING_STYLE.md).
+-   Changes are consistent with the [Coding Style](#Python-coding-style).
 
 ## How to become a contributor and submit your own code
 
@@ -36,3 +36,13 @@ Before sending your pull request for
 [review](https://github.com/Heeming/git-auto-commit/pulls),
 make sure your changes are consistent with the guidelines and follow the
 git-auto-commit [coding style](CODING_STYILE.md).
+
+#### Python coding style
+
+Changes to git-auto-commit Python code should conform to
+[Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)
+
+#### Shell coding style
+
+Changes to git-auto-commit Shell code should conform to
+[Google Shell Style Guide](https://google.github.io/styleguide/shell.xml)
