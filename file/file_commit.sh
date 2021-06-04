@@ -1,6 +1,6 @@
 echo "Specify file"
 
-file_name = "$1"
+file_name="$1"
 
 if ! git diff $file_name --quiet
 then
