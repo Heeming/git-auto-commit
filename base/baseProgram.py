@@ -8,10 +8,11 @@ while choice != 6:
     print("Menu")
     print("1. New")
     print("2. Continue")
-    print("3. Error Backup mode")
+    print("3. Select mode")
     print("4. Git add file")
     print("5. Git push to branch")
-    print("6. Exit")
+    print("6. Delete auto-commit branch")
+    print("7. Exit")
     choice = int(input(">> "))
 
     if choice == 1:
@@ -62,6 +63,14 @@ while choice != 6:
 
     elif choice == 6:
         subprocess.call(['bash', './killProcess.sh'])
+
+        branch = str(input("Where to checkout?(branch_name) "))
+
+        subprocess.call(['bash', './deleteBranch.sh', branch])
+
+    elif choice == 7:
+        subprocess.call(['bash', './killProcess.sh'])
+        break
 
     else:
         print("Wrong Input! Please input again")
