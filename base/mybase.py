@@ -25,7 +25,6 @@ for i in range(len(py_list)) :
         pass
     else:
         subprocess.call(['sh', './continue.sh'])
-        print('/////////')
         subprocess.call(['sh', './autoCommitProcess.sh', err])
     
 '''
