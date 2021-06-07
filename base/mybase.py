@@ -32,7 +32,7 @@ for i in range(len(py_list)) :
     
 
 for i in range(len(c_list)) :
-    p = subprocess.Popen(['python', path + py_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(['sh', './exe_c.sh', path + c_list[i], c_list], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
 
     if err == '':
@@ -42,7 +42,7 @@ for i in range(len(c_list)) :
         subprocess.call(['sh', './error_autoCommitProcess.sh ' + err])
 
 for i in range(len(java_list)) :
-    p = subprocess.Popen(['python', path + py_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(['sh', './java_c.sh', path + c_list[i], c_list], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
 
     if err == '':
