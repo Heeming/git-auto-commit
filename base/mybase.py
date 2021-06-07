@@ -22,7 +22,7 @@ for i in range(len(py_list)) :
         branch = str("error")
         msg = str(ex)
 
-        print("commit")
+        print("!!!!!!!!!!!commit")
         
         subprocess.call(['sh', './continue.sh'])
         subprocess.call(['sh', './autoCommitProcess.sh'])
