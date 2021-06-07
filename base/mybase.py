@@ -1,6 +1,8 @@
 import subprocess
 import time
 import os
+import logging
+import traceback
 
 path = "./code/"
 file_list = os.listdir(path)
@@ -12,6 +14,8 @@ print(py_list)
 
 #c_list = [file for file in file_list if file.endswith(".c")]
 #java_list = [file for file in file_list if file.endswith(".java")]
+
+
 
 
 for i in range(len(py_list)) :
