@@ -26,6 +26,8 @@ while choice != 6:
     elif choice == 3:
         subprocess.call(['sh', './killProcess.sh'])
 
+        
+        path = "./code/"
 
         file_list = os.listdir(path)
 
@@ -71,6 +73,8 @@ while choice != 6:
                 subprocess.call(['sh', './continue.sh'])
                 subprocess.call(['sh', './error_autoCommitProcess.sh ' + err])
         
+    
+
     
     elif choice == 4:
         subprocess.call(['bash', './killProcess.sh'])
