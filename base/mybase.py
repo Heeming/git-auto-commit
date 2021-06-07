@@ -20,12 +20,14 @@ java_list = [file for file in file_list if file.endswith(".java")]
 for i in range(len(py_list)) :
     p = subprocess.Popen(['python', path + py_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
-    print(err)
+    
     if err == '':
         pass
     else:
         subprocess.call(['sh', './continue.sh'])
+        print('/////////')
         subprocess.call(['sh', './autoCommitProcess.sh'])
+    
 '''
 for i in range(len(c_list)) :
 #    p = subprocess.Popen(['python', path + py_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -35,7 +37,7 @@ for i in range(len(c_list)) :
         pass
     else:
         subprocess.call(['sh', './continue.sh'])
-        subprocess.call(['sh', './autoCommitProcess.sh'])
+        subprocess.call(['sh', './error_autoCommitProcess.sh ' + err])
 
 for i in range(len(java_list)) :
 #    p = subprocess.Popen(['python', path + py_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -45,5 +47,5 @@ for i in range(len(java_list)) :
         pass
     else:
         subprocess.call(['sh', './continue.sh'])
-        subprocess.call(['sh', './autoCommitProcess.sh'])
+        subprocess.call(['sh', './error_autoCommitProcess.sh ' + err])
         '''
