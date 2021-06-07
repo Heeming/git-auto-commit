@@ -16,7 +16,9 @@ print(py_list)
 
 for i in range(len(py_list)) :
     try :
+        print("&&")
         print("11\n", subprocess.check_output( ['python', path + py_list[i]], universal_newlines=True), "\n11" )
+        print("&&")
         
     except Exception as ex:
         branch = str("error")
