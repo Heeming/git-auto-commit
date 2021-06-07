@@ -31,7 +31,7 @@ def specify_percent():
     percent = str(input('What percenttage change do you want to commit?'))
 
     subprocess.call(['sh', './file_npercent_change.sh', percent])
-    
+
 choice = 0
 
 while choice != 9:
@@ -57,7 +57,7 @@ while choice != 9:
 
     elif choice == 3:
         file_name = str(input('Specify file name to detect : '))
-        #subprocess.call(['sh', './fileNameProcess.sh', file_name])
+        subprocess.call(['sh', './fileNameProcess.sh', file_name])
         
     elif choice == 4:
         path = "./code/"
