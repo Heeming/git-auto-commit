@@ -84,7 +84,7 @@ while choice != 8:
                 msg = str(num)
                 time_based_autocommit(num) # GUI에서 사용자가 분을 세팅했다고 가정
             except KeyboardInterrupt:  # GUI에서 체크버튼 해제되었다고 가정
-                killprocess()
+                subprocess.call(['sh', './autoCommitProcess.sh'])
                 break
 
     elif choice == 4:
@@ -102,7 +102,7 @@ while choice != 8:
                 msg = str(n)
                 ctime_based_autocommit(fname, start(fname), stop(), n)  # 파일 생성 시간을 기준으로 n분마다 auto commit하는 걸 백그라운드에서 실행
             except KeyboardInterrupt:  # GUI에서 체크버튼 해제되었다고 가정
-                killprocess()
+                subprocess.call(['sh', './autoCommitProcess.sh'])
                 break
 
     elif choice == 5:
