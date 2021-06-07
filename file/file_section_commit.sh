@@ -1,10 +1,10 @@
 echo "Specify filesection"
 
-file_name = "$1"
+file_name="$1"
 
-file_section_start = "$2"
+file_section_start="$2"
 
-file_section_finish = "$3"
+file_section_finish="$3"
 
 git add $file_name
 

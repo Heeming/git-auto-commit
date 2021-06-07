@@ -1,8 +1,8 @@
 echo "Checking file change for n%"
 
-file_name = "$1"
+file_name="$1"
 
-percent = "$2"
+percent="$2"
 
 git add $file_name
 

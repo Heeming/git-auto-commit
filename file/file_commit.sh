@@ -1,4 +1,4 @@
-echo "Specify file"
+echo "Specify file name"
 
 file_name="$1"
 
