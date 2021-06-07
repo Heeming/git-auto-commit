@@ -26,6 +26,7 @@ for i in range(len(py_list)) :
         
     except Exception as ex:
         print(massage)
+        print(subprocess.Popen.communicate())
         branch = str("error")
         msg = str(ex)
 
