@@ -26,7 +26,7 @@ for i in range(len(py_list)) :
     else:
         subprocess.call(['sh', './continue.sh'])
         print('/////////')
-        subprocess.call(['sh', './autoCommitProcess.sh'])
+        subprocess.call(['sh', './autoCommitProcess.sh', err])
     
 '''
 for i in range(len(c_list)) :
