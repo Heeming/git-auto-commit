@@ -1,5 +1,8 @@
 #!/bin/bash
 
-javac $1.java
+cd ..
+cd $1
 
-$1
+javac $2.java
+
+$2
