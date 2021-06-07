@@ -16,16 +16,16 @@ print(py_list)
 #java_list = [file for file in file_list if file.endswith(".java")]
 
 
-
+massage = ''
 
 for i in range(len(py_list)) :
     try :
         print("&&")
-        print("11\n", subprocess.check_output( ['python', path + py_list[i]], universal_newlines=True, stderr=subprocess.PIPE), "\n11" )
+        massage = subprocess.check_output( ['python', path + py_list[i]], universal_newlines=True, stderr=subprocess.PIPE)
         print("&&")
         
     except Exception as ex:
-
+        print(massage)
         branch = str("error")
         msg = str(ex)
 
