@@ -21,7 +21,6 @@ while choice != 6:
     
     elif choice == 2:
         subprocess.call(['sh', './continue.sh'])
-        print(1)
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
