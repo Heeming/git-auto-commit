@@ -1,18 +1,13 @@
-import schedule
 import datetime as dt
 import subprocess
 import time
 import os
 
-
+# auto commit 실행 - subprocess에서 에러가 계속 나서 주석처리해놓음
 def auto_commit():
-    subprocess.call(['sh', './continue.sh'])
-    subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
-    print("백업되었습니다.")
-
-
-def time_based_autocommit(n):
-    schedule.every(n).minutes.do(auto_commit())  # n분마다 auto_commit 실행
+    print("auto commit을 시행합니다")
+    #subprocess.call(['sh', './continue.sh'])
+    #subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
 
 
 # 파일생성시간을 계산
@@ -23,14 +18,14 @@ def createtime(file):
         return ymd_ctime
 
 
-# 파일생성시간을 timestamp를 이용해 int형 숫자로 변환
+# 파일생성시간을 timestamp를 이용해 float형 숫자로 바꾼 후, float형을 int형으로 변환
 def start(filename):
     start_time = createtime(filename)
     start_time_timestamp = int(start_time.timestamp())
     return start_time_timestamp
 
 
-# 현재시간을 timestamp를 이용해 int형 숫자로 변환
+# 현재시간을 timestamp를 이용해 float형 숫자로 바꾼 후, float형을 int형으로 변환
 def stop():
     stop_time = dt.datetime.now()
     stop_time_timestamp = int(stop_time.timestamp())
@@ -45,11 +40,12 @@ def remainder(filename, start, stop, n):
 
 # 나머지가 0이 되면 autocommit 실행
 def ctime_based_autocommit(filename, start, stop, n):
-    print("시도 중")
-    print(remainder(filename, start, stop, n))
+    print("시도 중") # 함수가 실행될 때마다 '시도 중'을 출력
+    print(remainder(filename, start, stop, n)) # 나머지 출력
     if remainder(filename, start, stop, n) == 0:
-        subprocess.call(['sh', './continue.sh'])
-        subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
+        # auto commit 실행 - subprocess에서 에러가 계속 나서 주석처리해놓음
+        #subprocess.call(['sh', './continue.sh'])
+        #subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
         print("백업되었습니다.")
 
 choice = 0
@@ -75,12 +71,14 @@ while choice != 8:
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
-        filename = str(input("Add filename : "))
         num = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 세팅했다고 가정
-        try:
-            time_based_autocommit(num)  # GUI에서 사용자가 분을 세팅했다고 가정
-        except KeyboardInterrupt:  # GUI에서 체크버튼 해제되었다고 가정
-            print("버튼 해제")
+        while True:
+            try:
+                print("시도")
+                time.sleep(num*60)
+                auto_commit()
+            except Exception as ex:  # GUI에서 체크버튼 해제되었다고 가정
+                print(ex)
 
     elif choice == 4:
         filename = str(input('Enter your file name : '))  # GUI에서 사용자가 특정 파일 선택했다고 가정
