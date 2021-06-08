@@ -1,6 +1,6 @@
 #!/bin/bash
 
 
-gcc -0 $2 $1.c
+gcc -o $2.out $1$2.c
 
-$1
+$1$2.out

@@ -21,6 +21,7 @@ while choice != 6:
     
     elif choice == 2:
         subprocess.call(['sh', './continue.sh'])
+        print(1)
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
@@ -45,7 +46,7 @@ while choice != 6:
 
 
         for i in range(len(py_list)) :
-            p = subprocess.Popen(['python', path + py_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(['python3', path + py_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             try:
                 out, err = p.communicate(timeout=time_out_second)
             except Exception as ex:
@@ -59,7 +60,7 @@ while choice != 6:
             
 
         for i in range(len(c_list)) :
-            p = subprocess.Popen(['sh', './exe_c.sh', path + c_list[i], c_list], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(['sh', './exe_c.sh', path, c_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             try:
                 out, err = p.communicate(timeout=time_out_second)
             except Exception as ex:
