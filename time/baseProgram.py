@@ -7,7 +7,6 @@ import os
 
 def auto_commit():
     subprocess.call(['sh', './continue.sh'])
-    subprocess.call(['sh', './addFile.sh', fname])
     subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
     print("백업되었습니다.")
 
@@ -24,31 +23,31 @@ def createtime(file):
         return ymd_ctime
 
 
-# 파일생성시간을 timestamp를 이용해 float형 수로 변환
-def start(file):
-    start_time = createtime(file)
-    start_time_timestamp = start_time.timestamp()
+# 파일생성시간을 timestamp를 이용해 int형 숫자로 변환
+def start(filename):
+    start_time = createtime(filename)
+    start_time_timestamp = int(start_time.timestamp())
     return start_time_timestamp
 
 
-# 현재시간을 timestamp를 이용해 float형 수로 변환
+# 현재시간을 timestamp를 이용해 int형 숫자로 변환
 def stop():
     stop_time = dt.datetime.now()
-    stop_time_timestamp = stop_time.timestamp()
+    stop_time_timestamp = int(stop_time.timestamp())
     return stop_time_timestamp
 
 
 # (현재 시간 - 파일 생성 시간) % 60n을 통해서 나머지 계산
-def remainder(file, start, stop, n):
-    time_remainder = (stop - start(file)) % (60 * n)
+def remainder(filename, start, stop, n):
+    time_remainder = (stop - start(filename)) % (60 * n)
     return time_remainder
 
 
 # 나머지가 0이 되면 autocommit 실행
-def ctime_based_autocommit(file, start, stop, n):
+def ctime_based_autocommit(filename, start, stop, n):
     print("시도 중")
-    print(remainder(file, start, stop, n))
-    if 60*n - 0.02 < remainder(file, start, stop, n) < 60*n:
+    print(remainder(filename, start, stop, n))
+    if remainder(filename, start, stop, n) == 0:
         subprocess.call(['sh', './continue.sh'])
         subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
         print("백업되었습니다.")
@@ -76,7 +75,7 @@ while choice != 8:
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
-        fname = str(input("Add filename : "))
+        filename = str(input("Add filename : "))
         num = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 세팅했다고 가정
         try:
             time_based_autocommit(num)  # GUI에서 사용자가 분을 세팅했다고 가정
@@ -84,12 +83,13 @@ while choice != 8:
             print("버튼 해제")
 
     elif choice == 4:
-        fname = str(input('Enter your file name : '))  # GUI에서 사용자가 특정 파일 선택했다고 가정
+        filename = str(input('Enter your file name : '))  # GUI에서 사용자가 특정 파일 선택했다고 가정
         n = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 n으로 세팅했다고 가정
         while True:
             try:
                 print("시도")
-                ctime_based_autocommit(fname, start, stop(), n)  # 파일 생성 시간을 기준으로 n분마다 auto commit하는 걸 백그라운드에서 실행
+                time.sleep(1)
+                ctime_based_autocommit(filename, start, stop(), n)  # 파일 생성 시간을 기준으로 n분마다 auto commit하는 걸 백그라운드에서 실행
             except Exception as ex:  # GUI에서 체크버튼 해제되었다고 가정
                 print(ex)
             #if :  # GUI에서 체크버튼 해제되었다고 가정
