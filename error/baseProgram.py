@@ -54,6 +54,8 @@ while choice != 6:
             if err == '':
                 pass
             else:
+                print("error - " + py_list[i])
+                print("error msg :\n", err)
                 subprocess.call(['sh', './continue.sh'])
                 subprocess.call(['sh', './error_autoCommitProcess.sh', err])
             
@@ -68,6 +70,8 @@ while choice != 6:
             if err == '':
                 pass
             else:
+                print("error - " + c_list[i] + ".c")
+                print("error msg :\n", err)
                 subprocess.call(['sh', './continue.sh'])
                 subprocess.call(['sh', './error_autoCommitProcess.sh ' + err])
 
@@ -81,6 +85,8 @@ while choice != 6:
             if err == '':
                 pass
             else:
+                print("error - " + java_list[i] + ".java")
+                print("error msg :\n", err)
                 subprocess.call(['sh', './continue.sh'])
                 subprocess.call(['sh', './error_autoCommitProcess.sh ' + err])
         
