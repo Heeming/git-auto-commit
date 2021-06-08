@@ -55,7 +55,7 @@ while choice != 6:
                 pass
             else:
                 subprocess.call(['sh', './continue.sh'])
-                subprocess.call(['sh', './autoCommitProcess.sh', err])
+                subprocess.call(['sh', './error_autoCommitProcess.sh', err])
             
 
         for i in range(len(c_list)) :
