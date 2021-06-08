@@ -709,13 +709,12 @@ class Ui_MainWindow(object):
             branch = pushUI.branch
             msg = pushUI.message
             
-            subprocess.call(['sh', 'base/userCommit.sh', branch, msg])
-
+            subprocess.call(['sh', 'base/userCommit.sh', branch, msg, self.repositoryPath])
             subprocess.call(['sh', 'base/continue.sh']),
             
-            # TODO
-            # start()
-            # subprocess.call(['sh', 'base/autoCommitProcess.sh'])
+        # TODO
+        # start()
+        # subprocess.call(['sh', 'base/autoCommitProcess.sh'])
 
     def deleteBranch(self):
         checkoutQDialog = CheckoutQDialog()
