@@ -71,8 +71,6 @@ while choice != 8:
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
-        subprocess.call(['sh', './killProcess.sh'])
-
         path = "./code/"
         file_list = os.listdir(path)
 
@@ -90,8 +88,6 @@ while choice != 8:
                 break
 
     elif choice == 4:
-        subprocess.call(['sh', './killProcess.sh'])
-
         path = "./code/"
         file_list = os.listdir(path)
 
