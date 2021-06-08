@@ -45,6 +45,7 @@ class Ui_MainWindow(object):
         self.gridLayout_4 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_4.setObjectName("gridLayout_4")
         self.plainTextEdit = QtWidgets.QPlainTextEdit(self.scrollAreaWidgetContents_3)
+        self.plainTextEdit.setReadOnly(True)
         self.plainTextEdit.setObjectName("plainTextEdit")
         self.gridLayout_4.addWidget(self.plainTextEdit, 0, 0, 1, 1)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_3)

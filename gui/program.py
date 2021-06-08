@@ -422,9 +422,119 @@ class LocalQDialog(QDialog):
 
         # save repository name & path in membervariables
 
+class PushQDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.branch = None
+        self.message = None
+        self.setupUi()
+
+    def setupUi(self):
+        self.setObjectName("Dialog")
+        self.resize(550, 102)
+        self.setMinimumSize(QtCore.QSize(550, 102))
+        self.setMaximumSize(QtCore.QSize(550, 102))
+        self.gridLayout = QtWidgets.QGridLayout(self)
+        self.gridLayout.setObjectName("gridLayout")
+        self.formLayout_2 = QtWidgets.QFormLayout()
+        self.formLayout_2.setObjectName("formLayout_2")
+        self.label_3 = QtWidgets.QLabel(self)
+        self.label_3.setObjectName("label_3")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_3)
+        self.label = QtWidgets.QLabel(self)
+        self.label.setObjectName("label")
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.lineEdit = QtWidgets.QLineEdit(self)
+        self.lineEdit.setObjectName("lineEdit")
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lineEdit)
+        self.comboBox = QtWidgets.QComboBox(self)
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.comboBox)
+        self.gridLayout.addLayout(self.formLayout_2, 0, 0, 1, 1)
+        self.buttonBox = QtWidgets.QDialogButtonBox(self)
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 1)
+
+        self.retranslateUi()
+        self.buttonBox.accepted.connect(lambda:(
+            self.accept(),
+            self.saveInfo(),
+            )
+        )
+        self.buttonBox.rejected.connect(self.reject)
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(_translate("Dialog", "Push"))
+        self.label_3.setText(_translate("Dialog", "Branch"))
+        self.label.setText(_translate("Dialog", "Commit Message"))
+        self.comboBox.setItemText(0, _translate("Dialog", "master"))
+        self.comboBox.setItemText(1, _translate("Dialog", "auto-commit"))
+
+    def saveInfo(self):
+        self.branch = self.comboBox.currentText()
+        self.message = self.lineEdit.text()
+
+class CheckoutQDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.branch = None
+        self.setupUi()
+
+    def setupUi(self):
+        self.setObjectName("Dialog")
+        self.resize(550, 73)
+        self.setMinimumSize(QtCore.QSize(550, 73))
+        self.setMaximumSize(QtCore.QSize(550, 73))
+        self.gridLayout = QtWidgets.QGridLayout(self)
+        self.gridLayout.setObjectName("gridLayout")
+        self.formLayout_2 = QtWidgets.QFormLayout()
+        self.formLayout_2.setObjectName("formLayout_2")
+        self.label_3 = QtWidgets.QLabel(self)
+        self.label_3.setObjectName("label_3")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_3)
+        self.comboBox = QtWidgets.QComboBox(self)
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.comboBox)
+        self.gridLayout.addLayout(self.formLayout_2, 0, 0, 1, 1)
+        self.buttonBox = QtWidgets.QDialogButtonBox(self)
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 1)
+
+        self.retranslateUi()
+        self.buttonBox.accepted.connect(lambda:(
+            self.accept(),
+            self.saveInfo(),
+            ))
+        self.buttonBox.rejected.connect(self.reject)
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(_translate("Dialog", "Where to checkout to?"))
+        self.label_3.setText(_translate("Dialog", "Branch"))
+        self.comboBox.setItemText(0, _translate("Dialog", "master"))
+        self.comboBox.setItemText(1, _translate("Dialog", "auto-commit"))
+
+    def saveInfo(self):
+        self.branch = self.comboBox.currentText()
+
 
 class Ui_MainWindow(object):
 
+    def __init__(self):
+        self.option = [0]
+        self.repositoryName = None
+        self.repositoryPath = None
     # TODO
     # How to show widget when clicked button
 
@@ -506,10 +616,10 @@ class Ui_MainWindow(object):
         loginQDialog.exec_()
 
     def openRepository(self, MainWindow):
-        repository_path = self.selectDirectory()
+        self.repositoryPath = self.selectDirectory()
 
-        if repository_path != "":
-            self.addRepoTab(MainWindow, repository_path)
+        if self.repositoryPath != "":
+            self.addRepoTab(MainWindow)
 
             self.tabWidget.removeTab(self.tabWidget.currentIndex())
 
@@ -518,11 +628,11 @@ class Ui_MainWindow(object):
         cloneQDialog.exec_()
         
         # TODO
-        repositoryName = cloneQDialog.repositoryName
-        repositoryPath = cloneQDialog.repositoryPath
+        self.repositoryName = cloneQDialog.repositoryName
+        self.repositoryPath = cloneQDialog.repositoryPath
         
-        if repositoryName != None and repositoryPath != None:
-            self.addRepoTab(MainWindow, repositoryPath)
+        if self.repositoryName != None and self.repositoryPath != None:
+            self.addRepoTab(MainWindow)
 
             self.tabWidget.removeTab(self.tabWidget.currentIndex())
         
@@ -530,11 +640,11 @@ class Ui_MainWindow(object):
         localQDialog = LocalQDialog()
         localQDialog.exec_()
 
-        repositoryName = localQDialog.repositoryName
-        repositoryPath = localQDialog.repositoryPath
+        self.repositoryName = localQDialog.repositoryName
+        self.repositoryPath = localQDialog.repositoryPath
         
-        if repositoryName != None and repositoryPath != None:
-            self.addRepoTab(MainWindow, repositoryPath)
+        if self.repositoryName != None and self.repositoryPath != None:
+            self.addRepoTab(MainWindow)
 
             self.tabWidget.removeTab(self.tabWidget.currentIndex())
 
@@ -563,6 +673,65 @@ class Ui_MainWindow(object):
 
         subprocess.call(['sh', 'base/continue.sh'])
         subprocess.call(['sh', 'base/autoCommitProcess.sh'])
+
+    def start(self):
+        pass
+
+        # TODO
+        # member variable - options : list
+        # autoCommit with selected Modes
+
+    def stop(self):
+        pass
+        # TODO
+        # kill all process
+
+    def controlAutoCommit(self):
+        if self.pushButton_5.text() == "Start":
+            self.pushButton_5.setText("Stop")
+            self.start()
+
+        else:
+            self.pushButton_5.setText("Start")
+            self.stop()
+
+    def push(self):
+        subprocess.call(['bash', 'base/killProcess.sh'])
+
+        # TODO
+        # widget for get branch name and commit message...
+        pushUI = PushQDialog()
+        pushUI.exec_()
+
+
+        if pushUI.branch != None and pushUI.message != None:
+            branch = pushUI.branch
+            msg = pushUI.message
+            
+            subprocess.call(['sh', 'base/userCommit.sh', branch, msg])
+
+            subprocess.call(['sh', 'base/continue.sh']),
+            
+            # TODO
+            # start()
+            # subprocess.call(['sh', 'base/autoCommitProcess.sh'])
+
+    def deleteBranch(self):
+        checkoutQDialog = CheckoutQDialog()
+        checkoutQDialog.exec_()
+
+        branch = checkoutQDialog.branch
+
+        if branch != None:
+            subprocess.call(['bash', 'base/killProcess.sh'])
+            subprocess.call(['bash', 'base/deleteBranch.sh', branch])
+
+    def getGitLogGraph(self):
+        command = "cd "+self.repositoryPath+ r"; git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative"
+
+        log = subprocess.run(command, capture_output=True, shell=True)
+
+        return log.stdout.decode()
 
     def addNewTab(self, MainWindow):
         self.tab = QtWidgets.QWidget()
@@ -605,7 +774,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", "Clone a repo"))
         self.pushButton_3.setText(_translate("MainWindow", "Start a local repo"))
 
-    def addRepoTab(self, MainWindow, path):
+    def addRepoTab(self, MainWindow):
         # TODO
         # repository_name : Extract Repository name & set it to tab Name
         # gitLog : text of git log --graph ...
@@ -629,6 +798,8 @@ class Ui_MainWindow(object):
         self.gridLayout_4.setObjectName("gridLayout_4")
         self.plainTextEdit = QtWidgets.QPlainTextEdit(self.scrollAreaWidgetContents_3)
         self.plainTextEdit.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.plainTextEdit.setReadOnly(True)
+        self.plainTextEdit.setLineWrapMode(QtWidgets.QPlainTextEdit.NoWrap)
         self.plainTextEdit.setObjectName("plainTextEdit")
         self.gridLayout_4.addWidget(self.plainTextEdit, 0, 0, 1, 1)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_3)
@@ -637,13 +808,12 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
 
+        # Start
         self.pushButton_5 = QtWidgets.QPushButton(self.tab)
         self.pushButton_5.setObjectName("pushButton_5")
         # TODO
         # autoCommit.sh
-        self.pushButton_5.clicked.connect(lambda:
-            subprocess.call(['sh', 'base/autoCommitProcess.sh']), self.pushButton_5.setText("Stop") if self.pushButton_5.text() == "start" else subprocess.call(['bash', 'base/killProcess.sh']), self.pushButton_5.setText("Start")
-        )
+        self.pushButton_5.clicked.connect(self.controlAutoCommit)
 
         self.verticalLayout.addWidget(self.pushButton_5)
 
@@ -670,17 +840,7 @@ class Ui_MainWindow(object):
         self.pushButton_3.setObjectName("pushButton_3")
         # TODO
         # push to specific branch
-        self.pushButton_3.clicked.connect(lambda:(
-            subprocess.call(['bash', 'base/killProcess.sh']),
-
-            # TODO
-            # widget for get branch name and commit message...
-            
-            subprocess.call(['sh', 'base/userCommit.sh', branch, msg]),
-
-            subprocess.call(['sh', 'base/continue.sh']),
-            subprocess.call(['sh', 'base/autoCommitProcess.sh']),
-        ))
+        self.pushButton_3.clicked.connect(self.push)
 
         self.verticalLayout.addWidget(self.pushButton_3)
 
@@ -688,19 +848,15 @@ class Ui_MainWindow(object):
         self.pushButton_4.setObjectName("pushButton_4")
         # TODO
         # delete auto-commit branch
-        self.pushButton_4.clicked.connect(lambda:(
-            subprocess.call(['bash', '/home/hm/Workspace/2021/OSSW/project/git-auto-commit/base/killProcess.sh']),
-
-            # get branch name - where to checkout?
-
-            subprocess.call(['bash', '/home/hm/Workspace/2021/OSSW/project/git-auto-commit/base/deleteBranch.sh', branch]),
-        ))
+        self.pushButton_4.clicked.connect(self.deleteBranch)
 
         self.verticalLayout.addWidget(self.pushButton_4)
         self.gridLayout_5.addLayout(self.verticalLayout, 0, 1, 1, 1)
         self.tabWidget.addTab(self.tab, "")
 
         _translate = QtCore.QCoreApplication.translate
+
+        self.plainTextEdit.setPlainText(_translate("MainWindow", self.getGitLogGraph()))
         self.pushButton_5.setText(_translate("MainWindow", "Start"))
         self.pushButton.setText(_translate("MainWindow", "ChangeMode"))
         self.pushButton_2.setText(_translate("MainWindow", "Add files"))
