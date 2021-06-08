@@ -6,15 +6,11 @@ import os
 
 def auto_commit():
     subprocess.call(['sh', './continue.sh'])
-    subprocess.call(['sh', './autoCommitProcess.sh'])
+    subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
     print("백업되었습니다.")
 
 def time_based_autocommit(n):
-    schedule.every(n).minutes.do(auto_commit) # n분마다 auto_commit 실행
-
-# 백업 시간이 되었을 경우 출력할 문구
-def commit():
-    print("백업 시간이 되었습니다.")
+    schedule.every(n).minutes.do(auto_commit()) # n분마다 auto_commit 실행
 
 # 파일생성시간을 계산
 def createtime(file):
@@ -43,9 +39,8 @@ def remainder(start, stop, n):
 # 나머지가 0이 되면 autocommit 실행
 def ctime_based_autocommit(file, start, stop, n):
     if remainder(start, stop, n) == 0:
-        commit()
         subprocess.call(['sh', './continue.sh'])
-        subprocess.call(['sh', './autoCommitProcess.sh'])
+        subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
         print("백업되었습니다.")
 
 choice = 0
