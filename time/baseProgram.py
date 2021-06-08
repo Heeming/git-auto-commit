@@ -38,18 +38,17 @@ def stop():
 
 
 # (현재 시간 - 파일 생성 시간) % 60n을 통해서 나머지 계산
-def remainder(start, stop, n):
-    time_remainder = (stop - start) % (60 * n)
+def remainder(file, start, stop, n):
+    time_remainder = (stop - start(file)) % (60 * n)
     return time_remainder
 
 
 # 나머지가 0이 되면 autocommit 실행
 def ctime_based_autocommit(file, start, stop, n):
-    if remainder(start, stop, n) == 0:
+    if remainder(file, start, stop, n) == 0:
         subprocess.call(['sh', './continue.sh'])
         subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
         print("백업되었습니다.")
-
 
 choice = 0
 
@@ -74,38 +73,23 @@ while choice != 8:
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
-        path = "./code/"
-        file_list = os.listdir(path)
-
-        py_list = [file for file in file_list if file.endswith(".py")]
-
         num = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 세팅했다고 가정
-
-        for i in range(len(py_list)):
-            try:
-                branch = str(num)
-                msg = str(num)
-                time_based_autocommit(num)  # GUI에서 사용자가 분을 세팅했다고 가정
-
-            except KeyboardInterrupt:  # GUI에서 체크버튼 해제되었다고 가정
-                break
+        try:
+            branch = str(num)
+            msg = str(num)
+            time_based_autocommit(num)  # GUI에서 사용자가 분을 세팅했다고 가정
+        except KeyboardInterrupt:  # GUI에서 체크버튼 해제되었다고 가정
+            subprocess.call(['bash', './killProcess.sh'])
 
     elif choice == 4:
-        path = "./code/"
-        file_list = os.listdir(path)
-
-        py_list = [file for file in file_list if file.endswith(".py")]
-
         fname = str(input('Enter your file name : '))  # GUI에서 사용자가 특정 파일 선택했다고 가정
         n = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 n으로 세팅했다고 가정
-
-        for i in range(len(py_list)):
-            try:
-                branch = str(n)
-                msg = str(n)
-                ctime_based_autocommit(fname, start(fname), stop(), n)  # 파일 생성 시간을 기준으로 n분마다 auto commit하는 걸 백그라운드에서 실행
-            except KeyboardInterrupt:  # GUI에서 체크버튼 해제되었다고 가정
-                break
+        try:
+            branch = str(n)
+            msg = str(n)
+            ctime_based_autocommit(fname, start, stop(), n)  # 파일 생성 시간을 기준으로 n분마다 auto commit하는 걸 백그라운드에서 실행
+        except KeyboardInterrupt:  # GUI에서 체크버튼 해제되었다고 가정
+            subprocess.call(['bash', './killProcess.sh'])
 
     elif choice == 5:
         path = "./code/"
