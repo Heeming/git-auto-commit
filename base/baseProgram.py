@@ -24,6 +24,7 @@ while choice != 6:
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
+        time_out = 15
         path = "./code/"
         file_list = os.listdir(path)
 

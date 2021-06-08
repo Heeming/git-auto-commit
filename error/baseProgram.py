@@ -24,6 +24,8 @@ while choice != 6:
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
+        time_out_second = 15
+
         subprocess.call(['sh', './killProcess.sh'])
 
         
@@ -44,7 +46,10 @@ while choice != 6:
 
         for i in range(len(py_list)) :
             p = subprocess.Popen(['python', path + py_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            out, err = p.communicate()
+            try:
+                out, err = p.communicate(timeout=time_out_second)
+            except Exception as ex:
+                out, err = None, ex
             
             if err == '':
                 pass
@@ -55,7 +60,10 @@ while choice != 6:
 
         for i in range(len(c_list)) :
             p = subprocess.Popen(['sh', './exe_c.sh', path + c_list[i], c_list], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            out, err = p.communicate()
+            try:
+                out, err = p.communicate(timeout=time_out_second)
+            except Exception as ex:
+                out, err = None, ex
 
             if err == '':
                 pass
@@ -65,7 +73,10 @@ while choice != 6:
 
         for i in range(len(java_list)) :
             p = subprocess.Popen(['sh', './java_c.sh', path + java_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            out, err = p.communicate()
+            try:
+                out, err = p.communicate(timeout=time_out_second)
+            except Exception as ex:
+                out, err = None, ex
 
             if err == '':
                 pass
