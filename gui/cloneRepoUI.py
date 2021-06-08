@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'clone.ui'
+# Form implementation generated from reading ui file 'cloneExample.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -11,61 +11,62 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(550, 105)
-        Form.setMinimumSize(QtCore.QSize(550, 105))
-        Form.setMaximumSize(QtCore.QSize(550, 105))
-        self.gridLayout = QtWidgets.QGridLayout(Form)
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(550, 105)
+        Dialog.setMinimumSize(QtCore.QSize(550, 105))
+        Dialog.setMaximumSize(QtCore.QSize(550, 16777215))
+        self.gridLayout = QtWidgets.QGridLayout(Dialog)
         self.gridLayout.setObjectName("gridLayout")
         self.formLayout_2 = QtWidgets.QFormLayout()
         self.formLayout_2.setObjectName("formLayout_2")
-        self.label = QtWidgets.QLabel(Form)
+        self.label = QtWidgets.QLabel(Dialog)
         self.label.setObjectName("label")
         self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.lineEdit = QtWidgets.QLineEdit(Form)
+        self.lineEdit = QtWidgets.QLineEdit(Dialog)
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout.addWidget(self.lineEdit)
-        self.pushButton = QtWidgets.QPushButton(Form)
+        self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
         self.formLayout_2.setLayout(0, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout)
-        self.lineEdit_2 = QtWidgets.QLineEdit(Form)
+        self.lineEdit_2 = QtWidgets.QLineEdit(Dialog)
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lineEdit_2)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
-        self.pushButton_2 = QtWidgets.QPushButton(Form)
+        self.pushButton_2 = QtWidgets.QPushButton(Dialog)
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_2.addWidget(self.pushButton_2)
         self.formLayout_2.setLayout(2, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_2)
-        self.label_2 = QtWidgets.QLabel(Form)
+        self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setObjectName("label_2")
         self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_2)
-        self.gridLayout.addLayout(self.formLayout_2, 1, 0, 1, 1)
+        self.gridLayout.addLayout(self.formLayout_2, 0, 0, 1, 1)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Clone a Repo"))
-        self.label.setText(_translate("Form", "Where to clone to"))
-        self.pushButton.setText(_translate("Form", "Browse"))
-        self.pushButton_2.setText(_translate("Form", "Clone the repo"))
-        self.label_2.setText(_translate("Form", "URL"))
+        Dialog.setWindowTitle(_translate("Dialog", "Clone a Repo"))
+        self.label.setText(_translate("Dialog", "Where to clone to"))
+        self.lineEdit.setText(_translate("Dialog", "Hello"))
+        self.pushButton.setText(_translate("Dialog", "Browse"))
+        self.pushButton_2.setText(_translate("Dialog", "Clone the repo"))
+        self.label_2.setText(_translate("Dialog", "URL"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
     sys.exit(app.exec_())
