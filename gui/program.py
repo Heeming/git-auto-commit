@@ -11,75 +11,64 @@ import time
 import os
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import *
 
-class SelectModeQDialog(QtWidgets.QDialog):
+class SelectModeQDialog(QDialog):
+    selectedMode = None # information of selected modes
 
-    def setupUI(self):
+    def __init__(self):
         # TODO
         # send checked list to "Start"
         # save in member variables?
-
+        super().__init__()
+        self.setupUI()
+    
+    def setupUI(self):
         self.setObjectName("Dialog")
-        self.resize(587, 326)
-        self.setMinimumSize(QtCore.QSize(494, 326))
-        self.setMaximumSize(QtCore.QSize(587, 16777215))
+        self.resize(588, 326)
+        self.setMinimumSize(QtCore.QSize(588, 326))
+        self.setMaximumSize(QtCore.QSize(588, 16777215))
         self.gridLayout = QtWidgets.QGridLayout(self)
         self.gridLayout.setObjectName("gridLayout")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-
         self.checkBox = QtWidgets.QCheckBox(self)
         self.checkBox.setObjectName("checkBox")
-
         self.horizontalLayout.addWidget(self.checkBox)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-
         self.spinBox = QtWidgets.QSpinBox(self)
         self.spinBox.setObjectName("spinBox")
-
         self.horizontalLayout.addWidget(self.spinBox)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.verticalLayout_18 = QtWidgets.QVBoxLayout()
         self.verticalLayout_18.setObjectName("verticalLayout_18")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-
         self.checkBox_2 = QtWidgets.QCheckBox(self)
         self.checkBox_2.setObjectName("checkBox_2")
-
         self.horizontalLayout_2.addWidget(self.checkBox_2)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
-
         self.pushButton = QtWidgets.QPushButton(self)
         self.pushButton.setObjectName("pushButton")
-
         self.horizontalLayout_2.addWidget(self.pushButton)
         self.verticalLayout_18.addLayout(self.horizontalLayout_2)
         self.gridLayout_4 = QtWidgets.QGridLayout()
         self.gridLayout_4.setObjectName("gridLayout_4")
-
         self.label_4 = QtWidgets.QLabel(self)
         self.label_4.setObjectName("label_4")
-
         self.gridLayout_4.addWidget(self.label_4, 0, 0, 1, 1)
-
         self.pushButton_5 = QtWidgets.QPushButton(self)
         self.pushButton_5.setObjectName("pushButton_5")
-
         self.gridLayout_4.addWidget(self.pushButton_5, 0, 2, 1, 1)
-
         self.pushButton_6 = QtWidgets.QPushButton(self)
         self.pushButton_6.setObjectName("pushButton_6")
-
         self.gridLayout_4.addWidget(self.pushButton_6, 1, 2, 1, 1)
-
         self.label_5 = QtWidgets.QLabel(self)
         self.label_5.setObjectName("label_5")
-
         self.gridLayout_4.addWidget(self.label_5, 1, 0, 1, 1)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_4.addItem(spacerItem2, 0, 1, 1, 1)
@@ -91,45 +80,33 @@ class SelectModeQDialog(QtWidgets.QDialog):
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-
         self.checkBox_4 = QtWidgets.QCheckBox(self)
         self.checkBox_4.setObjectName("checkBox_4")
-
         self.horizontalLayout_3.addWidget(self.checkBox_4)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem4)
-
         self.pushButton_2 = QtWidgets.QPushButton(self)
         self.pushButton_2.setObjectName("pushButton_2")
-
         self.horizontalLayout_3.addWidget(self.pushButton_2)
         self.verticalLayout_10.addLayout(self.horizontalLayout_3)
         self.gridLayout_3 = QtWidgets.QGridLayout()
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-
         self.spinBox_2 = QtWidgets.QSpinBox(self)
         self.spinBox_2.setObjectName("spinBox_2")
-
         self.horizontalLayout_4.addWidget(self.spinBox_2)
-
         self.pushButton_3 = QtWidgets.QPushButton(self)
         self.pushButton_3.setObjectName("pushButton_3")
-
         self.horizontalLayout_4.addWidget(self.pushButton_3)
         self.gridLayout_3.addLayout(self.horizontalLayout_4, 0, 2, 1, 1)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-
         self.spinBox_3 = QtWidgets.QSpinBox(self)
         self.spinBox_3.setObjectName("spinBox_3")
-
         self.horizontalLayout_5.addWidget(self.spinBox_3)
-
         self.pushButton_4 = QtWidgets.QPushButton(self)
         self.pushButton_4.setObjectName("pushButton_4")
-
         self.horizontalLayout_5.addWidget(self.pushButton_4)
         self.gridLayout_3.addLayout(self.horizontalLayout_5, 1, 2, 1, 1)
         self.label_2 = QtWidgets.QLabel(self)
@@ -138,61 +115,312 @@ class SelectModeQDialog(QtWidgets.QDialog):
         self.label_3 = QtWidgets.QLabel(self)
         self.label_3.setObjectName("label_3")
         self.gridLayout_3.addWidget(self.label_3, 1, 0, 1, 1)
-        
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        
         self.gridLayout_3.addItem(spacerItem5, 0, 1, 1, 1)
-        
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        
         self.gridLayout_3.addItem(spacerItem6, 1, 1, 1, 1)
         self.verticalLayout_10.addLayout(self.gridLayout_3)
         self.verticalLayout.addLayout(self.verticalLayout_10)
         self.verticalLayout_11 = QtWidgets.QVBoxLayout()
         self.verticalLayout_11.setObjectName("verticalLayout_11")
-
         self.checkBox_3 = QtWidgets.QCheckBox(self)
         self.checkBox_3.setObjectName("checkBox_3")
-
         self.verticalLayout_11.addWidget(self.checkBox_3)
         self.verticalLayout.addLayout(self.verticalLayout_11)
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-
         self.checkBox_5 = QtWidgets.QCheckBox(self)
         self.checkBox_5.setObjectName("checkBox_5")
-
         self.horizontalLayout_7.addWidget(self.checkBox_5)
         self.verticalLayout.addLayout(self.horizontalLayout_7)
-        self.gridLayout.addLayout(self.verticalLayout, 1, 0, 1, 1)
-
+        self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
         self.buttonBox = QtWidgets.QDialogButtonBox(self)
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
+        self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 1)
 
-        self.gridLayout.addWidget(self.buttonBox, 2, 0, 1, 1)
-
-        _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("Form", "Select Git-Auto-Commit Modes"))
-        self.checkBox.setText(_translate("Form", "Commit to a certain time interval (minutes)"))
-        self.checkBox_2.setText(_translate("Form", "Commit when particular files changes"))
-        self.pushButton.setText(_translate("Form", "Add files"))
-        self.label_4.setText(_translate("Form", "TextLabel"))
-        self.pushButton_5.setText(_translate("Form", "Delete"))
-        self.pushButton_6.setText(_translate("Form", "Delete"))
-        self.label_5.setText(_translate("Form", "file name"))
-        self.checkBox_4.setText(_translate("Form", "Commit when a specific intervals of particular files changes"))
-        self.pushButton_2.setText(_translate("Form", "PushButton"))
-        self.pushButton_3.setText(_translate("Form", "Delete"))
-        self.pushButton_4.setText(_translate("Form", "Delete"))
-        self.label_2.setText(_translate("Form", "file name"))
-        self.label_3.setText(_translate("Form", "file name"))
-        self.checkBox_3.setText(_translate("Form", "Commit in the event of an error"))
-        self.checkBox_5.setText(_translate("Form", "Commit in the event of interrupt execution"))
+        self.retranslateUi()
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def showModal(self):
-        return super().exec_()
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(_translate("Dialog", "Select Git-Auto-Commit Modes"))
+        self.checkBox.setText(_translate("Dialog", "Commit to a certain time interval (minutes)"))
+        self.checkBox_2.setText(_translate("Dialog", "Commit when particular files changes"))
+        self.pushButton.setText(_translate("Dialog", "Add files"))
+        self.label_4.setText(_translate("Dialog", "TextLabel"))
+        self.pushButton_5.setText(_translate("Dialog", "Delete"))
+        self.pushButton_6.setText(_translate("Dialog", "Delete"))
+        self.label_5.setText(_translate("Dialog", "file name"))
+        self.checkBox_4.setText(_translate("Dialog", "Commit when a specific intervals of particular files changes"))
+        self.pushButton_2.setText(_translate("Dialog", "PushButton"))
+        self.pushButton_3.setText(_translate("Dialog", "Delete"))
+        self.pushButton_4.setText(_translate("Dialog", "Delete"))
+        self.label_2.setText(_translate("Dialog", "file name"))
+        self.label_3.setText(_translate("Dialog", "file name"))
+        self.checkBox_3.setText(_translate("Dialog", "Commit in the event of an error"))
+        self.checkBox_5.setText(_translate("Dialog", "Commit in the event of interrupt execution"))
+
+class LoginQDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.setupUI()
+    
+    def setupUI(self):
+        self.setObjectName("Dialog")
+        self.resize(300, 200)
+        self.setMinimumSize(QtCore.QSize(300, 200))
+        self.setMaximumSize(QtCore.QSize(300, 200))
+        self.gridLayout = QtWidgets.QGridLayout(self)
+        self.gridLayout.setObjectName("gridLayout")
+        self.gridLayout_3 = QtWidgets.QGridLayout()
+        self.gridLayout_3.setObjectName("gridLayout_3")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.horizontalLayout.addLayout(self.verticalLayout_7)
+        self.pushButton = QtWidgets.QPushButton(self)
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.horizontalLayout.addLayout(self.verticalLayout_8)
+        self.gridLayout_3.addLayout(self.horizontalLayout, 3, 0, 1, 1)
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.label = QtWidgets.QLabel(self)
+        self.label.setObjectName("label")
+        self.verticalLayout_5.addWidget(self.label)
+        self.lineEdit = QtWidgets.QLineEdit(self)
+        self.lineEdit.setObjectName("lineEdit")
+        self.verticalLayout_5.addWidget(self.lineEdit)
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.verticalLayout_5.addLayout(self.verticalLayout_6)
+        self.gridLayout_3.addLayout(self.verticalLayout_5, 1, 0, 1, 1)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.label_2 = QtWidgets.QLabel(self)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_3.addWidget(self.label_2)
+        self.lineEdit_2 = QtWidgets.QLineEdit(self)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.verticalLayout_3.addWidget(self.lineEdit_2)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.verticalLayout_3.addLayout(self.verticalLayout_2)
+        self.gridLayout_3.addLayout(self.verticalLayout_3, 0, 0, 1, 1)
+        self.gridLayout.addLayout(self.gridLayout_3, 0, 0, 1, 1)
+
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(_translate("Dialog", "Welcome"))
+        self.pushButton.setText(_translate("Dialog", "Sign in"))
+        self.label.setText(_translate("Dialog", "Password"))
+        self.label_2.setText(_translate("Dialog", "Username"))
+
+class CloneQDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.repositoryName = None   # Name of cloned repository
+        self.repositoryPath = None   # Path of cloned repository
+        self.setupUI()
+    
+    def setupUI(self):
+        self.setObjectName("Dialog")
+        self.resize(550, 105)
+        self.setMinimumSize(QtCore.QSize(550, 105))
+        self.setMaximumSize(QtCore.QSize(550, 16777215))
+        self.gridLayout = QtWidgets.QGridLayout(self)
+        self.gridLayout.setObjectName("gridLayout")
+        self.formLayout_2 = QtWidgets.QFormLayout()
+        self.formLayout_2.setObjectName("formLayout_2")
+        self.label = QtWidgets.QLabel(self)
+        self.label.setObjectName("label")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+
+        # Show selected Directory Path
+        self.lineEdit = QtWidgets.QLineEdit(self)
+        self.lineEdit.setObjectName("lineEdit")
+
+
+        self.horizontalLayout.addWidget(self.lineEdit)
+
+        # Browse Button
+        self.pushButton = QtWidgets.QPushButton(self)
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(lambda : (
+            self.lineEdit.setText(self.selectDirectory())
+            )
+        )
+
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.formLayout_2.setLayout(0, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout)
+        
+        # lineEdit for input URL
+        self.lineEdit_2 = QtWidgets.QLineEdit(self)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lineEdit_2)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem)
+
+        # Clone the repo Button
+        self.pushButton_2 = QtWidgets.QPushButton(self)
+        self.pushButton_2.setObjectName("pushButton_2")
+
+        # TODO
+        # no input -> unable button, unable to see fullPath Label
+        # at least one input - able button
+        # self.lineEdit_2.textChanged.connect(self.fullPathChange)
+        
+        self.horizontalLayout_2.addWidget(self.pushButton_2)
+        self.formLayout_2.setLayout(2, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_2)
+        self.label_2 = QtWidgets.QLabel(self)
+        self.label_2.setObjectName("label_2")
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_2)
+        self.gridLayout.addLayout(self.formLayout_2, 0, 0, 1, 1)
+
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(_translate("Dialog", "Clone a Repo"))
+        self.label.setText(_translate("Dialog", "Where to clone to"))
+        self.lineEdit.setText(_translate("Dialog", "Hello"))
+        self.pushButton.setText(_translate("Dialog", "Browse"))
+        self.pushButton_2.setText(_translate("Dialog", "Clone the repo"))
+        self.label_2.setText(_translate("Dialog", "URL"))
+
+    def selectDirectory(self):
+        dialog = QtWidgets.QFileDialog()
+        repository_path = dialog.getExistingDirectory(None, "Select Repository")
+        return repository_path
+
+    def cloneRepository(self):
+        pass
+
+        # TODO
+        # Check URL is correct
+        # Clone the Repository
+        # save local repository name & path in memeber variables
+
+class LocalQDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.repositoryName = None
+        self.repositoryPath = None
+        self.setupUI()
+
+    def setupUI(self):
+        self.setObjectName("Dialog")
+        self.resize(551, 126)
+        self.setMinimumSize(QtCore.QSize(551, 126))
+        self.setMaximumSize(QtCore.QSize(551, 16777215))
+        self.gridLayout = QtWidgets.QGridLayout(self)
+        self.gridLayout.setObjectName("gridLayout")
+        self.formLayout_2 = QtWidgets.QFormLayout()
+        self.formLayout_2.setObjectName("formLayout_2")
+        self.label_3 = QtWidgets.QLabel(self)
+        self.label_3.setObjectName("label_3")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_3)
+        
+        # lineEdit for repositoryName
+        self.lineEdit_3 = QtWidgets.QLineEdit(self)
+        self.lineEdit_3.setObjectName("lineEdit_3")
+        
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.lineEdit_3)
+        self.label = QtWidgets.QLabel(self)
+        self.label.setObjectName("label")
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+
+        # lineEdit that shows repository path
+        self.lineEdit = QtWidgets.QLineEdit(self)
+        self.lineEdit.setObjectName("lineEdit")
+
+
+        self.horizontalLayout.addWidget(self.lineEdit)
+
+        # Browse Button
+        self.pushButton = QtWidgets.QPushButton(self)
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(lambda : (
+            self.lineEdit.setText(self.selectDirectory())
+            )
+        )
+        # TODO
+        # Change text of Full path label (label_4)
+
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.formLayout_2.setLayout(1, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem)
+
+        # Button for Create Repository
+        self.pushButton_2 = QtWidgets.QPushButton(self)
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.clicked.connect(self.initLocalRepository)
+        
+        self.horizontalLayout_2.addWidget(self.pushButton_2)
+        self.formLayout_2.setLayout(3, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_2)
+        
+        # Label for show Full Path
+        self.label_4 = QtWidgets.QLabel(self)
+        self.label_4.setObjectName("label_4")
+        # TODO
+        # when Name & Browse location -> Change FUll PATH
+
+        self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.label_4)
+        self.label_2 = QtWidgets.QLabel(self)
+        self.label_2.setObjectName("label_2")
+        self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_2)
+        self.gridLayout.addLayout(self.formLayout_2, 0, 0, 1, 1)
+
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(_translate("Dialog", "Initialize a Repo"))
+        self.label_3.setText(_translate("Dialog", "Name"))
+        self.label.setText(_translate("Dialog", "Initialize in"))
+        self.pushButton.setText(_translate("Dialog", "Browse"))
+        self.pushButton_2.setText(_translate("Dialog", "Create Repository"))
+        self.label_4.setText(_translate("Dialog", "/"))
+        self.label_2.setText(_translate("Dialog", "Full path"))
+
+    def selectDirectory(self):
+        dialog = QtWidgets.QFileDialog()
+        repository_path = dialog.getExistingDirectory(None, "Select Repository")
+        return repository_path
+
+    def initLocalRepository(self):
+        pass
+        # TODO
+        # no input -> unable button, unable to see fullPath Label
+        # at least one input - able button
+        # self.lineEdit_2.textChanged.connect(self.fullPathChange)
+
+        # Make Folder
+        # git init.
+
+        # save repository name & path in membervariables
 
 
 class Ui_MainWindow(object):
@@ -273,10 +501,9 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def selectDirectory(self):
-        dialog = QtWidgets.QFileDialog()
-        repository_path = dialog.getExistingDirectory(None, "Select Repository")
-        return repository_path
+    def showLoginDialog(self):
+        loginQDialog = LoginQDialog()
+        loginQDialog.exec_()
 
     def openRepository(self, MainWindow):
         repository_path = self.selectDirectory()
@@ -286,21 +513,37 @@ class Ui_MainWindow(object):
         self.tabWidget.removeTab(self.tabWidget.currentIndex())
 
     def cloneRepository(self, MainWindow, url, path):
-        pass
+        cloneQDialog = CloneQDialog()
+        cloneQDialog.exec_()
         
         # TODO
-        # 1. make folder if path doesnt exist yet
-        # 2. Clone repo to path
-        # 3. addRepoTab
-        # 4. Delete newTab
+        repositoryName = cloneQDialog.repositoryName
+        repositoryPath = cloneQDialog.repositoryPath
+        
+        self.addRepoTab(MainWindow, repositoryPath)
+
+        self.tabWidget.removeTab(self.tabWidget.currentIndex())
         
     def initLocalRepository(self, MainWindow, path):
-        pass
+        localQDialog = LocalQDialog()
+        localQDialog.exec_()
+
         # TODO
-        # 1. make folder if path doesnt exist yet
-        # 2. git init
-        # 3. addRepoTab
-        # 4. Delete newTab
+        repositoryName = localQDialog.repositoryName
+        repositoryPath = localQDialog.repositoryPath
+        
+        self.addRepoTab(MainWindow, repositoryPath)
+
+        self.tabWidget.removeTab(self.tabWidget.currentIndex())
+
+    def showSelectMode(self):
+        selectModeQDialog = SelectModeQDialog()
+        selectModeQDialog.exec_()
+
+    def selectDirectory(self):
+        dialog = QtWidgets.QFileDialog()
+        repository_path = dialog.getExistingDirectory(None, "Select Repository")
+        return repository_path
 
     def addFiles(self):
         dialog = QtWidgets.QFileDialog()
@@ -318,201 +561,6 @@ class Ui_MainWindow(object):
 
         subprocess.call(['sh', 'base/continue.sh'])
         subprocess.call(['sh', 'base/autoCommitProcess.sh'])
-
-    def loginWidget(self):
-        Form = QtWidgets.QDialog()
-        Form.setObjectName("Form")
-        Form.setEnabled(True)
-        Form.resize(300, 200)
-        Form.setMinimumSize(QtCore.QSize(300, 200))
-        self.gridLayout_4 = QtWidgets.QGridLayout(Form)
-        self.gridLayout_4.setObjectName("gridLayout_4")
-        self.gridLayout_3 = QtWidgets.QGridLayout()
-        self.gridLayout_3.setObjectName("gridLayout_3")
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.verticalLayout_7 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.horizontalLayout.addLayout(self.verticalLayout_7)
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
-        self.verticalLayout_8 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_8.setObjectName("verticalLayout_8")
-        self.horizontalLayout.addLayout(self.verticalLayout_8)
-        self.gridLayout_3.addLayout(self.horizontalLayout, 3, 0, 1, 1)
-        self.verticalLayout_5 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setObjectName("label")
-        self.verticalLayout_5.addWidget(self.label)
-        self.lineEdit = QtWidgets.QLineEdit(Form)
-        self.lineEdit.setObjectName("lineEdit")
-        self.verticalLayout_5.addWidget(self.lineEdit)
-        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.verticalLayout_5.addLayout(self.verticalLayout_6)
-        self.gridLayout_3.addLayout(self.verticalLayout_5, 1, 0, 1, 1)
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.label_2 = QtWidgets.QLabel(Form)
-        self.label_2.setObjectName("label_2")
-        self.verticalLayout_3.addWidget(self.label_2)
-        self.lineEdit_2 = QtWidgets.QLineEdit(Form)
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.verticalLayout_3.addWidget(self.lineEdit_2)
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.verticalLayout_3.addLayout(self.verticalLayout_2)
-        self.gridLayout_3.addLayout(self.verticalLayout_3, 0, 0, 1, 1)
-        self.gridLayout_4.addLayout(self.gridLayout_3, 0, 0, 1, 1)
-
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Welcome"))
-        self.pushButton.setText(_translate("Form", "Sign in"))
-        self.label.setText(_translate("Form", "Password"))
-        self.label_2.setText(_translate("Form", "Username"))
-        QtCore.QMetaObject.connectSlotsByName(Form)
-
-        Form.show()
-
-
-    def cloneWidget(self):
-        Form = QtWidgets.QWidget()
-        
-        Form.setObjectName("Form")
-        Form.resize(550, 105)
-        Form.setMinimumSize(QtCore.QSize(550, 105))
-        Form.setMaximumSize(QtCore.QSize(550, 105))
-        self.gridLayout = QtWidgets.QGridLayout(Form)
-        self.gridLayout.setObjectName("gridLayout")
-        self.formLayout_2 = QtWidgets.QFormLayout()
-        self.formLayout_2.setObjectName("formLayout_2")
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setObjectName("label")
-        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.lineEdit = QtWidgets.QLineEdit(Form)
-        self.lineEdit.setObjectName("lineEdit")
-        self.horizontalLayout.addWidget(self.lineEdit)
-
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(lambda : (
-            self.lineEdit.setText(self.selectDirectory())
-            )
-        )
-
-        self.horizontalLayout.addWidget(self.pushButton)
-
-        self.formLayout_2.setLayout(0, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout)
-        self.lineEdit_2 = QtWidgets.QLineEdit(Form)
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lineEdit_2)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem)
-
-        self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.clicked.connect(self.cloneRepository)
-
-        # TODO
-        # no input -> unable button, unable to see fullPath Label
-        # at least one input - able button
-        # self.lineEdit_2.textChanged.connect(self.fullPathChange)
-
-        self.horizontalLayout_2.addWidget(self.pushButton_2)
-        self.formLayout_2.setLayout(2, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_2)
-        self.label_2 = QtWidgets.QLabel(Form)
-        self.label_2.setObjectName("label_2")
-        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_2)
-        self.gridLayout.addLayout(self.formLayout_2, 1, 0, 1, 1)
-
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Clone a Repo"))
-        self.label.setText(_translate("Form", "Where to clone to"))
-        self.pushButton.setText(_translate("Form", "Browse"))
-        self.pushButton_2.setText(_translate("Form", "Clone the repo"))
-        self.label_2.setText(_translate("Form", "URL"))
-        QtCore.QMetaObject.connectSlotsByName(Form)
-
-        Form.show()
-
-    def localWidget(self):
-        Form = QtWidgets.QWidget()
-        Form.setObjectName("Form")
-        Form.resize(550, 126)
-        Form.setMinimumSize(QtCore.QSize(550, 126))
-        Form.setMaximumSize(QtCore.QSize(550, 126))
-        self.gridLayout = QtWidgets.QGridLayout(Form)
-        self.gridLayout.setObjectName("gridLayout")
-        self.formLayout_2 = QtWidgets.QFormLayout()
-        self.formLayout_2.setObjectName("formLayout_2")
-        self.label_3 = QtWidgets.QLabel(Form)
-        self.label_3.setObjectName("label_3")
-        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_3)
-        self.lineEdit_3 = QtWidgets.QLineEdit(Form)
-        self.lineEdit_3.setObjectName("lineEdit_3")
-        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.lineEdit_3)
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setObjectName("label")
-        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.lineEdit = QtWidgets.QLineEdit(Form)
-        self.lineEdit.setObjectName("lineEdit")
-        self.horizontalLayout.addWidget(self.lineEdit)
-
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(lambda : (
-            self.lineEdit.setText(self.selectDirectory())
-            )
-        )
-        # TODO
-        # Change text of Full path label (label_4)
-
-        self.horizontalLayout.addWidget(self.pushButton)
-        self.formLayout_2.setLayout(1, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem)
-
-        self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.clicked.connect(self.initLocalRepository)
-        
-        # TODO
-        # no input -> unable button, unable to see fullPath Label
-        # at least one input - able button
-        # self.lineEdit_2.textChanged.connect(self.fullPathChange)
-
-        self.horizontalLayout_2.addWidget(self.pushButton_2)
-        self.formLayout_2.setLayout(3, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_2)
-        self.label_4 = QtWidgets.QLabel(Form)
-        self.label_4.setObjectName("label_4")
-        self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.label_4)
-        self.label_2 = QtWidgets.QLabel(Form)
-        self.label_2.setObjectName("label_2")
-        self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_2)
-        self.gridLayout.addLayout(self.formLayout_2, 0, 0, 1, 1)
-
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Initialize a Repo"))
-        self.label_3.setText(_translate("Form", "Name"))
-        self.label.setText(_translate("Form", "Initialize in"))
-        self.pushButton.setText(_translate("Form", "Browse"))
-        self.pushButton_2.setText(_translate("Form", "Create Repository"))
-        self.label_4.setText(_translate("Form", "/"))
-        self.label_2.setText(_translate("Form", "Full path"))
-
-        QtCore.QMetaObject.connectSlotsByName(Form)
-
-        Form.show()
 
     def addNewTab(self, MainWindow):
         self.tab = QtWidgets.QWidget()
@@ -533,11 +581,13 @@ class Ui_MainWindow(object):
 
         self.pushButton_2 = QtWidgets.QPushButton(self.tab)
         self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.clicked.connect(self.cloneRepository)
 
         self.verticalLayout.addWidget(self.pushButton_2)
 
         self.pushButton_3 = QtWidgets.QPushButton(self.tab)
         self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_3.clicked.connect(self.initLocalRepository)
 
         self.verticalLayout.addWidget(self.pushButton_3)
 
@@ -602,7 +652,7 @@ class Ui_MainWindow(object):
         # How to send modes to "Start"?
         # set member variables?
         # MultiChecking problem. Really can choose together?
-        self.pushButton.clicked.connect(self.selectModeWidget)
+        self.pushButton.clicked.connect(self.showSelectMode)
 
         self.verticalLayout.addWidget(self.pushButton)
 
