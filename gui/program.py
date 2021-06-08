@@ -508,11 +508,12 @@ class Ui_MainWindow(object):
     def openRepository(self, MainWindow):
         repository_path = self.selectDirectory()
 
-        self.addRepoTab(MainWindow, repository_path)
+        if repository_path != "":
+            self.addRepoTab(MainWindow, repository_path)
 
-        self.tabWidget.removeTab(self.tabWidget.currentIndex())
+            self.tabWidget.removeTab(self.tabWidget.currentIndex())
 
-    def cloneRepository(self, MainWindow, url, path):
+    def cloneRepository(self, MainWindow):
         cloneQDialog = CloneQDialog()
         cloneQDialog.exec_()
         
@@ -520,21 +521,22 @@ class Ui_MainWindow(object):
         repositoryName = cloneQDialog.repositoryName
         repositoryPath = cloneQDialog.repositoryPath
         
-        self.addRepoTab(MainWindow, repositoryPath)
+        if repositoryName != None and repositoryPath != None:
+            self.addRepoTab(MainWindow, repositoryPath)
 
-        self.tabWidget.removeTab(self.tabWidget.currentIndex())
+            self.tabWidget.removeTab(self.tabWidget.currentIndex())
         
-    def initLocalRepository(self, MainWindow, path):
+    def initLocalRepository(self, MainWindow):
         localQDialog = LocalQDialog()
         localQDialog.exec_()
 
-        # TODO
         repositoryName = localQDialog.repositoryName
         repositoryPath = localQDialog.repositoryPath
         
-        self.addRepoTab(MainWindow, repositoryPath)
+        if repositoryName != None and repositoryPath != None:
+            self.addRepoTab(MainWindow, repositoryPath)
 
-        self.tabWidget.removeTab(self.tabWidget.currentIndex())
+            self.tabWidget.removeTab(self.tabWidget.currentIndex())
 
     def showSelectMode(self):
         selectModeQDialog = SelectModeQDialog()
