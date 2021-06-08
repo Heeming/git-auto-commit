@@ -725,7 +725,7 @@ class Ui_MainWindow(object):
 
         if branch != None:
             subprocess.call(['bash', 'base/killProcess.sh'])
-            subprocess.call(['bash', 'base/deleteBranch.sh', branch])
+            subprocess.call(['bash', 'base/deleteBranch.sh', self.repositoryPath ,branch])
 
     def getGitLogGraph(self):
         command = "cd "+self.repositoryPath+ r"; git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative"

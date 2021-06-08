@@ -1,7 +1,11 @@
 #!/bin/bash
-  
+path="$1"  
+
+cd $path
+
 if ! git diff --quiet
 then
+
     git --no-pager checkout auto-commit
     git --no-pager add .
     git --no-pager commit -m "Auto Commit"
@@ -13,8 +17,7 @@ then
     # echo -e "Write commit message: \c"
     # read -a message
 
-    branch="$1"
-    # message="$2"
+    branch="$2"
 
     git checkout $branch
     # git merge --squash auto-commit
