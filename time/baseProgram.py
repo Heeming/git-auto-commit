@@ -64,7 +64,7 @@ while choice != 8:
 
     if choice == 1:
         subprocess.call(['sh', './setting.sh'])
-        subprocess.call(['sh', './autoCommitProcess.sh'3])
+        subprocess.call(['sh', './autoCommitProcess.sh'])
     
     elif choice == 2:
         subprocess.call(['sh', './continue.sh'])
