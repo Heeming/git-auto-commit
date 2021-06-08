@@ -7,6 +7,7 @@ import os
 
 def auto_commit():
     subprocess.call(['sh', './continue.sh'])
+    subprocess.call(['sh', './addFile.sh', fname])
     subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
     print("백업되었습니다.")
 
@@ -45,7 +46,9 @@ def remainder(file, start, stop, n):
 
 # 나머지가 0이 되면 autocommit 실행
 def ctime_based_autocommit(file, start, stop, n):
-    if remainder(file, start, stop, n) == 0:
+    print("시도 중")
+    print(remainder(file, start, stop, n))
+    if 60*n - 0.02 < remainder(file, start, stop, n) < 60*n:
         subprocess.call(['sh', './continue.sh'])
         subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
         print("백업되었습니다.")
@@ -73,23 +76,25 @@ while choice != 8:
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
+        fname = str(input("Add filename : "))
         num = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 세팅했다고 가정
         try:
-            branch = str(num)
-            msg = str(num)
             time_based_autocommit(num)  # GUI에서 사용자가 분을 세팅했다고 가정
         except KeyboardInterrupt:  # GUI에서 체크버튼 해제되었다고 가정
-            subprocess.call(['bash', './killProcess.sh'])
+            print("버튼 해제")
 
     elif choice == 4:
         fname = str(input('Enter your file name : '))  # GUI에서 사용자가 특정 파일 선택했다고 가정
         n = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 n으로 세팅했다고 가정
-        try:
-            branch = str(n)
-            msg = str(n)
-            ctime_based_autocommit(fname, start, stop(), n)  # 파일 생성 시간을 기준으로 n분마다 auto commit하는 걸 백그라운드에서 실행
-        except KeyboardInterrupt:  # GUI에서 체크버튼 해제되었다고 가정
-            subprocess.call(['bash', './killProcess.sh'])
+        while True:
+            try:
+                print("시도")
+                ctime_based_autocommit(fname, start, stop(), n)  # 파일 생성 시간을 기준으로 n분마다 auto commit하는 걸 백그라운드에서 실행
+            except Exception as ex:  # GUI에서 체크버튼 해제되었다고 가정
+                print(ex)
+            #if :  # GUI에서 체크버튼 해제되었다고 가정
+                #print("버튼 해제2")
+                #break
 
     elif choice == 5:
         path = "./code/"
