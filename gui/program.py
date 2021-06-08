@@ -617,6 +617,7 @@ class Ui_MainWindow(object):
 
     def openRepository(self, MainWindow):
         self.repositoryPath = self.selectDirectory()
+        self.repositoryName = self.repositoryPath.split('/')[-1]
 
         if self.repositoryPath != "":
             self.addRepoTab(MainWindow)
@@ -767,6 +768,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout_2.addLayout(self.verticalLayout_2)
         self.tabWidget.addTab(self.tab, "")
+        self.tabWidget.setCurrentIndex(self.tabWidget.currentIndex()+1)
 
         _translate = QtCore.QCoreApplication.translate
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "New Tab"))
@@ -856,6 +858,7 @@ class Ui_MainWindow(object):
 
         _translate = QtCore.QCoreApplication.translate
 
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", self.repositoryName))
         self.plainTextEdit.setPlainText(_translate("MainWindow", self.getGitLogGraph()))
         self.pushButton_5.setText(_translate("MainWindow", "Start"))
         self.pushButton.setText(_translate("MainWindow", "ChangeMode"))
