@@ -2,6 +2,36 @@ import subprocess
 import time
 import os
 
+# def auto_commit():
+#     subprocess.call(['sh', './continue.sh'])
+#     subprocess.call(['sh', './autoCommitProcess.sh'])
+#     print("백업되었습니다.")
+
+# # 특정 파일 지정
+# def specify_filename():
+#     file_name = str(input('Specify file name to detect : '))
+#     subprocess.call(['sh', './file_commit.sh', file_name])
+
+# # 특정 파일의 특정 구간 지정
+# def specify_filesection():
+#     specify_filename()
+    
+#     file_section = str(input('Do you want to specify section? [y/n] '))
+
+#     if file_section == "y" or file_section == "Y":
+#         file_section_start = str(input('Specify start section number in file to detect : '))
+#         file_section_finish = str(input('Specify finish section number in file to detect : '))
+#         subprocess.call(['sh', './file_section_commit.sh', file_section_start, file_section_finish])
+#     else:
+#         subprocess.call(['sh', './file_commit.sh', file_name])
+
+# def specify_percent():
+#     specify_filename() # 특정 파일 지정
+    
+#     percent = str(input('What percenttage change do you want to commit?'))
+
+#     subprocess.call(['sh', './file_npercent_change.sh', percent])
+
 choice = 0
 
 while choice != 6:
@@ -22,26 +52,17 @@ while choice != 6:
     elif choice == 2:
         subprocess.call(['sh', './continue.sh'])
         subprocess.call(['sh', './autoCommitProcess.sh'])
-
-    elif choice == 3:
-        path = "./code/"
-        file_list = os.listdir(path)
-
-        py_list = [file for file in file_list if file.endswith(".py")]
-        #c_list = [file for file in file_list if file.endswith(".c")]
-        #java_list = [file for file in file_list if file.endswith(".java")]
-
-        for i in range(len(py_list)) :
-            try :
-                subprocess.check_output( ['python', path + py_list[0]], universal_newlines=True )
-            except Exception as ex:
-                branch = str("error")
-                msg = str(ex)
-
-                subprocess.call(['sh', './continue.sh'])
-                subprocess.call(['sh', './autoCommitProcess.sh'])
         
-    
+    elif choice == 3:
+        subprocess.call(['bash', './killProcess.sh'])
+        subprocess.call(['sh', './setting.sh'])
+
+        specify_filename = str(input("Specify file_name to detect : "))
+
+        subprocess.call(['sh', './addFile.sh', specify_filename])
+        subprocess.call(['sh', './continue.sh'])
+        subprocess.call(['sh', './filename.sh', specify_filename])
+
     elif choice == 4:
         subprocess.call(['bash', './killProcess.sh'])
 

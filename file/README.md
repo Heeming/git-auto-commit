@@ -1,12 +1,12 @@
-# Base Program
+# File Program
 
 사용자 입력을 받아 auto-commit branch에 변경사항을 commit하고 master에 push
 
 ## Files
 
-- baseProgram.py : base program
-- autoCommit.sh : 변경사항을 체크하여 auto-commit branch에 변경사항 commit & push 하는 쉘 스크립트
-- userCommit.sh : 사용자로부터 commit message와 push할 branch명을 입력받아 해당 branch에 commit하는 쉘 스크립트
+- file_commit.sh : base program
+- file_section_commit.sh : 변경사항을 체크하여 auto-commit branch에 변경사항 commit & push 하는 쉘 스크립트
+- file_npercent_change.sh : 사용자로부터 commit message와 push할 branch명을 입력받아 해당 branch에 commit하는 쉘 스크립트
 
 ## Preconditions
 
