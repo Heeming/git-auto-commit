@@ -1,7 +1,7 @@
 # git-auto-commit
 The project git-auto-commit with user customizing in 2021 Open Source Software Project course.
 
-##[Error]
+##Error
 ### 기능 구현 목록(Function implementation list)
 1. 코드 컴파일 중 에러 발생 시 commit. (Function 1. Commit when error occurs during code compilation.)
 2. 프로그램 실행 중 에러 메세지 발생 시 commit (Function 2. Commit when error massage occur during execute program.)
