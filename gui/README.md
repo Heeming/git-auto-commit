@@ -15,3 +15,14 @@ Program
 - repoSelectUI.py    : 어떤 repository에 git-auto-commit을 실행할 것인지 선택하는 창 
 - selectMode.py      : git-auto-commit의 사용자 조건를 선택하는 창
 - signInUI.py        : 로그인 창
+
+
+## Preconditions
+- pyqt5가 install 되어 있어야 한다.
+ -  설치 방법 (linux-using python3) `pip3 install pyqt5`
+
+## How to use?
+ 1. 모든 폴더를 모두 다운 받는다
+ 2. gui 폴더의 program.py를 실행시킨다
+
+## 추가 구현 예정
