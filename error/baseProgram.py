@@ -54,6 +54,7 @@ while choice != 6:
             if err == '':
                 pass
             else:
+                err = str(err)
                 print("error - " + py_list[i])
                 print("error msg :\n", err)
                 subprocess.call(['sh', './continue.sh'])
@@ -70,6 +71,7 @@ while choice != 6:
             if err == '':
                 pass
             else:
+                err = str(err)
                 print("error - " + c_list[i] + ".c")
                 print("error msg :\n", err)
                 subprocess.call(['sh', './continue.sh'])
@@ -85,6 +87,7 @@ while choice != 6:
             if err == '':
                 pass
             else:
+                err = str(err)
                 print("error - " + java_list[i] + ".java")
                 print("error msg :\n", err)
                 subprocess.call(['sh', './continue.sh'])
