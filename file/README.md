@@ -26,13 +26,13 @@ file_autoCommit.sh : 사용자가 파일 이름을 지정하면 그 파일의 �
 
 ## 실행 예시
 1. `python3 baseProgram.py` `>> 3`
-![image](https://user-images.githubusercontent.com/60775453/121275988-c52e4f80-c908-11eb-9242-971e6f7d1853.png)
+<img src="https://user-images.githubusercontent.com/60775453/121275988-c52e4f80-c908-11eb-9242-971e6f7d1853.png" width=70% height=70% >
 2. 파일 이름 지정 `Specify file_name to detect : $file_name`
-![image](https://user-images.githubusercontent.com/60775453/121276158-1c342480-c909-11eb-843c-dde82886b473.png)
+<img src="https://user-images.githubusercontent.com/60775453/121276158-1c342480-c909-11eb-843c-dde82886b473.png" width=70% height=70% >
 3. 오토커밋
-![image](https://user-images.githubusercontent.com/60775453/121276052-e42ce180-c908-11eb-9f67-12cbd0115c34.png)
+<img src="https://user-images.githubusercontent.com/60775453/121276052-e42ce180-c908-11eb-9f67-12cbd0115c34.png" width=50% height=50% >
 4. git kraken
-![image](https://user-images.githubusercontent.com/60775453/121276234-4259c480-c909-11eb-8ee3-87da7ada1f4f.png) 
+<img src="https://user-images.githubusercontent.com/60775453/121276234-4259c480-c909-11eb-8ee3-87da7ada1f4f.png" width=90% height=90% >
 
 
 ## 추가 구현 예정
