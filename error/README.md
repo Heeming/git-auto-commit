@@ -39,6 +39,9 @@
 ## 추가 구현 예정
 * python, c, java 외 다른 언어 소스코드 오류 발생 시 commit 가능하도록 다양한 언어 추가 지원 구현 예정.
 
-  
+ 
 ### 데모(Demo) 
 https://user-images.githubusercontent.com/53044223/121273797-08d28a80-c904-11eb-8634-04764b16280f.mp4
+
+git source tree
+![image (1)](https://user-images.githubusercontent.com/53044223/121279850-33c2db80-c910-11eb-9607-95d8bf290e9a.png)
