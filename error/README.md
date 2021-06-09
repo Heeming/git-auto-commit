@@ -36,7 +36,7 @@
     * 실행 취소시 time out으로 commit 메세지가 설정되어 commit됨.
 
 ## 추가 구현 예정
-* python, c, java 외 다른 언어 소스코드 오류 발생 시 commit 가능하게 추가 구현 예정.
+* python, c, java 외 다른 언어 소스코드 오류 발생 시 commit 가능하도록 다양한 언어 추가 지원 구현 예정.
 
   
 ### 데모(Demo) 
