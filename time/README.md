@@ -50,9 +50,8 @@ shell file을 불러올 때 에러가 나서 그 부분은 주석 처리를 해�
 4. 파일 생성 시간으로부터 시간이 n분 지날 때마다 autoCommit 실행
   
   
-## 2-2. result of time_based_autocommit
-![time_based_autocommit_1](https://user-images.githubusercontent.com/69781815/121240393-3d7b1d80-c8d5-11eb-9967-8187303871d0.gif)  
-![time_based_autocommit_2](https://user-images.githubusercontent.com/69781815/121240397-3f44e100-c8d5-11eb-9a2b-325e94054bdb.gif)   
+## 2-2. result of createtime_based_autocommit
+![createtime_based_autocommit](https://user-images.githubusercontent.com/69781815/121240409-42d86800-c8d5-11eb-9e36-34d8af9f884a.gif)
   
 
   
