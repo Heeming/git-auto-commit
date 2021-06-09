@@ -34,15 +34,16 @@ import os
 
 choice = 0
 
-while choice != 6:
+while choice != 9:
     print("Menu")
     print("1. New")
     print("2. Continue")
     print("3. Select mode")
-    print("4. Git add file")
-    print("5. Git push to branch")
-    print("6. Delete auto-commit branch")
-    print("7. Exit")
+    print("4. N percent")
+    print("5. Git add file")
+    print("6. Git push to branch")
+    print("7. Delete auto-commit branch")
+    print("8. Exit")
     choice = int(input(">> "))
 
     if choice == 1:
@@ -59,18 +60,28 @@ while choice != 6:
 
         specify_filename = str(input("Specify file_name to detect : "))
 
-        subprocess.call(['sh', './addFile.sh', specify_filename])
-        subprocess.call(['sh', './continue.sh'])
+        subprocess.call(['sh', './file_addFile.sh', specify_filename])
         subprocess.call(['sh', './filename.sh', specify_filename])
 
     elif choice == 4:
         subprocess.call(['bash', './killProcess.sh'])
+        subprocess.call(['sh', './setting.sh'])
 
-        filename = str(input("What file to add?(file_name) "))
-        subprocess.call(['sh', './addFile.sh', filename])
+        n = str(input("Input percent : "))
+        filename = str(input("Add filename : "))
 
         subprocess.call(['sh', './continue.sh'])
-        subprocess.call(['sh', './autoCommitProcess.sh'])
+        subprocess.call(['sh', './addFile.sh', filename])
+        subprocess.call(['sh', './file_npercent.sh', filename, n])
+
+    # elif choice == 4:
+    #     subprocess.call(['bash', './killProcess.sh'])
+
+    #     filename = str(input("What file to add?(file_name) "))
+    #     subprocess.call(['sh', './addFile.sh', filename])
+
+    #     subprocess.call(['sh', './continue.sh'])
+    #     subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 5:
         subprocess.call(['bash', './killProcess.sh'])
