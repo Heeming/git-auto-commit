@@ -6,8 +6,8 @@ print(os.path.abspath('.'))
 # auto commit 실행 - subprocess에서 에러가 계속 나서 주석처리해놓음
 def auto_commit():
     print("auto commit을 시행합니다")
-    #subprocess.call(['sh', './continue.sh'])
-    #subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
+    subprocess.call(['sh', './continue.sh'])
+    subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
 
 
 # 파일생성시간을 계산
@@ -87,6 +87,8 @@ while choice != 8:
     elif choice == 4:
         subprocess.call(['bash', './killProcess.sh'], shell=True)
         subprocess.call(['sh', './setting.sh'], shell=True)
+        #subprocess.call(['bash', './killProcess.sh'], shell=True)
+        #subprocess.call(['sh', './setting.sh'], shell=True)
         #subprocess.run(['bash', './killProcess.sh'])
         #subprocess.run(['sh', './setting.sh'])
         #os.popen(['./killProcess.sh'])
