@@ -1,5 +1,8 @@
 #!/bin/bash
-echo "git add file"
+
+path="$2"
+
+cd $path
 
 if [ "$1" = "" ]
 then echo "please write file name which need to git add"

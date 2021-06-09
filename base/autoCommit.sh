@@ -1,4 +1,8 @@
 #!/bin/bash
+path="$1"
+
+cd $path
+
 while :
 do
   #echo "Checking for uncommitted changes in the git working tree"
@@ -14,5 +18,5 @@ do
     #echo "Working tree clean. Nothing to commmit."
   fi
 
-  sleep 60
+  sleep 1
 done
