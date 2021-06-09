@@ -21,124 +21,239 @@ class SelectModeQDialog(QDialog):
         # send checked list to "Start"
         # save in member variables?
         super().__init__()
+        self.checkedOptions = [0]
+        self.fileCreationIntervalFile = None
+        self.fileCertainPercentageFiles = []
+        self.fileChangesFiles = []
+        self.fileIntervalChangesFiles = []
         self.setupUI()
     
     def setupUI(self):
         self.setObjectName("Dialog")
-        self.resize(588, 326)
-        self.setMinimumSize(QtCore.QSize(588, 326))
-        self.setMaximumSize(QtCore.QSize(588, 16777215))
+        self.resize(590, 750)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
+        self.setSizePolicy(sizePolicy)
+        self.setMinimumSize(QtCore.QSize(590, 750))
+        self.setMaximumSize(QtCore.QSize(590, 16777215))
+
         self.gridLayout = QtWidgets.QGridLayout(self)
         self.gridLayout.setObjectName("gridLayout")
-        self.verticalLayout = QtWidgets.QVBoxLayout()
+
+       # Commit on conditions
+        self.radioButton_2 = QtWidgets.QRadioButton(self)
+        self.radioButton_2.setObjectName("radioButton_2")
+
+        self.gridLayout.addWidget(self.radioButton_2, 1, 0, 1, 1)
+        self.verticalFrame = QtWidgets.QFrame(self)
+        self.verticalFrame.setObjectName("verticalFrame")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalFrame)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        
+        # Commit to a certain time interval (minutes)       
+        self.timeFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.timeFrame.setObjectName("timeFrame")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.timeFrame)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.checkBox = QtWidgets.QCheckBox(self)
+        
+        self.checkBox = QtWidgets.QCheckBox(self.timeFrame)
         self.checkBox.setObjectName("checkBox")
+        
         self.horizontalLayout.addWidget(self.checkBox)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.spinBox = QtWidgets.QSpinBox(self)
+        
+        self.spinBox = QtWidgets.QSpinBox(self.timeFrame)
         self.spinBox.setObjectName("spinBox")
+        
         self.horizontalLayout.addWidget(self.spinBox)
-        self.verticalLayout.addLayout(self.horizontalLayout)
-        self.verticalLayout_18 = QtWidgets.QVBoxLayout()
+        self.verticalLayout.addWidget(self.timeFrame)
+        
+        # Commit to a certain time interval based on the creation time of a file
+        self.verticalFrame_2 = QtWidgets.QFrame(self.verticalFrame)
+        self.verticalFrame_2.setObjectName("verticalFrame_2")
+        self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.verticalFrame_2)
+        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.horizontalLayout_22 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_22.setObjectName("horizontalLayout_22")
+        
+        self.checkBox_2 = QtWidgets.QCheckBox(self.verticalFrame_2)
+        self.checkBox_2.setObjectName("checkBox_2")
+        
+        self.horizontalLayout_22.addWidget(self.checkBox_2)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_22.addItem(spacerItem1)
+        
+        # Browse File Button
+        self.pushButton_13 = QtWidgets.QPushButton(self.verticalFrame_2)
+        self.pushButton_13.setObjectName("pushButton_13")
+        self.pushButton_13.clicked.connect(self.fileCreationAddFiles)
+
+        self.horizontalLayout_22.addWidget(self.pushButton_13)
+        self.verticalLayout_13.addLayout(self.horizontalLayout_22)
+
+        # File Info
+        self.verticalFrame_21 = QtWidgets.QFrame(self.verticalFrame_2)
+        self.verticalFrame_21.setObjectName("verticalFrame_21")
+        
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.verticalFrame_21)
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        
+        # file1
+
+        self.verticalLayout_13.addWidget(self.verticalFrame_21)
+        self.verticalLayout.addWidget(self.verticalFrame_2)
+
+        # Commit when changes occur to a file of more than a certain percentage
+        self.verticalFrame_22 = QtWidgets.QFrame(self.verticalFrame)
+        self.verticalFrame_22.setObjectName("verticalFrame_22")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.verticalFrame_22)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
+
+        self.checkBox_3 = QtWidgets.QCheckBox(self.verticalFrame_22)
+        self.checkBox_3.setObjectName("checkBox_3")
+
+        self.horizontalLayout_10.addWidget(self.checkBox_3)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_10.addItem(spacerItem3)
+        
+        # Browse Files
+        self.pushButton_7 = QtWidgets.QPushButton(self.verticalFrame_22)
+        self.pushButton_7.setObjectName("pushButton_7")
+        self.pushButton_7.clicked.connect(self.fileCertainPercentageAddFiles)
+        
+        self.horizontalLayout_10.addWidget(self.pushButton_7)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_10)
+
+        # File Info
+        self.verticalFrame_4 = QtWidgets.QFrame(self.verticalFrame_22)
+        self.verticalFrame_4.setObjectName("verticalFrame_4")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalFrame_4)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        
+        # file1  
+        
+        # file2
+
+        self.verticalLayout_6.addWidget(self.verticalFrame_4)
+        self.verticalLayout.addWidget(self.verticalFrame_22)
+        
+        # Commit when particular files changes
+        self.fileFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.fileFrame.setObjectName("fileFrame")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.fileFrame)
         self.verticalLayout_18.setObjectName("verticalLayout_18")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.checkBox_2 = QtWidgets.QCheckBox(self)
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.horizontalLayout_2.addWidget(self.checkBox_2)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem1)
-        self.pushButton = QtWidgets.QPushButton(self)
+        
+        self.checkBox_4 = QtWidgets.QCheckBox(self.fileFrame)
+        self.checkBox_4.setObjectName("checkBox_4")
+        
+        self.horizontalLayout_2.addWidget(self.checkBox_4)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem6)
+        
+        # Browse File
+        self.pushButton = QtWidgets.QPushButton(self.fileFrame)
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.fileChangesAddFiles)
+        
         self.horizontalLayout_2.addWidget(self.pushButton)
         self.verticalLayout_18.addLayout(self.horizontalLayout_2)
-        self.gridLayout_4 = QtWidgets.QGridLayout()
-        self.gridLayout_4.setObjectName("gridLayout_4")
-        self.label_4 = QtWidgets.QLabel(self)
-        self.label_4.setObjectName("label_4")
-        self.gridLayout_4.addWidget(self.label_4, 0, 0, 1, 1)
-        self.pushButton_5 = QtWidgets.QPushButton(self)
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.gridLayout_4.addWidget(self.pushButton_5, 0, 2, 1, 1)
-        self.pushButton_6 = QtWidgets.QPushButton(self)
-        self.pushButton_6.setObjectName("pushButton_6")
-        self.gridLayout_4.addWidget(self.pushButton_6, 1, 2, 1, 1)
-        self.label_5 = QtWidgets.QLabel(self)
-        self.label_5.setObjectName("label_5")
-        self.gridLayout_4.addWidget(self.label_5, 1, 0, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_4.addItem(spacerItem2, 0, 1, 1, 1)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_4.addItem(spacerItem3, 1, 1, 1, 1)
-        self.verticalLayout_18.addLayout(self.gridLayout_4)
-        self.verticalLayout.addLayout(self.verticalLayout_18)
-        self.verticalLayout_10 = QtWidgets.QVBoxLayout()
+        
+        # File INFO
+        self.frame = QtWidgets.QFrame(self.fileFrame)
+        self.frame.setObjectName("frame")
+
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+
+        # file1
+        
+        # file2
+
+        self.verticalLayout_18.addWidget(self.frame)
+        self.verticalLayout.addWidget(self.fileFrame)
+
+        # Commit when a specific intervals of particular files changes
+        self.fileIntervalFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.fileIntervalFrame.setObjectName("fileIntervalFrame")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.fileIntervalFrame)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.checkBox_4 = QtWidgets.QCheckBox(self)
-        self.checkBox_4.setObjectName("checkBox_4")
-        self.horizontalLayout_3.addWidget(self.checkBox_4)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem4)
-        self.pushButton_2 = QtWidgets.QPushButton(self)
+
+        self.checkBox_5 = QtWidgets.QCheckBox(self.fileIntervalFrame)
+        self.checkBox_5.setObjectName("checkBox_5")
+
+        self.horizontalLayout_3.addWidget(self.checkBox_5)
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem9)
+
+        # Browse Button
+        self.pushButton_2 = QtWidgets.QPushButton(self.fileIntervalFrame)
         self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.clicked.connect(self.fileIntervalChangesAddFiles)
+
         self.horizontalLayout_3.addWidget(self.pushButton_2)
         self.verticalLayout_10.addLayout(self.horizontalLayout_3)
-        self.gridLayout_3 = QtWidgets.QGridLayout()
-        self.gridLayout_3.setObjectName("gridLayout_3")
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.spinBox_2 = QtWidgets.QSpinBox(self)
-        self.spinBox_2.setObjectName("spinBox_2")
-        self.horizontalLayout_4.addWidget(self.spinBox_2)
-        self.pushButton_3 = QtWidgets.QPushButton(self)
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.horizontalLayout_4.addWidget(self.pushButton_3)
-        self.gridLayout_3.addLayout(self.horizontalLayout_4, 0, 2, 1, 1)
-        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        self.spinBox_3 = QtWidgets.QSpinBox(self)
-        self.spinBox_3.setObjectName("spinBox_3")
-        self.horizontalLayout_5.addWidget(self.spinBox_3)
-        self.pushButton_4 = QtWidgets.QPushButton(self)
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.horizontalLayout_5.addWidget(self.pushButton_4)
-        self.gridLayout_3.addLayout(self.horizontalLayout_5, 1, 2, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout_3.addWidget(self.label_2, 0, 0, 1, 1)
-        self.label_3 = QtWidgets.QLabel(self)
-        self.label_3.setObjectName("label_3")
-        self.gridLayout_3.addWidget(self.label_3, 1, 0, 1, 1)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_3.addItem(spacerItem5, 0, 1, 1, 1)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_3.addItem(spacerItem6, 1, 1, 1, 1)
-        self.verticalLayout_10.addLayout(self.gridLayout_3)
-        self.verticalLayout.addLayout(self.verticalLayout_10)
-        self.verticalLayout_11 = QtWidgets.QVBoxLayout()
+
+        # FILE INFO
+        self.frame1 = QtWidgets.QFrame(self.fileIntervalFrame)
+        self.frame1.setObjectName("frame1")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.frame1)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        
+        # file1 
+
+        # file 2
+
+        self.verticalLayout_10.addWidget(self.frame1)
+        self.verticalLayout.addWidget(self.fileIntervalFrame)
+
+        # Error Frame
+        self.errorFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.errorFrame.setObjectName("errorFrame")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.errorFrame)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
-        self.checkBox_3 = QtWidgets.QCheckBox(self)
-        self.checkBox_3.setObjectName("checkBox_3")
-        self.verticalLayout_11.addWidget(self.checkBox_3)
-        self.verticalLayout.addLayout(self.verticalLayout_11)
-        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
+
+        self.checkBox_6 = QtWidgets.QCheckBox(self.errorFrame)
+        self.checkBox_6.setObjectName("checkBox_6")
+
+        self.verticalLayout_11.addWidget(self.checkBox_6)
+        self.verticalLayout.addWidget(self.errorFrame)
+
+        # Interrupt Frame
+        self.interruptFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.interruptFrame.setObjectName("interruptFrame")
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.interruptFrame)
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        self.checkBox_5 = QtWidgets.QCheckBox(self)
-        self.checkBox_5.setObjectName("checkBox_5")
-        self.horizontalLayout_7.addWidget(self.checkBox_5)
-        self.verticalLayout.addLayout(self.horizontalLayout_7)
-        self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
+
+        self.checkBox_9 = QtWidgets.QCheckBox(self.interruptFrame)
+        self.checkBox_9.setObjectName("checkBox_9")
+
+        self.horizontalLayout_7.addWidget(self.checkBox_9)
+        self.verticalLayout.addWidget(self.interruptFrame)
+
+
+        self.gridLayout.addWidget(self.verticalFrame, 4, 0, 1, 1)
+
+        # Commit whenever changes occur
+        self.radioButton = QtWidgets.QRadioButton(self)
+        self.radioButton.setObjectName("radioButton")
+
+        self.gridLayout.addWidget(self.radioButton, 0, 0, 1, 1)
+        
         self.buttonBox = QtWidgets.QDialogButtonBox(self)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 1)
+        
+        self.gridLayout.addWidget(self.buttonBox, 5, 0, 1, 1)
 
         self.retranslateUi()
         self.buttonBox.accepted.connect(self.accept)
@@ -148,21 +263,210 @@ class SelectModeQDialog(QDialog):
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("Dialog", "Select Git-Auto-Commit Modes"))
+        self.radioButton_2.setText(_translate("Dialog", "Commit on conditions"))
         self.checkBox.setText(_translate("Dialog", "Commit to a certain time interval (minutes)"))
-        self.checkBox_2.setText(_translate("Dialog", "Commit when particular files changes"))
+        self.checkBox_2.setText(_translate("Dialog", "Commit to a certain time interval based on the creation time of a file"))
+        self.pushButton_13.setText(_translate("Dialog", "Add files"))
+        self.checkBox_3.setText(_translate("Dialog", "Commit when changes occur to a file of more than a certain percentage"))
+        self.pushButton_7.setText(_translate("Dialog", "Add files"))
+        self.checkBox_4.setText(_translate("Dialog", "Commit when particular files changes"))
         self.pushButton.setText(_translate("Dialog", "Add files"))
-        self.label_4.setText(_translate("Dialog", "TextLabel"))
-        self.pushButton_5.setText(_translate("Dialog", "Delete"))
-        self.pushButton_6.setText(_translate("Dialog", "Delete"))
-        self.label_5.setText(_translate("Dialog", "file name"))
-        self.checkBox_4.setText(_translate("Dialog", "Commit when a specific intervals of particular files changes"))
-        self.pushButton_2.setText(_translate("Dialog", "PushButton"))
-        self.pushButton_3.setText(_translate("Dialog", "Delete"))
-        self.pushButton_4.setText(_translate("Dialog", "Delete"))
-        self.label_2.setText(_translate("Dialog", "file name"))
-        self.label_3.setText(_translate("Dialog", "file name"))
-        self.checkBox_3.setText(_translate("Dialog", "Commit in the event of an error"))
-        self.checkBox_5.setText(_translate("Dialog", "Commit in the event of interrupt execution"))
+        self.checkBox_5.setText(_translate("Dialog", "Commit when a specific intervals of particular files changes"))
+        self.pushButton_2.setText(_translate("Dialog", "Add files"))
+        self.checkBox_6.setText(_translate("Dialog", "Commit in the event of an error"))
+        self.checkBox_9.setText(_translate("Dialog", "Commit in the event of interrupt execution"))
+        self.radioButton.setText(_translate("Dialog", "Commit whenever changes occur"))
+
+    def fileCreationAddFiles(self):
+        dialog = QtWidgets.QFileDialog()
+        # TODO
+        # Is working correctly? Really give list/tuple of selected file names? Need to check types
+        file = dialog.getOpenFileName(None, "Select file to add")
+
+        # nothing choose and just cancel -> what is it's condition?
+        if file[0] != '':
+            self.horizontalLayout_25 = QtWidgets.QHBoxLayout()
+            self.horizontalLayout_25.setObjectName("horizontalLayout_25")
+
+            self.label_12 = QtWidgets.QLabel(self.verticalFrame_21)
+            self.label_12.setObjectName("label_12")
+
+            self.horizontalLayout_25.addWidget(self.label_12)
+            spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            self.horizontalLayout_25.addItem(spacerItem2)
+            
+            self.spinBox_11 = QtWidgets.QSpinBox(self.verticalFrame_21)
+            self.spinBox_11.setObjectName("spinBox_11")
+            
+            self.horizontalLayout_25.addWidget(self.spinBox_11)
+        
+            # Delete Button
+            self.pushButton_15 = QtWidgets.QPushButton(self.verticalFrame_21)
+            self.pushButton_15.setObjectName("pushButton_15")
+            self.pushButton_15.clicked.connect(lambda:(
+                    self.verticalLayout_9.removeItem(self.horizontalLayout_25),
+                )
+            )
+            
+            self.horizontalLayout_25.addWidget(self.pushButton_15)
+            self.verticalLayout_9.addLayout(self.horizontalLayout_25)
+
+            _translate = QtCore.QCoreApplication.translate  
+            self.label_12.setText(_translate("Dialog", file[0].split("/")[-1]))
+            self.pushButton_15.setText(_translate("Dialog", "Delete"))
+
+    def fileCertainPercentageAddFiles(self):
+        dialog = QtWidgets.QFileDialog()
+        # TODO
+        # Is working correctly? Really give list/tuple of selected file names? Need to check types
+        files = dialog.getOpenFileNames(None, "Select files to add")
+
+        if files[0] != []:
+            for f in files[0]:
+                self.horizontalLayout_14 = QtWidgets.QHBoxLayout()
+                self.horizontalLayout_14.setObjectName("horizontalLayout_14")
+                
+                self.label_7 = QtWidgets.QLabel(self.verticalFrame_4)
+                self.label_7.setObjectName("label_7")
+
+                self.horizontalLayout_14.addWidget(self.label_7)
+                spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+                self.horizontalLayout_14.addItem(spacerItem4)
+
+                self.spinBox_6 = QtWidgets.QSpinBox(self.verticalFrame_4)
+                self.spinBox_6.setObjectName("spinBox_6")
+
+                self.horizontalLayout_14.addWidget(self.spinBox_6)
+
+                # Delete Button
+                self.pushButton_8 = QtWidgets.QPushButton(self.verticalFrame_4)
+                self.pushButton_8.setObjectName("pushButton_8")
+                self.pushButton_8.clicked.connect(lambda:(
+                        self.verticalLayout_4.removeItem(self.horizontalLayout_14),
+                    )
+                )
+
+                self.horizontalLayout_14.addWidget(self.pushButton_8)
+                self.verticalLayout_4.addLayout(self.horizontalLayout_14)
+
+                _translate = QtCore.QCoreApplication.translate  
+                self.label_7.setText(_translate("Dialog", f.split("/")[-1]))
+                self.pushButton_8.setText(_translate("Dialog", "Delete"))
+            
+    def fileChangesAddFiles(self):
+        dialog = QtWidgets.QFileDialog()
+        # TODO
+        # Is working correctly? Really give list/tuple of selected file names? Need to check types
+        files = dialog.getOpenFileNames(None, "Select files to add")
+
+        if files[0] != []:
+            for f in files[0]:
+                self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+                self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+                
+                self.label_4 = QtWidgets.QLabel(self.frame)
+                self.label_4.setObjectName("label_4")
+                
+                self.horizontalLayout_6.addWidget(self.label_4)
+                spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+                self.horizontalLayout_6.addItem(spacerItem7)
+                
+                # Delete Button
+                self.pushButton_5 = QtWidgets.QPushButton(self.frame)
+                self.pushButton_5.setObjectName("pushButton_5")
+                self.pushButton_5.clicked.connect(lambda:(
+                        self.verticalLayout_2.removeItem(self.horizontalLayout_6),
+                    )
+                )
+                
+                self.horizontalLayout_6.addWidget(self.pushButton_5)
+                self.verticalLayout_2.addLayout(self.horizontalLayout_6)
+
+                _translate = QtCore.QCoreApplication.translate
+                self.label_4.setText(_translate("Dialog", f.split("/")[-1]))
+                self.pushButton_5.setText(_translate("Dialog", "Delete"))
+
+    def fileIntervalChangesAddFiles(self):
+        dialog = QtWidgets.QFileDialog()
+        # TODO
+        # Is working correctly? Really give list/tuple of selected file names? Need to check types
+        files = dialog.getOpenFileNames(None, "Select files to add")
+
+        if files[0] != []:
+            for f in files[0]:
+                self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
+                self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+
+                self.label_2 = QtWidgets.QLabel(self.frame1)
+                self.label_2.setObjectName("label_2")
+
+                self.horizontalLayout_11.addWidget(self.label_2)
+                spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+                self.horizontalLayout_11.addItem(spacerItem10)
+                
+                # start line of interval
+                self.spinBox_4 = QtWidgets.QSpinBox(self.frame1)
+                self.spinBox_4.setObjectName("spinBox_4")
+                
+                self.horizontalLayout_11.addWidget(self.spinBox_4)
+                self.label = QtWidgets.QLabel(self.frame1)
+                self.label.setObjectName("label")
+                self.horizontalLayout_11.addWidget(self.label)
+                
+                # last line of interval
+                self.spinBox_2 = QtWidgets.QSpinBox(self.frame1)
+                self.spinBox_2.setObjectName("spinBox_2")
+                
+                self.horizontalLayout_11.addWidget(self.spinBox_2)
+                
+                # Delete Button
+                self.pushButton_3 = QtWidgets.QPushButton(self.frame1)
+                self.pushButton_3.setObjectName("pushButton_3")
+                self.pushButton_3.clicked.connect(lambda:(
+                        self.verticalLayout_5.removeItem(self.horizontalLayout_11),
+                    )
+                )
+
+                self.horizontalLayout_11.addWidget(self.pushButton_3)
+                self.verticalLayout_5.addLayout(self.horizontalLayout_11)
+
+                _translate = QtCore.QCoreApplication.translate
+                self.label_2.setText(_translate("Dialog", f.split("/")[-1]))
+                self.label.setText(_translate("Dialog", "~"))
+                self.pushButton_3.setText(_translate("Dialog", "Delete"))
+
+    def saveInfo(self):
+        self.checkedOptions = []
+        
+        self.fileCreationIntervalFile = None
+        self.fileCertainPercentageFiles = []
+        self.fileChangesFiles = []
+        self.fileIntervalChangesFiles = []
+
+        if self.radioButton.isChecked():
+            self.checkedOptions.append(0)
+
+        else:
+            if self.checkBox.isChecked():
+                self.checkedOptions.append(1)
+
+            if self.checkBox_2.isChecked():
+                self.checkedOptions.append(2)
+
+            if self.checkBox_3.isChecked():
+                self.checkedOptions.append(3)
+
+            if self.checkBox_4.isChecked():
+                self.checkedOptions.append(4)
+
+            if self.checkBox_5.isChecked():
+                self.checkedOptions.append(5)
+
+            if self.checkBox_6.isChecked():
+                self.checkedOptions.append(6)
+
+            if self.checkBox_9.isChecked():
+                self.checkedOptions.append(7)        
 
 class LoginQDialog(QDialog):
     def __init__(self):
@@ -535,6 +839,11 @@ class Ui_MainWindow(object):
         self.option = [0]
         self.repositoryName = None
         self.repositoryPath = None
+        self.checkedOptions = [0]
+        self.fileCreationIntervalFile = None
+        self.fileCertainPercentageFiles = []
+        self.fileChangesFiles = []
+        self.fileIntervalChangesFiles = []
     # TODO
     # How to show widget when clicked button
 
@@ -653,6 +962,13 @@ class Ui_MainWindow(object):
         selectModeQDialog = SelectModeQDialog()
         selectModeQDialog.exec_()
 
+        if selectModeQDialog.checkedOptions != []:
+            self.checkedOptions = selectModeQDialog.checkedOptions
+            self.fileCreationIntervalFile = selectModeQDialog.fileCreationIntervalFile
+            self.fileCertainPercentageFiles = selectModeQDialog.fileCertainPercentageFiles
+            self.fileChangesFiles = selectModeQDialog.fileChangesFiles
+            self.fileIntervalChangesFiles = selectModeQDialog.fileIntervalChangesFiles
+
     def selectDirectory(self):
         dialog = QtWidgets.QFileDialog()
         repository_path = dialog.getExistingDirectory(None, "Select Repository")
@@ -665,25 +981,75 @@ class Ui_MainWindow(object):
         files = dialog.getOpenFileNames(None, "Select files to add")
 
         # nothing choose and just cancel -> what is it's condition?
-        if files is not list:
-            return
+        if files[0] != []:
+            subprocess.call(['bash', 'base/killProcess.sh'])
+            for f in files[0]:
+                subprocess.call(['sh', 'base/addFile.sh', f, self.repositoryPath])
 
-        subprocess.call(['bash', 'base/killProcess.sh'])
-        for f in files:
-            subprocess.call(['sh', 'base/addFile.sh', f])
-
-        subprocess.call(['sh', 'base/continue.sh'])
-        subprocess.call(['sh', 'base/autoCommitProcess.sh'])
+            subprocess.call(['sh', 'base/continue.sh'])
+            
+            # TODO
+            self.start()
+            #subprocess.call(['sh', 'base/autoCommitProcess.sh'])
 
     def start(self):
-        pass
+
+            if self.checkedOptions[0] == 0:
+                subprocess.call(['sh', 'base/continue.sh'])
+                subprocess.call(['sh', 'base/autoCommitProcess.sh', self.repositoryPath])
+
+            else:
+                if 1 in self.checkedOptions:
+                    pass
+
+                if 2 in self.checkedOptions:
+                    pass
+
+                if 3 in self.checkedOptions:
+                    pass
+
+                if 4 in self.checkedOptions:
+                    pass
+
+                if 5 in self.checkedOptions:
+                    pass
+
+                if 6 in self.checkedOptions:
+                    pass
+
+                if 7 in self.checkedOptions:
+                    pass
 
         # TODO
         # member variable - options : list
         # autoCommit with selected Modes
 
     def stop(self):
-        pass
+        if self.checkedOptions[0] == 0:
+            subprocess.call(['bash', 'base/killProcess.sh'])
+
+        else:
+            if 1 in self.checkedOptions:
+                pass
+
+            if 2 in self.checkedOptions:
+                pass
+
+            if 3 in self.checkedOptions:
+                pass
+
+            if 4 in self.checkedOptions:
+                pass
+
+            if 5 in self.checkedOptions:
+                pass
+
+            if 6 in self.checkedOptions:
+                pass
+
+            if 7 in self.checkedOptions:
+                pass
+
         # TODO
         # kill all process
 
@@ -733,6 +1099,9 @@ class Ui_MainWindow(object):
 
         return log.stdout.decode()
 
+    # TODO
+    # Seperate Tab from MainWindow
+
     def addNewTab(self, MainWindow):
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
@@ -776,11 +1145,6 @@ class Ui_MainWindow(object):
         self.pushButton_3.setText(_translate("MainWindow", "Start a local repo"))
 
     def addRepoTab(self, MainWindow):
-        # TODO
-        # repository_name : Extract Repository name & set it to tab Name
-        # gitLog : text of git log --graph ...
-
-
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
         self.gridLayout_5 = QtWidgets.QGridLayout(self.tab)
