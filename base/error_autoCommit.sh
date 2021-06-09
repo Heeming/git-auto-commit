@@ -1,8 +1,4 @@
 #!/bin/bash
-path="$1"
-
-cd $path
-
 while :
 do
   #echo "Checking for uncommitted changes in the git working tree"
@@ -11,12 +7,12 @@ do
   then
     git --no-pager checkout auto-commit
     git --no-pager add .
-    git --no-pager commit -m "Auto Commit"
+    git --no-pager commit -m "Error-Auto Commit/Error Message : $@"
     git --no-pager push -u origin auto-commit
 
   #else
     #echo "Working tree clean. Nothing to commmit."
   fi
 
-  sleep 1
+  sleep 60
 done
