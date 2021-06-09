@@ -1,7 +1,7 @@
 #!/bin/bash
 
 do
-  #echo "Checking for uncommitted changes in the git working tree"
+  echo "Checking for uncommitted changes in the git working tree"
 
   if ! git diff --quiet
   then
@@ -10,8 +10,8 @@ do
     git --no-pager commit -m "Auto Commit"
     git --no-pager push -u origin auto-commit
 
-  #else
-    #echo "Working tree clean. Nothing to commmit."
+  else
+    echo "Working tree clean. Nothing to commmit."
   fi
 
 done

@@ -2,7 +2,7 @@ import datetime as dt
 import subprocess
 import time
 import os
-
+print(os.path.abspath('.'))
 # auto commit 실행 - subprocess에서 에러가 계속 나서 주석처리해놓음
 def auto_commit():
     print("auto commit을 시행합니다")
@@ -44,8 +44,8 @@ def ctime_based_autocommit(filename, start, stop, n):
     print(remainder(filename, start, stop, n)) # 나머지 출력
     if remainder(filename, start, stop, n) == 0:
         # auto commit 실행 - subprocess에서 에러가 계속 나서 주석처리해놓음
-        #subprocess.call(['sh', './continue.sh'])
-        #subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
+        subprocess.call(['sh', './addFile.sh', filename])
+        subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
         print("백업되었습니다.")
 
 choice = 0
@@ -71,6 +71,10 @@ while choice != 8:
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
+        subprocess.call(['bash', './killProcess.sh'])
+        subprocess.call(['sh', './setting.sh'])
+
+        filename = str(input("Enter your file name : "))
         num = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 세팅했다고 가정
         while True:
             try:
@@ -81,6 +85,13 @@ while choice != 8:
                 print(ex)
 
     elif choice == 4:
+        subprocess.call(['bash', './killProcess.sh'], shell=True)
+        subprocess.call(['sh', './setting.sh'], shell=True)
+        #subprocess.run(['bash', './killProcess.sh'])
+        #subprocess.run(['sh', './setting.sh'])
+        #os.popen(['./killProcess.sh'])
+        #os.popen(['./setting.sh'])
+
         filename = str(input('Enter your file name : '))  # GUI에서 사용자가 특정 파일 선택했다고 가정
         n = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 n으로 세팅했다고 가정
         while True:
