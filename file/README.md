@@ -1,30 +1,94 @@
 # File Program
 
-사용자 입력을 받아 auto-commit branch에 변경사항을 commit하고 master에 push
+사용자 입력을 받아 auto-commit branch에 변경사항을 commit하고 push
 
 ## Files
 
-- file_commit.sh : base program
-- file_section_commit.sh : 변경사항을 체크하여 auto-commit branch에 변경사항 commit & push 하는 쉘 스크립트
-- file_npercent_change.sh : 사용자로부터 commit message와 push할 branch명을 입력받아 해당 branch에 commit하는 쉘 스크립트
+- file_autoCommit.sh : 사용자가 파일 이름을 지정하면 그 파일의 변경사항이 감지되면 commit & push 하는 쉘 스크립트
+- file_section.sh : 사용자로부터 전체 코드의 특정 구간 n부터 m을 입력받아 특정 구간 내에 변경사항이 발생하면 commit & push 하는 쉘 스크립트
+- file_npercent.sh : 사용자로부터 전체 코드의 몇%가 변경되면 커밋할것인지 n을 입력받아 변경사항이 n% 이상이면 commit & push 하는 쉘 스크립트
 
 ## Preconditions
 
 - git 사용자명과 password 저장 (아래의 명령어 순서대로 실행)
   - `git config --global credential.helper store`
   - `git config --global credential.helper cache`
-- local repository에 autoCommit.sh, userComit.sh, baseProgram.py를 추가하고 git에 commit & push
+- local repository에 file_autoCommit.sh, file_addFile.sh, baseProgram.py를 추가하고 git에 commit & push
 - auto-commit branch 생성 후 해당 branch로 checkout
   - `git checkout -b auto-commit`
 
-## How to use?
+# 1. 특정 파일 지정
+file_autoCommit.sh : 사용자가 파일 이름을 지정하면 그 파일의 변경사항이 감지되면 commit & push 하는 쉘 스크립트
 
-1. 파일 작업
-2. baseProgram 실행
-   - auto-commit?[y/n] y입력 시 현재까지의 변경사항이 auto-commit branch에 "Auto Commit"이란 commit message로 commit & push 됨
-   - push to other branch?[y/n] y입력 시 commit&push할 branch명, commit message입력.
-   - 입력한 branch에는 최종 결과만 commit됨
+## How to use?
+1. baseProgram.py 실행 `python3 baseProgram.py`
+2. 모드 선택 `>> 3`
+3. 파일 이름 입력 `Specify file_name to detect : $file_name`
+4. $file_name 의 파일 수정
+5. autoCommit 실행
+
+## 실행 예시
+1. `python3 baseProgram.py` `>> 3`
+![image](https://user-images.githubusercontent.com/60775453/121275988-c52e4f80-c908-11eb-9242-971e6f7d1853.png)
+2. 파일 이름 지정 `Specify file_name to detect : $file_name`
+![image](https://user-images.githubusercontent.com/60775453/121276158-1c342480-c909-11eb-843c-dde82886b473.png)
+3. 오토커밋
+![image](https://user-images.githubusercontent.com/60775453/121276052-e42ce180-c908-11eb-9f67-12cbd0115c34.png)
+4. git kraken
+![image](https://user-images.githubusercontent.com/60775453/121276234-4259c480-c909-11eb-8ee3-87da7ada1f4f.png)
+
 
 ## 추가 구현 예정
-
 - 사용자 입력에 따라 autoCommit.sh를 background에서 반복적으로 실행시키고 background 실행을 중단하는 shell 혹은 python 코드
+
+# 2. n% 변경 지정
+file_npercent.sh : 사용자로부터 전체 코드의 몇%가 변경되면 커밋할것인지 n을 입력받아 변경사항이 n% 이상이면 commit & push 하는 쉘 스크립트
+
+## How to use?
+1. baseProgram.py 실행 `python3 baseProgram.py`
+2. 모드 선택 `>> 4`
+3. 퍼센트 입력, 파일지정 `Input percent : $n`, `Add file name : $file_name`
+4. $file_name 의 파일 수정
+5. 전체 코드의 n% 이상 변경 감지 시 autoCommit 실행
+
+## 코드
+```bash
+  echo "Checking file change for n%"
+
+  filename="$1"
+  n="$2"
+  _100="100"
+  diff_msg=`git diff --stat $filename`
+
+  change_line=$(echo $diff_msg | cut -f  3 -d' ') # 변경된 줄 수 
+  FILE_ROW_COUNT=$(cat $filename| wc -l) # 전체 줄 수 
+  change=`expr $change_line / $FILE_ROW_COUNT` # 변경된 줄 수 / 전체 줄 수 
+  change_percent=`expr $change \* $_100` # percent = 변경된 줄 수 / 전체 줄 수 * 100
+  echo "$FILE_ROW_COUNT"
+
+  if ! git diff --quiet && $change_percent > $n
+  then
+    git checkout auto-commit
+    git add $filename
+    git commit -m "Auto Commit: More than $n percent change detected."
+    git push -u origin auto-commit
+```
+## 실행예시
+
+### 고려할 사항
+1. 초기에 파일의 전체 라인 수를 읽기 때문에 0줄인 파일은 작업 불가
+2. 한 줄의 길이가 아니라 단순 줄 수로 퍼센트 계산하므로 한 줄의 코드 길이에 따라 퍼센트가 부정확함
+
+# 3. 파일 구간 지정
+file_section.sh : 사용자로부터 전체 코드의 특정 구간 n부터 m을 입력받아 특정 구간 내에 변경사항이 발생하면 commit & push 하는 쉘 스크립트
+
+## How to use?
+1. baseProgram.py 실행 `python3 baseProgram.py`
+2. 모드 선택 `>> 4`
+3. 퍼센트 입력, 파일지정 `Input percent : $n`, `Add file name : $file_name`
+4. $file_name 의 파일 수정
+5. 전체 코드의 n% 이상 변경 감지 시 autoCommit 실행
+
+## 코드
+
+## 실행예시
