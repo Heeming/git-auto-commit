@@ -10,12 +10,9 @@
 
 ## Preconditions
 
-- git 사용자명과 password 저장 (아래의 명령어 순서대로 실행)
-  - `git config --global credential.helper store`
-  - `git config --global credential.helper cache`
-- local repository에 file_autoCommit.sh, file_addFile.sh, baseProgram.py를 추가하고 git에 commit & push
-- auto-commit branch 생성 후 해당 branch로 checkout
-  - `git checkout -b auto-commit`
+- git push <base branch name>을 실행 후 요청이 있을 경우 cmd/terminal/base 상에서 github에 로그인
+- local repository에 autoCommit.sh, userComit.sh, baseProgram.py를 추가하고 git에 commit & push
+- 해당 local repository는 이미 github remote가 완료됨을 전제로 작동함
 
 # 1. 특정 파일 지정
 file_autoCommit.sh : 사용자가 파일 이름을 지정하면 그 파일의 변경사항이 감지되면 commit & push 하는 쉘 스크립트
