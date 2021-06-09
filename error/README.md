@@ -22,6 +22,7 @@
  * git push <base branch name>을 실행 후 요청이 있을 경우 cmd/terminal/base 상에서 github에 로그인
  * local repository에 autoCommit.sh, userComit.sh, baseProgram.py를 추가하고 git에 commit & push
  * 해당 local repository는 이미 github remote가 완료됨을 전제로 작동함
+ * gcc와 javac가 설치되어 있어야 한다.
 
 ## How to use?
 1. 파일 작업
