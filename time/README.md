@@ -18,8 +18,6 @@ This function allows us to autocommit every n minutes from now.
 shell file을 불러올 때 에러가 나서 그 부분은 주석 처리를 해놓았으며,   
 그 부분을 빼고는 온전하게 완성되었다.  
   
-![time_based_autocommit](https://user-images.githubusercontent.com/69781815/121240360-32c08880-c8d5-11eb-8d90-eb81dee08834.JPG)  
-  
   
 ## 1-1. How to use?(미완성이라 3번은 완성이 되어야 할 수 있음)
 
@@ -38,9 +36,7 @@ shell file을 불러올 때 에러가 나서 그 부분은 주석 처리를 해�
 This function allows us to autocommit every n minutes from creation time of the file you set.  
 shell file을 불러올 때 에러가 나서 그 부분은 주석 처리를 해놓았으며,   
 그 부분을 빼고는 온전하게 완성되었다.  
-  
-![createtime_based_autocommit](https://user-images.githubusercontent.com/69781815/121240365-348a4c00-c8d5-11eb-8844-f28af420a5da.JPG) 
-  
+
   
 ## 2-1. How to use?(미완성이라 3번은 완성이 되어야 할 수 있음)
 
