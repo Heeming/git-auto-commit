@@ -16,7 +16,8 @@ do
   echo "변경 : $change"
   echo "변경 된 퍼센트 : $change_percent"
 
-  if ! git diff --quiet && $change_percent > $n
+  # if ! git diff --quiet
+  if [! git diff --quiet] && [$change_percent -gt $n]
   then
     git checkout auto-commit
     git add $filename
