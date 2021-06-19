@@ -41,7 +41,7 @@ file_autoCommit.sh : 사용자가 파일 이름을 지정하면 그 파일의 �
 
 - 사용자 입력에 따라 autoCommit.sh를 background에서 반복적으로 실행시키고 background 실행을 중단하는 shell 혹은 python 코드
 
-# 2. 특정 파일의 전체 줄의 n% 이상 변경 감지 (Doing : Fix Type error)
+# 2. 특정 파일의 전체 줄의 n% 이상 변경 감지
 
 file_npercent.sh : 사용자로부터 전체 코드의 몇%가 변경되면 커밋할것인지 n을 입력받아 변경사항이 n% 이상이면 commit & push 하는 쉘 스크립트
 
@@ -56,28 +56,44 @@ file_npercent.sh : 사용자로부터 전체 코드의 몇%가 변경되면 커�
 ## 코드
 
 ```bash
-  echo "Checking file change for n%"
-
+  #!/bin/bash
+while :
+do
   filename="$1"
   n="$2"
-  _100="100"
+
+  echo "Checking file change for $n%"
+
   diff_msg=`git diff --stat $filename`
+  FILE_ROW_COUNT=$(cat $filename| wc -l) # 전체 줄 수 
+  change_line=$(echo $diff_msg | cut -f 3 -d' ') # 변경된 줄 수 
+  change=`expr $change_line / $FILE_ROW_COUNT` # 변경된 줄 수 / 전체 줄 수 
+  change_percent=`expr $change \* 100` # percent = 변경된 줄 수 / 전체 줄 수 * 100
+  echo "전체 줄 수 : $FILE_ROW_COUNT"
+  echo "변경된 줄 수 : $change_line"
+  echo "변경 : $change"
+  echo "변경 된 퍼센트 : $change_percent"
 
-  change_line=$(echo $diff_msg | cut -f  3 -d' ') # 변경된 줄 수
-  FILE_ROW_COUNT=$(cat $filename| wc -l) # 전체 줄 수
-  change=`expr $change_line / $FILE_ROW_COUNT` # 변경된 줄 수 / 전체 줄 수
-  change_percent=`expr $change \* $_100` # percent = 변경된 줄 수 / 전체 줄 수 * 100
-  echo "$FILE_ROW_COUNT"
-
-  if ! git diff --quiet && $change_percent > $n
+  if [! git diff --quiet] && [$change_percent -gt $n]
   then
     git checkout auto-commit
     git add $filename
     git commit -m "Auto Commit: More than $n percent change detected."
     git push -u origin auto-commit
+  fi
+
+  sleep 60
+done
+
 ```
 
 ## 실행예시
+1. `python3 baseProgram.py` `>> 4`
+2. 파일 이름 지정 `Specify file_name to detect : $file_name`
+3. 퍼센트 입력 `Input percent : $n`
+<img src="https://user-images.githubusercontent.com/60775453/122644986-dbcb7680-d152-11eb-8d8a-ef5b95cc2f38.png" width=30% height=30% >
+4. 오토커밋
+<img src="https://user-images.githubusercontent.com/60775453/122644906-855e3800-d152-11eb-97d5-ec5bc6e97269.png" width=40% height=40% >
 
 ### 고려할 사항
 
