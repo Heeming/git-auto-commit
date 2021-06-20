@@ -78,8 +78,8 @@ while choice != 8:
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
-        subprocess.check_output(['bash', './killProcess.sh'])
-        subprocess.check_output(['sh', './setting.sh'])
+        subprocess.call(['bash', './killProcess.sh'])
+        subprocess.call(['sh', './setting.sh'])
 
         filename = str(input("Enter your file name : "))
         num = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 세팅했다고 가정
