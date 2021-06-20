@@ -14,11 +14,11 @@
 - local repository에 autoCommit.sh, userComit.sh, baseProgram.py를 추가하고 git에 commit & push
 - 해당 local repository는 이미 github remote가 완료됨을 전제로 작동함
 
-# 1. 특정 파일 지정 (Done)
+## 1. 특정 파일 지정 (Done)
 
 file_autoCommit.sh : 사용자가 파일 이름을 지정하면 그 파일의 변경사항이 감지되면 commit & push 하는 쉘 스크립트
 
-## How to use?
+### How to use?
 
 1. baseProgram.py 실행 `python3 baseProgram.py`
 2. 모드 선택 `>> 3`
@@ -26,7 +26,7 @@ file_autoCommit.sh : 사용자가 파일 이름을 지정하면 그 파일의 �
 4. $file_name 의 파일 수정
 5. autoCommit 실행
 
-## 실행 예시
+### 실행 예시
 
 1. `python3 baseProgram.py` `>> 3`
 <img src="https://user-images.githubusercontent.com/60775453/121275988-c52e4f80-c908-11eb-9242-971e6f7d1853.png" width=70% height=70% >
@@ -37,15 +37,15 @@ file_autoCommit.sh : 사용자가 파일 이름을 지정하면 그 파일의 �
 4. git kraken
 <img src="https://user-images.githubusercontent.com/60775453/121276234-4259c480-c909-11eb-8ee3-87da7ada1f4f.png" width=90% height=90% >
 
-## 추가 구현 예정
+### 추가 구현 예정
 
 - 사용자 입력에 따라 autoCommit.sh를 background에서 반복적으로 실행시키고 background 실행을 중단하는 shell 혹은 python 코드
 
-# 2. 특정 파일의 전체 줄의 n% 이상 변경 감지
+## 2. 특정 파일의 전체 줄의 n% 이상 변경 감지
 
 file_npercent.sh : 사용자로부터 전체 코드의 몇%가 변경되면 커밋할것인지 n을 입력받아 변경사항이 n% 이상이면 commit & push 하는 쉘 스크립트
 
-## How to use?
+### How to use?
 
 1. baseProgram.py 실행 `python3 baseProgram.py`
 2. 모드 선택 `>> 4`
@@ -53,7 +53,7 @@ file_npercent.sh : 사용자로부터 전체 코드의 몇%가 변경되면 커�
 4. $file_name 의 파일 수정
 5. 전체 코드의 n% 이상 변경 감지 시 autoCommit 실행
 
-## 코드
+### 코드
 
 ```bash
   #!/bin/bash
@@ -87,7 +87,7 @@ done
 
 ```
 
-## 실행예시
+### 실행예시
 1. `python3 baseProgram.py` `>> 4`
 2. 파일 이름 지정 `Specify file_name to detect : $file_name`
 3. 퍼센트 입력 `Input percent : $n`
@@ -101,11 +101,11 @@ done
 2. 한 줄의 길이가 아니라 단순 줄 수로 퍼센트 계산하므로 한 줄의 코드 길이에 따라 퍼센트가 부정확함
 
 
-# 3. 특정 파일에서 변경사항을 감지할 구간 설정 (Doing : Fix Type error)
+## 3. 특정 파일에서 변경사항을 감지할 구간 설정 (Doing : Fix Type error)
 
 file_section.sh : 사용자로부터 전체 코드의 특정 구간 n부터 m을 입력받아 특정 구간 내에 변경사항이 발생하면 commit & push 하는 쉘 스크립트
 
-## How to use?
+### How to use?
 
 1. baseProgram.py 실행 `python3 baseProgram.py`
 2. 모드 선택 `>> 5`
@@ -113,7 +113,7 @@ file_section.sh : 사용자로부터 전체 코드의 특정 구간 n부터 m을
 4. $file_name 의 파일 수정
 5. 전체 코드 중 n부터 m 구간의 코드 변경 시 autoCommit 실행
 
-## 코드
+### 코드
 ```bash
 #!/bin/bash
 while :
@@ -143,6 +143,6 @@ do
 done
 ```
 
-## 보완할 점
+### 보완할 점
 - type error
 
