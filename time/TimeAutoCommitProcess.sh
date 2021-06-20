@@ -1,6 +1,6 @@
 #!/bin/bash
 
-do
+#do
   echo "Checking for uncommitted changes in the git working tree"
 
   if ! git diff --quiet
@@ -14,4 +14,4 @@ do
     echo "Working tree clean. Nothing to commmit."
   fi
 
-done
+#done

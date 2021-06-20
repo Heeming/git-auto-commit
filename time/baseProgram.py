@@ -1,14 +1,21 @@
+import schedule
+import threading
 import datetime as dt
 import subprocess
 import time
 import os
-print(os.path.abspath('.'))
-# auto commit 실행 - subprocess에서 에러가 계속 나서 주석처리해놓음
+
+# auto commit 실행
 def auto_commit():
     print("auto commit을 시행합니다")
     subprocess.call(['sh', './continue.sh'])
     subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
 
+# n분마다 auto_commit 실행
+def time_based_autocommit(num):
+    schedule.every(num).minutes.do(auto_commit)
+    while 1:
+        schedule.run_pending()
 
 # 파일생성시간을 계산
 def createtime(file):
@@ -76,30 +83,21 @@ while choice != 8:
 
         filename = str(input("Enter your file name : "))
         num = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 세팅했다고 가정
-        while True:
-            try:
-                print("시도")
-                time.sleep(num*60)
-                auto_commit()
-            except Exception as ex:  # GUI에서 체크버튼 해제되었다고 가정
-                print(ex)
+        try:
+            print("시도")
+            time_based_autocommit(num)
+        except Exception as ex:  # GUI에서 체크버튼 해제되었다고 가정
+            print(ex)
 
     elif choice == 4:
-        subprocess.call(['bash', './killProcess.sh'], shell=True)
-        subprocess.call(['sh', './setting.sh'], shell=True)
-        #subprocess.call(['bash', './killProcess.sh'], shell=True)
-        #subprocess.call(['sh', './setting.sh'], shell=True)
-        #subprocess.run(['bash', './killProcess.sh'])
-        #subprocess.run(['sh', './setting.sh'])
-        #os.popen(['./killProcess.sh'])
-        #os.popen(['./setting.sh'])
+        subprocess.call(['bash', './killProcess.sh'])
+        subprocess.call(['sh', './setting.sh'])
 
         filename = str(input('Enter your file name : '))  # GUI에서 사용자가 특정 파일 선택했다고 가정
         n = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 n으로 세팅했다고 가정
         while True:
             try:
                 print("시도")
-                time.sleep(1)
                 ctime_based_autocommit(filename, start, stop(), n)  # 파일 생성 시간을 기준으로 n분마다 auto commit하는 걸 백그라운드에서 실행
             except Exception as ex:  # GUI에서 체크버튼 해제되었다고 가정
                 print(ex)
