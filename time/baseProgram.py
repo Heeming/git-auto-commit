@@ -11,8 +11,10 @@ def auto_commit():
     subprocess.call(['sh', './continue.sh'])
     subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
 
+# n분마다 auto_commit 실행
 def time_based_autocommit(num):
-    threading.Timer(num, auto_commit).start() # n분마다 auto_commit 실행
+    #threading.Timer(num, auto_commit).start()
+    schedule.every(num).minutes.do(auto_commit)
 
 # 파일생성시간을 계산
 def createtime(file):
@@ -83,7 +85,7 @@ while choice != 8:
         try:
             print("시도")
             time_based_autocommit(num)
-        except Exception as ex:  # GUI에서 체크버튼 4해제되었다고 가정
+        except Exception as ex:  # GUI에서 체크버튼 해제되었다고 가정
             print(ex)
 
     elif choice == 4:
