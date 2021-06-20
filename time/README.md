@@ -11,7 +11,7 @@
 
 ## Preconditions
   
-- 윈도우 사용자는 리눅스를 추가적으로 반드시 설치할 것.
+- 윈도우 사용자는 리눅스를 추가적으로 반드시 설치할 것.  
 (보편적으로 WSL2를 설치하거나, virtual machine을 통해 리눅스를 설치하면 윈도우 사용자도 실행이 가능하다.  
 하지만, 작성자의 경우 WSL2를 설치하고 나서도 /bin/bash 에러를 겪고, virtual machine은 설치도 못한 채 amd-v error를 겪었다.  
 /bin/bash는 lxrun /install을 해야 해결 가능한데 이 명령어 자체가 먹히질 않으며(이때 bash를 사용해도 된다지만 bash를 사용했을 때도 에러가 발생하여 무조건 lxrun /install을 이용하는 수밖에 없었다),  
