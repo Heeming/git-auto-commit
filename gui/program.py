@@ -7,11 +7,26 @@
 # WARNING! All changes made in this file will be lost!
 
 import subprocess
-import time
+import datetime as dt
 import os
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
+
+# 파일생성시간을 계산
+def createtime(file):
+    if os.path.isfile(file):
+        ctime = os.path.getctime(file)  # create time 생성
+        ymd_ctime = dt.datetime.fromtimestamp(ctime)  # 출력 형태를 ymd의 format으로 변경
+        return ymd_ctime
+
+
+# 파일생성시간을 timestamp를 이용해 float형 숫자로 바꾼 후, float형을 int형으로 변환
+def start(filename):
+    start_time = createtime(filename)
+    start_time_timestamp = int(start_time.timestamp())
+    return start_time_timestamp
+
 
 class SelectModeQDialog(QDialog):
     selectedMode = None # information of selected modes
@@ -316,7 +331,7 @@ class SelectModeQDialog(QDialog):
             self.verticalLayout_9.addLayout(self.horizontalLayout_25)
 
             _translate = QtCore.QCoreApplication.translate  
-            self.label_12.setText(_translate("Dialog", file[0].split("/")[-1]))
+            self.label_12.setText(_translate("Dialog", file[0]))
             self.pushButton_15.setText(_translate("Dialog", "Delete"))
 
     def fileCertainPercentageAddFiles(self):
@@ -354,7 +369,7 @@ class SelectModeQDialog(QDialog):
                 self.verticalLayout_4.addLayout(self.horizontalLayout_14)
 
                 _translate = QtCore.QCoreApplication.translate  
-                self.label_7.setText(_translate("Dialog", f.split("/")[-1]))
+                self.label_7.setText(_translate("Dialog"))
                 self.pushButton_8.setText(_translate("Dialog", "Delete"))
             
     def fileChangesAddFiles(self):
@@ -387,7 +402,7 @@ class SelectModeQDialog(QDialog):
                 self.verticalLayout_2.addLayout(self.horizontalLayout_6)
 
                 _translate = QtCore.QCoreApplication.translate
-                self.label_4.setText(_translate("Dialog", f.split("/")[-1]))
+                self.label_4.setText(_translate("Dialog"))
                 self.pushButton_5.setText(_translate("Dialog", "Delete"))
 
     def fileIntervalChangesAddFiles(self):
@@ -435,7 +450,7 @@ class SelectModeQDialog(QDialog):
                 self.verticalLayout_5.addLayout(self.horizontalLayout_11)
 
                 _translate = QtCore.QCoreApplication.translate
-                self.label_2.setText(_translate("Dialog", f.split("/")[-1]))
+                self.label_2.setText(_translate("Dialog"))
                 self.label.setText(_translate("Dialog", "~"))
                 self.pushButton_3.setText(_translate("Dialog", "Delete"))
 
@@ -457,7 +472,7 @@ class SelectModeQDialog(QDialog):
 
             if self.checkBox_2.isChecked():
                 self.checkedOptions.append(2)
-                # TODO
+                self.fileCreationIntervalFile = (self.label_12.text(), self.spinBox_11.value())
 
             if self.checkBox_3.isChecked():
                 self.checkedOptions.append(3)
@@ -1018,7 +1033,11 @@ class Ui_MainWindow(object):
                     subprocess.call(['sh', 'base/timeAutoCommitProcess.sh', self.repositoryPath, str(interval)])
 
                 if 2 in self.checkedOptions:
-                    pass
+                    crtime = int(os.path.getctime(self.fileCreationIntervalFile[0]))
+                    interval = self.fileCreationIntervalFile[1] * 60
+                    subprocess.call(['sh', 'base/continue.sh'])
+                    subprocess.call(['sh', 'base/filetimeAutoCommitProcess.sh', self.repositoryPath, str(crtime), str(interval)])
+
 
                 if 3 in self.checkedOptions:
                     pass
