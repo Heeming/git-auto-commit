@@ -1,7 +1,10 @@
-#!/bin/bash
+#!/bin/sh
+
 path="$1"
 
 cd $path
+
+interval="$2"
 
 while :
 do
@@ -9,14 +12,14 @@ do
 
   if ! git diff --quiet
   then
-    git --no-pager checkout auto-commit
-    git --no-pager add .
-    git --no-pager commit -m "Auto Commit"
-    git --no-pager push -u origin auto-commit
+    git checkout auto-commit
+    git add .
+    git commit -m "Auto Commit"
+    git push -u origin auto-commit
 
   #else
     #echo "Working tree clean. Nothing to commmit."
   fi
 
-  sleep 10
+  sleep $interval
 done

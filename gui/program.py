@@ -22,6 +22,7 @@ class SelectModeQDialog(QDialog):
         # save in member variables?
         super().__init__()
         self.checkedOptions = [0]
+        self.timeInterval = None
         self.fileCreationIntervalFile = None
         self.fileCertainPercentageFiles = []
         self.fileChangesFiles = []
@@ -256,7 +257,10 @@ class SelectModeQDialog(QDialog):
         self.gridLayout.addWidget(self.buttonBox, 5, 0, 1, 1)
 
         self.retranslateUi()
-        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.accepted.connect(lambda:(
+            self.accept(),
+            self.saveInfo(),
+            ))
         self.buttonBox.rejected.connect(self.reject)
         QtCore.QMetaObject.connectSlotsByName(self)
 
@@ -437,7 +441,7 @@ class SelectModeQDialog(QDialog):
 
     def saveInfo(self):
         self.checkedOptions = []
-        
+        self.timeInterval = None
         self.fileCreationIntervalFile = None
         self.fileCertainPercentageFiles = []
         self.fileChangesFiles = []
@@ -446,27 +450,34 @@ class SelectModeQDialog(QDialog):
         if self.radioButton.isChecked():
             self.checkedOptions.append(0)
 
-        else:
+        elif self.radioButton_2.isChecked():
             if self.checkBox.isChecked():
                 self.checkedOptions.append(1)
+                self.timeInterval = self.spinBox.value()
 
             if self.checkBox_2.isChecked():
                 self.checkedOptions.append(2)
+                # TODO
 
             if self.checkBox_3.isChecked():
                 self.checkedOptions.append(3)
+                # TODO
 
             if self.checkBox_4.isChecked():
                 self.checkedOptions.append(4)
+                # TODO
 
             if self.checkBox_5.isChecked():
                 self.checkedOptions.append(5)
+                # TODO
 
             if self.checkBox_6.isChecked():
                 self.checkedOptions.append(6)
+                # TODO
 
             if self.checkBox_9.isChecked():
                 self.checkedOptions.append(7)        
+                # TODO
 
 class LoginQDialog(QDialog):
     def __init__(self):
@@ -840,6 +851,7 @@ class Ui_MainWindow(object):
         self.repositoryName = None
         self.repositoryPath = None
         self.checkedOptions = [0]
+        self.timeInterval = None
         self.fileCreationIntervalFile = None
         self.fileCertainPercentageFiles = []
         self.fileChangesFiles = []
@@ -964,6 +976,7 @@ class Ui_MainWindow(object):
 
         if selectModeQDialog.checkedOptions != []:
             self.checkedOptions = selectModeQDialog.checkedOptions
+            self.timeInterval = selectModeQDialog.timeInterval
             self.fileCreationIntervalFile = selectModeQDialog.fileCreationIntervalFile
             self.fileCertainPercentageFiles = selectModeQDialog.fileCertainPercentageFiles
             self.fileChangesFiles = selectModeQDialog.fileChangesFiles
@@ -1000,7 +1013,9 @@ class Ui_MainWindow(object):
 
             else:
                 if 1 in self.checkedOptions:
-                    pass
+                    interval = self.timeInterval * 60
+                    subprocess.call(['sh', 'base/continue.sh'])
+                    subprocess.call(['sh', 'base/timeAutoCommitProcess.sh', self.repositoryPath, str(interval)])
 
                 if 2 in self.checkedOptions:
                     pass
@@ -1025,30 +1040,30 @@ class Ui_MainWindow(object):
         # autoCommit with selected Modes
 
     def stop(self):
-        if self.checkedOptions[0] == 0:
-            subprocess.call(['bash', 'base/killProcess.sh'])
+        # if self.checkedOptions[0] == 0:
+        subprocess.call(['bash', 'base/killProcess.sh'])
 
-        else:
-            if 1 in self.checkedOptions:
-                pass
+        # else:
+        #     if 1 in self.checkedOptions:
+        #         pass
 
-            if 2 in self.checkedOptions:
-                pass
+        #     if 2 in self.checkedOptions:
+        #         pass
 
-            if 3 in self.checkedOptions:
-                pass
+        #     if 3 in self.checkedOptions:
+        #         pass
 
-            if 4 in self.checkedOptions:
-                pass
+        #     if 4 in self.checkedOptions:
+        #         pass
 
-            if 5 in self.checkedOptions:
-                pass
+        #     if 5 in self.checkedOptions:
+        #         pass
 
-            if 6 in self.checkedOptions:
-                pass
+        #     if 6 in self.checkedOptions:
+        #         pass
 
-            if 7 in self.checkedOptions:
-                pass
+        #     if 7 in self.checkedOptions:
+        #         pass
 
         # TODO
         # kill all process
