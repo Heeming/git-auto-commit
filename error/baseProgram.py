@@ -32,6 +32,7 @@ while choice != 6:
 
         
         path = "./code/"
+        path = input("Type source code path(folder) : ")
 
         file_list = os.listdir(path)
 
@@ -78,6 +79,7 @@ while choice != 6:
 
         
         path = "./code/"
+        path = input("Type source code path(folder) : ")
 
         file_list = os.listdir(path)
 
@@ -123,6 +125,7 @@ while choice != 6:
 
         
         path = "./code/"
+        path = input("Type source code path(folder) : ")
 
         file_list = os.listdir(path)
 
