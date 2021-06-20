@@ -13,8 +13,9 @@ def auto_commit():
 
 # n분마다 auto_commit 실행
 def time_based_autocommit(num):
-    #threading.Timer(num, auto_commit).start()
     schedule.every(num).minutes.do(auto_commit)
+    while 1:
+        schedule.run_pending()
 
 # 파일생성시간을 계산
 def createtime(file):
