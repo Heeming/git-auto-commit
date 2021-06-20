@@ -1,4 +1,5 @@
 import schedule
+import threading
 import datetime as dt
 import subprocess
 import time
@@ -11,7 +12,7 @@ def auto_commit():
     subprocess.call(['sh', './TimeAutoCommitProcess.sh'])
 
 def time_based_autocommit(num):
-    schedule.every(num).minutes.do(auto_commit) # n분마다 auto_commit 실행
+    threading.Timer(num, auto_commit).start() # n분마다 auto_commit 실행
 
 # 파일생성시간을 계산
 def createtime(file):
@@ -74,21 +75,20 @@ while choice != 8:
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
     elif choice == 3:
-        #subprocess.check_output(['bash', './killProcess.sh'])
-        #subprocess.check_output(['sh', './setting.sh'])
+        subprocess.check_output(['bash', './killProcess.sh'])
+        subprocess.check_output(['sh', './setting.sh'])
 
         filename = str(input("Enter your file name : "))
         num = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 세팅했다고 가정
-        while True:
-            try:
-                print("시도")
-                time_based_autocommit(num)
-            except Exception as ex:  # GUI에서 체크버튼 4해제되었다고 가정
-                print(ex)
+        try:
+            print("시도")
+            time_based_autocommit(num)
+        except Exception as ex:  # GUI에서 체크버튼 4해제되었다고 가정
+            print(ex)
 
     elif choice == 4:
-        #subprocess.call(['bash', './killProcess.sh'])
-        #subprocess.call(['sh', './setting.sh'])
+        subprocess.call(['bash', './killProcess.sh'])
+        subprocess.call(['sh', './setting.sh'])
 
         filename = str(input('Enter your file name : '))  # GUI에서 사용자가 특정 파일 선택했다고 가정
         n = int(input('Enter the minutes you want to set up : '))  # GUI에서 사용자가 분을 n으로 세팅했다고 가정
