@@ -147,31 +147,31 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 - signInUI.py : 로그인 창
 
 ## Demo
-1. d
+1. execute-openRepository
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/1.gif" width=50% height=50%>
 
-2. d
+2. basic auto-commit mode
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/2.gif" width=50% height=50%>
 
-3. d
+3. time auto-commit mode1
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/3.gif" width=50% height=50%>
 
-4. d
+4. time auto-commit mode2
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/4.gif" width=50% height=50%>
 
-5. d
+5. file auto-commit mode1
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/5.gif" width=50% height=50%>
 
-6. d
+6. 6. file-auto commit mode2
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/6.gif" width=50% height=50%>
 
-7. d
+7. 7. add file
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/7.gif" width=50% height=50%>
 
-8. d
+8. 8. push
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/8.gif" width=50% height=50%>
 
-9. d
+9. 9. delete auto-commit branch
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/9.gif" width=50% height=50%>
 
 
