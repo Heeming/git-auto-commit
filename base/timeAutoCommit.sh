@@ -1,7 +1,10 @@
-#!/bin/bash
+#!/bin/sh
+
 path="$1"
 
 cd $path
+
+interval="$2"
 
 while :
 do
@@ -18,5 +21,5 @@ do
     #echo "Working tree clean. Nothing to commmit."
   fi
 
-  sleep 10
+  sleep $interval
 done

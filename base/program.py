@@ -7,11 +7,27 @@
 # WARNING! All changes made in this file will be lost!
 
 import subprocess
-import time
+import datetime as dt
 import os
+from typing import Text
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
+
+# 파일생성시간을 계산
+def createtime(file):
+    if os.path.isfile(file):
+        ctime = os.path.getctime(file)  # create time 생성
+        ymd_ctime = dt.datetime.fromtimestamp(ctime)  # 출력 형태를 ymd의 format으로 변경
+        return ymd_ctime
+
+
+# 파일생성시간을 timestamp를 이용해 float형 숫자로 바꾼 후, float형을 int형으로 변환
+def start(filename):
+    start_time = createtime(filename)
+    start_time_timestamp = int(start_time.timestamp())
+    return start_time_timestamp
+
 
 class SelectModeQDialog(QDialog):
     selectedMode = None # information of selected modes
@@ -22,6 +38,7 @@ class SelectModeQDialog(QDialog):
         # save in member variables?
         super().__init__()
         self.checkedOptions = [0]
+        self.timeInterval = None
         self.fileCreationIntervalFile = None
         self.fileCertainPercentageFiles = []
         self.fileChangesFiles = []
@@ -30,14 +47,14 @@ class SelectModeQDialog(QDialog):
     
     def setupUI(self):
         self.setObjectName("Dialog")
-        self.resize(590, 750)
+        self.resize(610, 750)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
         self.setSizePolicy(sizePolicy)
-        self.setMinimumSize(QtCore.QSize(590, 750))
-        self.setMaximumSize(QtCore.QSize(590, 16777215))
+        self.setMinimumSize(QtCore.QSize(610, 750))
+        self.setMaximumSize(QtCore.QSize(610, 16777215))
 
         self.gridLayout = QtWidgets.QGridLayout(self)
         self.gridLayout.setObjectName("gridLayout")
@@ -215,17 +232,29 @@ class SelectModeQDialog(QDialog):
         self.verticalLayout_10.addWidget(self.frame1)
         self.verticalLayout.addWidget(self.fileIntervalFrame)
 
-        # Error Frame
-        self.errorFrame = QtWidgets.QFrame(self.verticalFrame)
-        self.errorFrame.setObjectName("errorFrame")
-        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.errorFrame)
+        # Compile Error Frame
+        self.compileErrorFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.compileErrorFrame.setObjectName("compileErrorFrame")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.compileErrorFrame)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
 
-        self.checkBox_6 = QtWidgets.QCheckBox(self.errorFrame)
+        self.checkBox_6 = QtWidgets.QCheckBox(self.compileErrorFrame)
         self.checkBox_6.setObjectName("checkBox_6")
 
         self.verticalLayout_11.addWidget(self.checkBox_6)
-        self.verticalLayout.addWidget(self.errorFrame)
+        self.verticalLayout.addWidget(self.compileErrorFrame)
+
+        # Runtime Error Frame
+        self.runtimeErrorFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.runtimeErrorFrame.setObjectName("runtimeErrorFrame")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.runtimeErrorFrame)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        
+        self.checkBox_7 = QtWidgets.QCheckBox(self.runtimeErrorFrame)
+        self.checkBox_7.setObjectName("checkBox_7")
+        
+        self.verticalLayout_7.addWidget(self.checkBox_7)
+        self.verticalLayout.addWidget(self.runtimeErrorFrame)
 
         # Interrupt Frame
         self.interruptFrame = QtWidgets.QFrame(self.verticalFrame)
@@ -256,7 +285,10 @@ class SelectModeQDialog(QDialog):
         self.gridLayout.addWidget(self.buttonBox, 5, 0, 1, 1)
 
         self.retranslateUi()
-        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.accepted.connect(lambda:(
+            self.accept(),
+            self.saveInfo(),
+            ))
         self.buttonBox.rejected.connect(self.reject)
         QtCore.QMetaObject.connectSlotsByName(self)
 
@@ -273,7 +305,8 @@ class SelectModeQDialog(QDialog):
         self.pushButton.setText(_translate("Dialog", "Add files"))
         self.checkBox_5.setText(_translate("Dialog", "Commit when a specific intervals of particular files changes"))
         self.pushButton_2.setText(_translate("Dialog", "Add files"))
-        self.checkBox_6.setText(_translate("Dialog", "Commit in the event of an error"))
+        self.checkBox_6.setText(_translate("Dialog", "Commit in the event of a compile error"))
+        self.checkBox_7.setText(_translate("Dialog", "Commit in the event of a runtime error"))
         self.checkBox_9.setText(_translate("Dialog", "Commit in the event of interrupt execution"))
         self.radioButton.setText(_translate("Dialog", "Commit whenever changes occur"))
 
@@ -312,7 +345,7 @@ class SelectModeQDialog(QDialog):
             self.verticalLayout_9.addLayout(self.horizontalLayout_25)
 
             _translate = QtCore.QCoreApplication.translate  
-            self.label_12.setText(_translate("Dialog", file[0].split("/")[-1]))
+            self.label_12.setText(_translate("Dialog", file[0]))
             self.pushButton_15.setText(_translate("Dialog", "Delete"))
 
     def fileCertainPercentageAddFiles(self):
@@ -350,7 +383,7 @@ class SelectModeQDialog(QDialog):
                 self.verticalLayout_4.addLayout(self.horizontalLayout_14)
 
                 _translate = QtCore.QCoreApplication.translate  
-                self.label_7.setText(_translate("Dialog", f.split("/")[-1]))
+                self.label_7.setText(_translate("Dialog", f))
                 self.pushButton_8.setText(_translate("Dialog", "Delete"))
             
     def fileChangesAddFiles(self):
@@ -383,7 +416,7 @@ class SelectModeQDialog(QDialog):
                 self.verticalLayout_2.addLayout(self.horizontalLayout_6)
 
                 _translate = QtCore.QCoreApplication.translate
-                self.label_4.setText(_translate("Dialog", f.split("/")[-1]))
+                self.label_4.setText(_translate("Dialog", f))
                 self.pushButton_5.setText(_translate("Dialog", "Delete"))
 
     def fileIntervalChangesAddFiles(self):
@@ -431,13 +464,13 @@ class SelectModeQDialog(QDialog):
                 self.verticalLayout_5.addLayout(self.horizontalLayout_11)
 
                 _translate = QtCore.QCoreApplication.translate
-                self.label_2.setText(_translate("Dialog", f.split("/")[-1]))
+                self.label_2.setText(_translate("Dialog"))
                 self.label.setText(_translate("Dialog", "~"))
                 self.pushButton_3.setText(_translate("Dialog", "Delete"))
 
     def saveInfo(self):
         self.checkedOptions = []
-        
+        self.timeInterval = None
         self.fileCreationIntervalFile = None
         self.fileCertainPercentageFiles = []
         self.fileChangesFiles = []
@@ -446,27 +479,35 @@ class SelectModeQDialog(QDialog):
         if self.radioButton.isChecked():
             self.checkedOptions.append(0)
 
-        else:
+        elif self.radioButton_2.isChecked():
             if self.checkBox.isChecked():
                 self.checkedOptions.append(1)
+                self.timeInterval = self.spinBox.value()
 
             if self.checkBox_2.isChecked():
                 self.checkedOptions.append(2)
+                self.fileCreationIntervalFile = (self.label_12.text(), self.spinBox_11.value())
 
             if self.checkBox_3.isChecked():
                 self.checkedOptions.append(3)
+                self.fileCertainPercentageFiles.append((self.label_7.text(), self.spinBox_6.value()))
 
             if self.checkBox_4.isChecked():
                 self.checkedOptions.append(4)
+                self.fileChangesFiles.append(self.label_4.text())
 
             if self.checkBox_5.isChecked():
                 self.checkedOptions.append(5)
+                # TODO
 
             if self.checkBox_6.isChecked():
                 self.checkedOptions.append(6)
 
+            if self.checkBox_7.isChecked():
+                self.checkedOptions.append(7)
+
             if self.checkBox_9.isChecked():
-                self.checkedOptions.append(7)        
+                self.checkedOptions.append(9)        
 
 class LoginQDialog(QDialog):
     def __init__(self):
@@ -840,6 +881,7 @@ class Ui_MainWindow(object):
         self.repositoryName = None
         self.repositoryPath = None
         self.checkedOptions = [0]
+        self.timeInterval = None
         self.fileCreationIntervalFile = None
         self.fileCertainPercentageFiles = []
         self.fileChangesFiles = []
@@ -964,6 +1006,7 @@ class Ui_MainWindow(object):
 
         if selectModeQDialog.checkedOptions != []:
             self.checkedOptions = selectModeQDialog.checkedOptions
+            self.timeInterval = selectModeQDialog.timeInterval
             self.fileCreationIntervalFile = selectModeQDialog.fileCreationIntervalFile
             self.fileCertainPercentageFiles = selectModeQDialog.fileCertainPercentageFiles
             self.fileChangesFiles = selectModeQDialog.fileChangesFiles
@@ -994,52 +1037,37 @@ class Ui_MainWindow(object):
 
     def start(self):
 
-            if self.checkedOptions[0] == 0:
-                subprocess.call(['sh', 'base/continue.sh'])
-                subprocess.call(['sh', 'base/autoCommitProcess.sh', self.repositoryPath])
-
-            else:
-                if 1 in self.checkedOptions:
-                    pass
-
-                if 2 in self.checkedOptions:
-                    pass
-
-                if 3 in self.checkedOptions:
-                    pass
-
-                if 4 in self.checkedOptions:
-                    pass
-
-                if 5 in self.checkedOptions:
-                    pass
-
-                if 6 in self.checkedOptions:
-                    pass
-
-                if 7 in self.checkedOptions:
-                    pass
-
-        # TODO
-        # member variable - options : list
-        # autoCommit with selected Modes
-
-    def stop(self):
         if self.checkedOptions[0] == 0:
             subprocess.call(['bash', 'base/killProcess.sh'])
+            subprocess.call(['sh', 'base/continue.sh'])
+            subprocess.call(['sh', 'base/autoCommitProcess.sh', self.repositoryPath])
 
         else:
             if 1 in self.checkedOptions:
-                pass
+                subprocess.call(['bash', 'base/killProcess.sh'])
+                interval = self.timeInterval * 60
+                subprocess.call(['sh', 'base/continue.sh'])
+                subprocess.call(['sh', 'base/timeAutoCommitProcess.sh', self.repositoryPath, str(interval)])
 
             if 2 in self.checkedOptions:
-                pass
+                subprocess.call(['bash', 'base/killProcess.sh'])
+                crtime = int(os.path.getctime(self.fileCreationIntervalFile[0]))
+                interval = self.fileCreationIntervalFile[1] * 60
+                subprocess.call(['sh', 'base/continue.sh'])
+                subprocess.call(['sh', 'base/filetimeAutoCommitProcess.sh', self.repositoryPath, str(crtime), str(interval)])
+
 
             if 3 in self.checkedOptions:
-                pass
+                subprocess.call(['bash', 'base/killProcess.sh'])
+                subprocess.call(['sh', 'base/continue.sh'])
+                subprocess.call(['sh', 'base/addFile.sh', self.repositoryPath, self.fileCertainPercentageFiles[0][0]])
+                subprocess.call(['sh', 'base/fileNPercentProcess.sh', self.repositoryPath, self.fileCertainPercentageFiles[0][0], str(self.fileCertainPercentageFiles[0][1])])
 
             if 4 in self.checkedOptions:
-                pass
+                subprocess.call(['bash', 'base/killProcess.sh'])
+                subprocess.call(['sh', 'base/continue.sh'])
+                subprocess.call(['sh', 'base/addFile.sh', self.repositoryPath, self.fileChangesFiles[0]])
+                subprocess.call(['sh', 'base/fileAutoCommitProcess.sh', self.repositoryPath, self.fileChangesFiles[0]])
 
             if 5 in self.checkedOptions:
                 pass
@@ -1050,8 +1078,15 @@ class Ui_MainWindow(object):
             if 7 in self.checkedOptions:
                 pass
 
+            if 9 in self.checkedOptions:
+                pass
+
         # TODO
-        # kill all process
+        # member variable - options : list
+        # autoCommit with selected Modes
+
+    def stop(self):
+        subprocess.call(['bash', 'base/killProcess.sh'])
 
     def controlAutoCommit(self):
         if self.pushButton_5.text() == "Start":
@@ -1077,10 +1112,6 @@ class Ui_MainWindow(object):
             
             subprocess.call(['sh', 'base/userCommit.sh', branch, msg, self.repositoryPath])
             subprocess.call(['sh', 'base/continue.sh']),
-            
-        # TODO
-        # start()
-        # subprocess.call(['sh', 'base/autoCommitProcess.sh'])
 
     def deleteBranch(self):
         checkoutQDialog = CheckoutQDialog()
