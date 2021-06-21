@@ -47,14 +47,14 @@ class SelectModeQDialog(QDialog):
     
     def setupUI(self):
         self.setObjectName("Dialog")
-        self.resize(590, 750)
+        self.resize(610, 750)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
         self.setSizePolicy(sizePolicy)
-        self.setMinimumSize(QtCore.QSize(590, 750))
-        self.setMaximumSize(QtCore.QSize(590, 16777215))
+        self.setMinimumSize(QtCore.QSize(610, 750))
+        self.setMaximumSize(QtCore.QSize(610, 16777215))
 
         self.gridLayout = QtWidgets.QGridLayout(self)
         self.gridLayout.setObjectName("gridLayout")
@@ -232,17 +232,29 @@ class SelectModeQDialog(QDialog):
         self.verticalLayout_10.addWidget(self.frame1)
         self.verticalLayout.addWidget(self.fileIntervalFrame)
 
-        # Error Frame
-        self.errorFrame = QtWidgets.QFrame(self.verticalFrame)
-        self.errorFrame.setObjectName("errorFrame")
-        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.errorFrame)
+        # Compile Error Frame
+        self.compileErrorFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.compileErrorFrame.setObjectName("compileErrorFrame")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.compileErrorFrame)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
 
-        self.checkBox_6 = QtWidgets.QCheckBox(self.errorFrame)
+        self.checkBox_6 = QtWidgets.QCheckBox(self.compileErrorFrame)
         self.checkBox_6.setObjectName("checkBox_6")
 
         self.verticalLayout_11.addWidget(self.checkBox_6)
-        self.verticalLayout.addWidget(self.errorFrame)
+        self.verticalLayout.addWidget(self.compileErrorFrame)
+
+        # Runtime Error Frame
+        self.runtimeErrorFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.runtimeErrorFrame.setObjectName("runtimeErrorFrame")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.runtimeErrorFrame)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        
+        self.checkBox_7 = QtWidgets.QCheckBox(self.runtimeErrorFrame)
+        self.checkBox_7.setObjectName("checkBox_7")
+        
+        self.verticalLayout_7.addWidget(self.checkBox_7)
+        self.verticalLayout.addWidget(self.runtimeErrorFrame)
 
         # Interrupt Frame
         self.interruptFrame = QtWidgets.QFrame(self.verticalFrame)
@@ -293,7 +305,8 @@ class SelectModeQDialog(QDialog):
         self.pushButton.setText(_translate("Dialog", "Add files"))
         self.checkBox_5.setText(_translate("Dialog", "Commit when a specific intervals of particular files changes"))
         self.pushButton_2.setText(_translate("Dialog", "Add files"))
-        self.checkBox_6.setText(_translate("Dialog", "Commit in the event of an error"))
+        self.checkBox_6.setText(_translate("Dialog", "Commit in the event of a compile error"))
+        self.checkBox_7.setText(_translate("Dialog", "Commit in the event of a runtime error"))
         self.checkBox_9.setText(_translate("Dialog", "Commit in the event of interrupt execution"))
         self.radioButton.setText(_translate("Dialog", "Commit whenever changes occur"))
 
@@ -489,11 +502,12 @@ class SelectModeQDialog(QDialog):
 
             if self.checkBox_6.isChecked():
                 self.checkedOptions.append(6)
-                # TODO
+
+            if self.checkBox_7.isChecked():
+                self.checkedOptions.append(7)
 
             if self.checkBox_9.isChecked():
-                self.checkedOptions.append(7)        
-                # TODO
+                self.checkedOptions.append(9)        
 
 class LoginQDialog(QDialog):
     def __init__(self):
@@ -1062,6 +1076,9 @@ class Ui_MainWindow(object):
                 pass
 
             if 7 in self.checkedOptions:
+                pass
+
+            if 9 in self.checkedOptions:
                 pass
 
         # TODO
