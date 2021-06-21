@@ -39,7 +39,7 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 - [GUI](https://github.com/Heeming/git-auto-commit/blob/master/gui/README.md)
 
 ## Contribution guidelines
-- [CONTRIBUTING](Contribution guidelines)
+- [CONTRIBUTING](https://github.com/Heeming/git-auto-commit/blob/master/CONTRIBUTING.md)
 
 ## Code of Conduct
 - [CODE_OF_CONDUCT](https://github.com/Heeming/git-auto-commit/blob/master/CODE_OF_CONDUCT.md)
