@@ -29,6 +29,36 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
   - 위의 기본 사용자 조건을 사용자가 Customizing을 쉽게 달성할 수 있도록 하기 위한 GUI 개발
 
 ## Quick Start
+- 프로젝트 다운로드
+```bash
+> git clone 프로젝트-주소
+> cd 프로젝트-폴더
+> git checkout 브랜치-이름
+```
+## How to use?
+1. how to start 
+![01.how to start.png](./img/01.how to start.png)
+2. main window1
+
+3. click open repostiroy chooing repository window show
+
+4. main window2 - after choosing repository
+
+5. select mode window - when click ChangeMode button in main window2
+
+6. file choosing window - when lick Add File button on select mode UI
+
+7. change spinbox value
+
+8. choose file1
+
+9. choose file2 and change spinbox value
+
+10. choose file3
+
+11. push window - when click Push button on main window2
+
+12. delete auto-commit window when click delete auto-commit branch on main window2
 
 
 ## Documents
