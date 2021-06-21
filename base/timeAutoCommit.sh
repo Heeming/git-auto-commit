@@ -16,7 +16,7 @@ do
   then
     git checkout auto-commit
     git add .
-    git commit -m "Auto Commit: Every $min minite(s)"
+    git commit -m "Auto Commit: Every $min minute(s)"
     git push -u origin auto-commit
 
   #else

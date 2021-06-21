@@ -1036,37 +1036,37 @@ class Ui_MainWindow(object):
             #subprocess.call(['sh', './autoCommitProcess.sh'])
 
     def start(self):
-        subprocess.call(['sh', './setting.sh'])
+        subprocess.call(['sh', './setting.sh', self.repositoryPath])
 
         if self.checkedOptions[0] == 0:
             subprocess.call(['bash', './killProcess.sh'])
-            subprocess.call(['sh', './continue.sh'])
+            subprocess.call(['sh', './continue.sh', self.repositoryPath])
             subprocess.call(['sh', './autoCommitProcess.sh', self.repositoryPath])
 
         else:
             if 1 in self.checkedOptions:
                 subprocess.call(['bash', './killProcess.sh'])
                 interval = self.timeInterval * 60
-                subprocess.call(['sh', './continue.sh'])
+                subprocess.call(['sh', './continue.sh', self.repositoryPath])
                 subprocess.call(['sh', './timeAutoCommitProcess.sh', self.repositoryPath, str(interval)])
 
             if 2 in self.checkedOptions:
                 subprocess.call(['bash', './killProcess.sh'])
                 crtime = int(os.path.getctime(self.fileCreationIntervalFile[0]))
                 interval = self.fileCreationIntervalFile[1] * 60
-                subprocess.call(['sh', './continue.sh'])
+                subprocess.call(['sh', './continue.sh', self.repositoryPath])
                 subprocess.call(['sh', './filetimeAutoCommitProcess.sh', self.repositoryPath, str(crtime), str(interval), self.fileCreationIntervalFile[0]])
 
 
             if 3 in self.checkedOptions:
                 subprocess.call(['bash', './killProcess.sh'])
-                subprocess.call(['sh', './continue.sh'])
+                subprocess.call(['sh', './continue.sh', self.repositoryPath])
                 subprocess.call(['sh', './addFile.sh', self.repositoryPath, self.fileCertainPercentageFiles[0][0]])
                 subprocess.call(['sh', './fileNPercentProcess.sh', self.repositoryPath, self.fileCertainPercentageFiles[0][0], str(self.fileCertainPercentageFiles[0][1])])
 
             if 4 in self.checkedOptions:
                 subprocess.call(['bash', './killProcess.sh'])
-                subprocess.call(['sh', './continue.sh'])
+                subprocess.call(['sh', './continue.sh', self.repositoryPath])
                 subprocess.call(['sh', './addFile.sh', self.repositoryPath, self.fileChangesFiles[0]])
                 subprocess.call(['sh', './fileAutoCommitProcess.sh', self.repositoryPath, self.fileChangesFiles[0]])
 
