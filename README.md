@@ -38,6 +38,12 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 - [file](https://github.com/Heeming/git-auto-commit/blob/master/file/README.md)
 - [GUI](https://github.com/Heeming/git-auto-commit/blob/master/gui/README.md)
 
+## Contribution guidelines
+- [CONTRIBUTING](Contribution guidelines)
+
+## Code of Conduct
+- [CODE_OF_CONDUCT](https://github.com/Heeming/git-auto-commit/blob/master/CODE_OF_CONDUCT.md)
+
 ## License
 [MIT license](https://opensource.org/licenses/MIT)
 ```
