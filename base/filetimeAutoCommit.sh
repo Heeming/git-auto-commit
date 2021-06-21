@@ -25,7 +25,7 @@ do
     then
       git checkout auto-commit
       git add .
-      git commit -m "Auto Commit: Every $min past from creation time of $filename"
+      git commit -m "Auto Commit: Every $min minute(s) from creation time of $filename"
       git push -u origin auto-commit
     fi
   fi
