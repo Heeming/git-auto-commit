@@ -46,8 +46,9 @@ git-auto-commit 프로그램. program.py가 해당 프로그램이다. .sh파일
 2. cloneRepository: GUI를 통한 respository clone 기능
 3. make localRepository: GUI를 통해 local에 새로운 repository를 생성하는 기능
 4. make push to option : 현재는 모든 auto-commit이 remote repository에 push까지 되도록 개발되어 있다. 해당 push에 대해 사용자가 push 여부를 지정할 수 있도록 할 예정이다.
-5. branch & commit graph : respository 선택 후 화면에 해당 respoisotry의 git log(branch, commit)이 graph로 보여지며 실시간으로 업데이트 되도록 개발할 예정이다. 현재는 repository 선택 시의 git log가 보여지고 업데이트 되지는 않는다.
-6. open multiple repositories : tab 기능을 이용해 한번에 여러 repository를 open하여 개별적으로 auto-commit을 사용할 수 있도록 개발하고자 한다.
-7. select multiple modes : auto-commit mode 설정 시 여러 모드를 중복 선택 가능하도록 할 예정이다. 현재는 GUI 상으론 중복 선택이 가능하지만, 실제로 중복선택할 경우 에러가 발생한다. 각 모드별로 동시 실행 가능한 것과 불가능한 것을 나눠, 동시 실행 불가능한 모드의 경우 GUI자체에서 중복 선택 불가능하도록 만들 예정이다.
-8. manage merging : master branch 혹은 다른 개발 브랜치로 auto-commit branch를 merge할 경우 conflict 등의 문제가 발생할 수 있다. 이를 다룰 수 있는 기능을 추가할 계획이 있다.
-9. Vscode Extension : Vscode Extension으로 프로그램을 확장할 계획이 있다.
+5. button lock : start 버튼을 통해 auto-commit이 진행중인 상황에서는 stop 버튼 외의 다른 버튼을 누를 수 없도록 lock 하는 기능
+6. branch & commit graph : respository 선택 후 화면에 해당 respoisotry의 git log(branch, commit)이 graph로 보여지며 실시간으로 업데이트 되도록 개발할 예정이다. 현재는 repository 선택 시의 git log가 보여지고 업데이트 되지는 않는다.
+7. open multiple repositories : tab 기능을 이용해 한번에 여러 repository를 open하여 개별적으로 auto-commit을 사용할 수 있도록 개발하고자 한다.
+8. select multiple modes : auto-commit mode 설정 시 여러 모드를 중복 선택 가능하도록 할 예정이다. 현재는 GUI 상으론 중복 선택이 가능하지만, 실제로 중복선택할 경우 에러가 발생한다. 각 모드별로 동시 실행 가능한 것과 불가능한 것을 나눠, 동시 실행 불가능한 모드의 경우 GUI자체에서 중복 선택 불가능하도록 만들 예정이다.
+9. manage merging : master branch 혹은 다른 개발 브랜치로 auto-commit branch를 merge할 경우 conflict 등의 문제가 발생할 수 있다. 이를 다룰 수 있는 기능을 추가할 계획이 있다.
+10. Vscode Extension : Vscode Extension으로 프로그램을 확장할 계획이 있다.
