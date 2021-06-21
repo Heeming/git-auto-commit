@@ -1036,6 +1036,7 @@ class Ui_MainWindow(object):
             #subprocess.call(['sh', './autoCommitProcess.sh'])
 
     def start(self):
+        subprocess.call(['sh', './setting.sh'])
 
         if self.checkedOptions[0] == 0:
             subprocess.call(['bash', './killProcess.sh'])
