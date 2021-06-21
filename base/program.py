@@ -1069,33 +1069,7 @@ class Ui_MainWindow(object):
         # autoCommit with selected Modes
 
     def stop(self):
-        # if self.checkedOptions[0] == 0:
         subprocess.call(['bash', 'base/killProcess.sh'])
-
-        # else:
-        #     if 1 in self.checkedOptions:
-        #         pass
-
-        #     if 2 in self.checkedOptions:
-        #         pass
-
-        #     if 3 in self.checkedOptions:
-        #         pass
-
-        #     if 4 in self.checkedOptions:
-        #         pass
-
-        #     if 5 in self.checkedOptions:
-        #         pass
-
-        #     if 6 in self.checkedOptions:
-        #         pass
-
-        #     if 7 in self.checkedOptions:
-        #         pass
-
-        # TODO
-        # kill all process
 
     def controlAutoCommit(self):
         if self.pushButton_5.text() == "Start":
@@ -1121,10 +1095,6 @@ class Ui_MainWindow(object):
             
             subprocess.call(['sh', 'base/userCommit.sh', branch, msg, self.repositoryPath])
             subprocess.call(['sh', 'base/continue.sh']),
-            
-        # TODO
-        # start()
-        # subprocess.call(['sh', 'base/autoCommitProcess.sh'])
 
     def deleteBranch(self):
         checkoutQDialog = CheckoutQDialog()
