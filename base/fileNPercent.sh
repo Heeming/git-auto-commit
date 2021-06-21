@@ -17,11 +17,6 @@ do
     change=$(($change_line*100))
     change_percent=$(($change/$FILE_ROW_COUNT))
 
-    echo "total : $FILE_ROW_COUNT"
-    echo "changed : $change_line"
-    echo "change * 100 : $change"
-    echo "percent : $change_percent"
-
     if [ $change_percent -gt $n ]
     then
       git checkout auto-commit
