@@ -4,8 +4,6 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 ## Introduction
 사용자가 설정한 조건에 따라 file change를 git에 자동으로 commit & push 해주는 시스템이다. 사용자가 auto-commit을 사용할 폴더와 github repository를 등록하면 repository에 auto-commit 전용 branch를 새로 생성한다. 사용자 조건에 따라 auto-commit을 하며, 해당 commit은 해당 branch에 기록된다. 사용자가 프로그램에서 auto-commit을 해제하면 branch를 삭제한다.
 
-<img src="https://user-images.githubusercontent.com/60775453/122745173-af833780-d2c3-11eb-9241-91c39e0eaf03.png" width=80% height=80% >
-
 ## Features
 기본 사용자 조건 : 사용자가 모든 파일에 대해서, 혹은 특정 부분/특정 파일을 지정하여 사용자 조건을 customizing할 수 있다. 
 - [base]
@@ -37,29 +35,40 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 ```
 ## How to use?
 1. how to start 
-<img src="https://github.com/Heeming/git-auto-commit/tree/master/img/1" >
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/1.png" width=50% height=50%>
 
 2. main window1
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/2.png" width=50% height=50%>
 
 3. click open repostiroy chooing repository window show
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/3.png" >
 
 4. main window2 - after choosing repository
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/4.png" >
 
 5. select mode window - when click ChangeMode button in main window2
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/5.png" >
 
 6. file choosing window - when lick Add File button on select mode UI
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/6.png" >
 
 7. change spinbox value
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/7.png" >
 
 8. choose file1
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/8.png" >
 
 9. choose file2 and change spinbox value
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/9.png" >
 
 10. choose file3
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/10.png" >
 
 11. push window - when click Push button on main window2
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/11.png" >
 
 12. delete auto-commit window when click delete auto-commit branch on main window2
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/img/12.png" >
 
 
 ## Documents
