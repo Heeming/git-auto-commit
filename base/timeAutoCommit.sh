@@ -6,6 +6,8 @@ cd $path
 
 interval="$2"
 
+min=$(($interval/60))
+
 while :
 do
   #echo "Checking for uncommitted changes in the git working tree"
@@ -14,7 +16,7 @@ do
   then
     git checkout auto-commit
     git add .
-    git commit -m "Auto Commit"
+    git commit -m "Auto Commit: Every $min minite(s)"
     git push -u origin auto-commit
 
   #else

@@ -21,10 +21,8 @@ do
     then
       git checkout auto-commit
       git add .
-      git commit -m "Auto Commit: More than $n percent change detected."
+      git commit -m "Auto Commit: More than $n percent change detected at $filename."
       git push -u origin auto-commit
     fi
   fi
-
-  sleep 10
 done

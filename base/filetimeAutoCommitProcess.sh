@@ -5,4 +5,6 @@ crtime="$2"
 
 n="$3"
 
-sh base/filetimeAutoCommit.sh $path $crtime $n &
+filename="$4"
+
+sh filetimeAutoCommit.sh $path $crtime $n $filename &

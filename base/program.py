@@ -1025,49 +1025,49 @@ class Ui_MainWindow(object):
 
         # nothing choose and just cancel -> what is it's condition?
         if files[0] != []:
-            subprocess.call(['bash', 'base/killProcess.sh'])
+            subprocess.call(['bash', './killProcess.sh'])
             for f in files[0]:
-                subprocess.call(['sh', 'base/addFile.sh', f, self.repositoryPath])
+                subprocess.call(['sh', './addFile.sh', f, self.repositoryPath])
 
-            subprocess.call(['sh', 'base/continue.sh'])
+            subprocess.call(['sh', './continue.sh'])
             
             # TODO
             self.start()
-            #subprocess.call(['sh', 'base/autoCommitProcess.sh'])
+            #subprocess.call(['sh', './autoCommitProcess.sh'])
 
     def start(self):
 
         if self.checkedOptions[0] == 0:
-            subprocess.call(['bash', 'base/killProcess.sh'])
-            subprocess.call(['sh', 'base/continue.sh'])
-            subprocess.call(['sh', 'base/autoCommitProcess.sh', self.repositoryPath])
+            subprocess.call(['bash', './killProcess.sh'])
+            subprocess.call(['sh', './continue.sh'])
+            subprocess.call(['sh', './autoCommitProcess.sh', self.repositoryPath])
 
         else:
             if 1 in self.checkedOptions:
-                subprocess.call(['bash', 'base/killProcess.sh'])
+                subprocess.call(['bash', './killProcess.sh'])
                 interval = self.timeInterval * 60
-                subprocess.call(['sh', 'base/continue.sh'])
-                subprocess.call(['sh', 'base/timeAutoCommitProcess.sh', self.repositoryPath, str(interval)])
+                subprocess.call(['sh', './continue.sh'])
+                subprocess.call(['sh', './timeAutoCommitProcess.sh', self.repositoryPath, str(interval)])
 
             if 2 in self.checkedOptions:
-                subprocess.call(['bash', 'base/killProcess.sh'])
+                subprocess.call(['bash', './killProcess.sh'])
                 crtime = int(os.path.getctime(self.fileCreationIntervalFile[0]))
                 interval = self.fileCreationIntervalFile[1] * 60
-                subprocess.call(['sh', 'base/continue.sh'])
-                subprocess.call(['sh', 'base/filetimeAutoCommitProcess.sh', self.repositoryPath, str(crtime), str(interval)])
+                subprocess.call(['sh', './continue.sh'])
+                subprocess.call(['sh', './filetimeAutoCommitProcess.sh', self.repositoryPath, str(crtime), str(interval), self.fileCreationIntervalFile[0]])
 
 
             if 3 in self.checkedOptions:
-                subprocess.call(['bash', 'base/killProcess.sh'])
-                subprocess.call(['sh', 'base/continue.sh'])
-                subprocess.call(['sh', 'base/addFile.sh', self.repositoryPath, self.fileCertainPercentageFiles[0][0]])
-                subprocess.call(['sh', 'base/fileNPercentProcess.sh', self.repositoryPath, self.fileCertainPercentageFiles[0][0], str(self.fileCertainPercentageFiles[0][1])])
+                subprocess.call(['bash', './killProcess.sh'])
+                subprocess.call(['sh', './continue.sh'])
+                subprocess.call(['sh', './addFile.sh', self.repositoryPath, self.fileCertainPercentageFiles[0][0]])
+                subprocess.call(['sh', './fileNPercentProcess.sh', self.repositoryPath, self.fileCertainPercentageFiles[0][0], str(self.fileCertainPercentageFiles[0][1])])
 
             if 4 in self.checkedOptions:
-                subprocess.call(['bash', 'base/killProcess.sh'])
-                subprocess.call(['sh', 'base/continue.sh'])
-                subprocess.call(['sh', 'base/addFile.sh', self.repositoryPath, self.fileChangesFiles[0]])
-                subprocess.call(['sh', 'base/fileAutoCommitProcess.sh', self.repositoryPath, self.fileChangesFiles[0]])
+                subprocess.call(['bash', './killProcess.sh'])
+                subprocess.call(['sh', './continue.sh'])
+                subprocess.call(['sh', './addFile.sh', self.repositoryPath, self.fileChangesFiles[0]])
+                subprocess.call(['sh', './fileAutoCommitProcess.sh', self.repositoryPath, self.fileChangesFiles[0]])
 
             if 5 in self.checkedOptions:
                 pass
@@ -1086,7 +1086,7 @@ class Ui_MainWindow(object):
         # autoCommit with selected Modes
 
     def stop(self):
-        subprocess.call(['bash', 'base/killProcess.sh'])
+        subprocess.call(['bash', './killProcess.sh'])
 
     def controlAutoCommit(self):
         if self.pushButton_5.text() == "Start":
@@ -1098,7 +1098,7 @@ class Ui_MainWindow(object):
             self.stop()
 
     def push(self):
-        subprocess.call(['bash', 'base/killProcess.sh'])
+        subprocess.call(['bash', './killProcess.sh'])
 
         # TODO
         # widget for get branch name and commit message...
@@ -1110,8 +1110,8 @@ class Ui_MainWindow(object):
             branch = pushUI.branch
             msg = pushUI.message
             
-            subprocess.call(['sh', 'base/userCommit.sh', branch, msg, self.repositoryPath])
-            subprocess.call(['sh', 'base/continue.sh']),
+            subprocess.call(['sh', './userCommit.sh', branch, msg, self.repositoryPath])
+            subprocess.call(['sh', './continue.sh']),
 
     def deleteBranch(self):
         checkoutQDialog = CheckoutQDialog()
@@ -1120,8 +1120,8 @@ class Ui_MainWindow(object):
         branch = checkoutQDialog.branch
 
         if branch != None:
-            subprocess.call(['bash', 'base/killProcess.sh'])
-            subprocess.call(['bash', 'base/deleteBranch.sh', self.repositoryPath ,branch])
+            subprocess.call(['bash', './killProcess.sh'])
+            subprocess.call(['bash', './deleteBranch.sh', self.repositoryPath ,branch])
 
     def getGitLogGraph(self):
         command = "cd "+self.repositoryPath+ r"; git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative"

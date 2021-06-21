@@ -3,4 +3,4 @@ path="$1"
 
 filename="$2"
 
-sh base/fileAutoCommit.sh $path $filename &
+sh fileAutoCommit.sh $path $filename &

@@ -15,6 +15,4 @@ do
     git commit -m "Auto Commit: tracking $specify_filename"
     git push -u origin auto-commit
   fi
-
-  sleep 10
 done

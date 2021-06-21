@@ -1,4 +1,4 @@
 #!/bin/bash
 path="$1"
 
-sh base/autoCommit.sh $path &
+sh autoCommit.sh $path &

@@ -4,4 +4,4 @@ path="$1"
 filename="$2"
 n="$3"
 
-sh base/fileNPercent.sh $path $filename $n &
+sh fileNPercent.sh $path $filename $n &
