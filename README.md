@@ -37,7 +37,8 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 ```
 ## How to use?
 1. how to start 
-![01.how to start.png](./img/01.how to start.png)
+<img src="https://github.com/Heeming/git-auto-commit/tree/master/img/1" >
+
 2. main window1
 
 3. click open repostiroy chooing repository window show
