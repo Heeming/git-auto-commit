@@ -9,6 +9,7 @@
 import subprocess
 import datetime as dt
 import os
+from typing import Text
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
@@ -369,7 +370,7 @@ class SelectModeQDialog(QDialog):
                 self.verticalLayout_4.addLayout(self.horizontalLayout_14)
 
                 _translate = QtCore.QCoreApplication.translate  
-                self.label_7.setText(_translate("Dialog"))
+                self.label_7.setText(_translate("Dialog", f))
                 self.pushButton_8.setText(_translate("Dialog", "Delete"))
             
     def fileChangesAddFiles(self):
@@ -402,7 +403,7 @@ class SelectModeQDialog(QDialog):
                 self.verticalLayout_2.addLayout(self.horizontalLayout_6)
 
                 _translate = QtCore.QCoreApplication.translate
-                self.label_4.setText(_translate("Dialog"))
+                self.label_4.setText(_translate("Dialog", f))
                 self.pushButton_5.setText(_translate("Dialog", "Delete"))
 
     def fileIntervalChangesAddFiles(self):
@@ -476,11 +477,11 @@ class SelectModeQDialog(QDialog):
 
             if self.checkBox_3.isChecked():
                 self.checkedOptions.append(3)
-                # TODO
+                self.fileCertainPercentageFiles.append((self.label_7.text(), self.spinBox_6.value()))
 
             if self.checkBox_4.isChecked():
                 self.checkedOptions.append(4)
-                # TODO
+                self.fileChangesFiles.append(self.label_4.text())
 
             if self.checkBox_5.isChecked():
                 self.checkedOptions.append(5)
@@ -1022,37 +1023,46 @@ class Ui_MainWindow(object):
 
     def start(self):
 
-            if self.checkedOptions[0] == 0:
+        if self.checkedOptions[0] == 0:
+            subprocess.call(['bash', 'base/killProcess.sh'])
+            subprocess.call(['sh', 'base/continue.sh'])
+            subprocess.call(['sh', 'base/autoCommitProcess.sh', self.repositoryPath])
+
+        else:
+            if 1 in self.checkedOptions:
+                subprocess.call(['bash', 'base/killProcess.sh'])
+                interval = self.timeInterval * 60
                 subprocess.call(['sh', 'base/continue.sh'])
-                subprocess.call(['sh', 'base/autoCommitProcess.sh', self.repositoryPath])
+                subprocess.call(['sh', 'base/timeAutoCommitProcess.sh', self.repositoryPath, str(interval)])
 
-            else:
-                if 1 in self.checkedOptions:
-                    interval = self.timeInterval * 60
-                    subprocess.call(['sh', 'base/continue.sh'])
-                    subprocess.call(['sh', 'base/timeAutoCommitProcess.sh', self.repositoryPath, str(interval)])
-
-                if 2 in self.checkedOptions:
-                    crtime = int(os.path.getctime(self.fileCreationIntervalFile[0]))
-                    interval = self.fileCreationIntervalFile[1] * 60
-                    subprocess.call(['sh', 'base/continue.sh'])
-                    subprocess.call(['sh', 'base/filetimeAutoCommitProcess.sh', self.repositoryPath, str(crtime), str(interval)])
+            if 2 in self.checkedOptions:
+                subprocess.call(['bash', 'base/killProcess.sh'])
+                crtime = int(os.path.getctime(self.fileCreationIntervalFile[0]))
+                interval = self.fileCreationIntervalFile[1] * 60
+                subprocess.call(['sh', 'base/continue.sh'])
+                subprocess.call(['sh', 'base/filetimeAutoCommitProcess.sh', self.repositoryPath, str(crtime), str(interval)])
 
 
-                if 3 in self.checkedOptions:
-                    pass
+            if 3 in self.checkedOptions:
+                subprocess.call(['bash', 'base/killProcess.sh'])
+                subprocess.call(['sh', 'base/continue.sh'])
+                subprocess.call(['sh', 'base/addFile.sh', self.repositoryPath, self.fileCertainPercentageFiles[0][0]])
+                subprocess.call(['sh', 'base/fileNPercentProcess.sh', self.repositoryPath, self.fileCertainPercentageFiles[0][0], str(self.fileCertainPercentageFiles[0][1])])
 
-                if 4 in self.checkedOptions:
-                    pass
+            if 4 in self.checkedOptions:
+                subprocess.call(['bash', 'base/killProcess.sh'])
+                subprocess.call(['sh', 'base/continue.sh'])
+                subprocess.call(['sh', 'base/addFile.sh', self.repositoryPath, self.fileChangesFiles[0]])
+                subprocess.call(['sh', 'base/fileAutoCommitProcess.sh', self.repositoryPath, self.fileChangesFiles[0]])
 
-                if 5 in self.checkedOptions:
-                    pass
+            if 5 in self.checkedOptions:
+                pass
 
-                if 6 in self.checkedOptions:
-                    pass
+            if 6 in self.checkedOptions:
+                pass
 
-                if 7 in self.checkedOptions:
-                    pass
+            if 7 in self.checkedOptions:
+                pass
 
         # TODO
         # member variable - options : list

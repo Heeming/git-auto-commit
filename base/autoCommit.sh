@@ -9,10 +9,10 @@ do
 
   if ! git diff --quiet
   then
-    git --no-pager checkout auto-commit
-    git --no-pager add .
-    git --no-pager commit -m "Auto Commit"
-    git --no-pager push -u origin auto-commit
+    git checkout auto-commit
+    git add .
+    git commit -m "Auto Commit"
+    git push -u origin auto-commit
 
   #else
     #echo "Working tree clean. Nothing to commmit."

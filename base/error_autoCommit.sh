@@ -14,5 +14,5 @@ do
     #echo "Working tree clean. Nothing to commmit."
   fi
 
-  sleep 60
+  sleep 10
 done
