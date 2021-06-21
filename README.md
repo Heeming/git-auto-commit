@@ -146,6 +146,35 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 - selectMode.py : git-auto-commit의 사용자 조건를 선택하는 창
 - signInUI.py : 로그인 창
 
+## Demo
+1. d
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/1.gif" width=50% height=50%>
+
+2. d
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/2.gif" width=50% height=50%>
+
+3. d
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/3.gif" width=50% height=50%>
+
+4. d
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/4.gif" width=50% height=50%>
+
+5. d
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/5.gif" width=50% height=50%>
+
+6. d
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/6.gif" width=50% height=50%>
+
+7. d
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/7.gif" width=50% height=50%>
+
+8. d
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/8.gif" width=50% height=50%>
+
+9. d
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/9.gif" width=50% height=50%>
+
+
 ## Contribution guidelines
 - [CONTRIBUTING](https://github.com/Heeming/git-auto-commit/blob/master/CONTRIBUTING.md)
 
