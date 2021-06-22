@@ -164,16 +164,16 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 5. file auto-commit mode1
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/5.gif" width=50% height=50%>
 
-6. 6. file-auto commit mode2
+6. file-auto commit mode2
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/6.gif" width=50% height=50%>
 
-7. 7. add file
+7. add file
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/7.gif" width=50% height=50%>
 
-8. 8. push
+8. push
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/8.gif" width=50% height=50%>
 
-9. 9. delete auto-commit branch
+9. delete auto-commit branch
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/9.gif" width=50% height=50%>
 
 
