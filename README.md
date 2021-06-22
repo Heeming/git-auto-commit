@@ -30,8 +30,10 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 - 프로젝트 다운로드
 ```bash
 > git clone 프로젝트-주소
-> cd 프로젝트-폴더
+> cd git-auto-commit
+> cd base
 > git checkout 브랜치-이름
+> python baseProgram.py
 ```
 ## How to use?
 1. how to start 
@@ -147,6 +149,8 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 - signInUI.py : 로그인 창
 
 ## Demo
+[Demo vedio](https://drive.google.com/drive/folders/14EXzA5BIJCla3NhSRaD8_JMwRASzUYEl?usp=sharing)
+
 1. execute-openRepository
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/1.gif" width=50% height=50%>
 
@@ -162,16 +166,16 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 5. file auto-commit mode1
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/5.gif" width=50% height=50%>
 
-6. 6. file-auto commit mode2
+6. file-auto commit mode2
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/6.gif" width=50% height=50%>
 
-7. 7. add file
+7. add file
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/7.gif" width=50% height=50%>
 
-8. 8. push
+8. push
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/8.gif" width=50% height=50%>
 
-9. 9. delete auto-commit branch
+9. delete auto-commit branch
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/9.gif" width=50% height=50%>
 
 
