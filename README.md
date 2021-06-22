@@ -152,31 +152,31 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 [Demo vedio](https://drive.google.com/drive/folders/14EXzA5BIJCla3NhSRaD8_JMwRASzUYEl?usp=sharing)
 
 1. execute-openRepository
-<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/1.gif" width=50% height=50%>
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/1.gif" width=80% height=80%>
 
 2. basic auto-commit mode
-<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/2.gif" width=50% height=50%>
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/2.gif" width=80% height=80%>
 
 3. time auto-commit mode1
-<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/3.gif" width=50% height=50%>
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/3.gif" width=80% height=80%>
 
 4. time auto-commit mode2
-<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/4.gif" width=50% height=50%>
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/4.gif" width=80% height=80%>
 
 5. file auto-commit mode1
-<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/5.gif" width=50% height=50%>
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/5.gif" width=80% height=80%>
 
 6. file-auto commit mode2
-<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/6.gif" width=50% height=50%>
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/6.gif" width=80% height=80%>
 
 7. add file
-<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/7.gif" width=50% height=50%>
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/7.gif" width=80% height=80%>
 
 8. push
-<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/8.gif" width=50% height=50%>
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/8.gif" width=80% height=80%>
 
 9. delete auto-commit branch
-<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/9.gif" width=50% height=50%>
+<img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/9.gif" width=80% height=80%>
 
 
 ## Contribution guidelines
