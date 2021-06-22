@@ -30,8 +30,10 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 - 프로젝트 다운로드
 ```bash
 > git clone 프로젝트-주소
-> cd 프로젝트-폴더
+> cd git-auto-commit
+> cd base
 > git checkout 브랜치-이름
+> python baseProgram.py
 ```
 ## How to use?
 1. how to start 
