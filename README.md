@@ -147,6 +147,8 @@ The project git-auto-commit with user customizing in 2021 Open Source Software P
 - signInUI.py : 로그인 창
 
 ## Demo
+[Demo vedio](https://drive.google.com/drive/folders/14EXzA5BIJCla3NhSRaD8_JMwRASzUYEl?usp=sharing)
+
 1. execute-openRepository
 <img src="https://github.com/Heeming/git-auto-commit/blob/master/gif/1.gif" width=50% height=50%>
 
