@@ -8,7 +8,9 @@ while choice != 6:
     print("Menu")
     print("1. New")
     print("2. Continue")
-    print("3. Select mode")
+    print("3. Select mode(check compile error)")
+    print("3.1. Select mode(check execute error)")
+    print("3.2. Select mode(check stop process)")
     print("4. Git add file")
     print("5. Git push to branch")
     print("6. Delete auto-commit branch")
@@ -23,13 +25,61 @@ while choice != 6:
         subprocess.call(['sh', './continue.sh'])
         subprocess.call(['sh', './autoCommitProcess.sh'])
 
-    elif choice == 3:
+    elif choice == 3: # check compile error
         time_out_second = 15
 
         subprocess.call(['sh', './killProcess.sh'])
 
         
         path = "./code/"
+        path = input("Type source code path(folder) : ")
+
+        file_list = os.listdir(path)
+
+
+        py_list = [file for file in file_list if file.endswith(".py")]
+
+        c_list = [file for file in file_list if file.endswith(".c")]
+        for i in range(len(c_list)): c_list[i] = c_list[i].split('.')[0]
+
+        java_list = [file for file in file_list if file.endswith(".java")]
+        for i in range(len(java_list)): java_list[i] = java_list[i].split('.')[0]
+
+
+
+        for i in range(len(py_list)) :
+            p = subprocess.Popen(['python3', path + py_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            try:
+                out, err = p.communicate(timeout=time_out_second)
+            except Exception as ex:
+                out, err = None, ex
+            
+            if err == '':
+                pass
+            else:
+                err = str(err)
+                print("error - " + py_list[i])
+                print("error msg :\n", err)
+                subprocess.call(['sh', './continue.sh'])
+                subprocess.call(['sh', './error_autoCommitProcess.sh', err])
+            
+
+        for i in range(len(c_list)) : # 컴파일을 원래 소스코드 파일 이름대로 해야 함.
+            subprocess.Popen(['sh', './compile_c.sh', path, c_list[i]] + '.out', universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            
+
+        for i in range(len(java_list)) :
+            subprocess.Popen(['sh', './compile_java.sh', path + java_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+
+    elif choice == 3.1: # check execute error
+        time_out_second = 15
+
+        subprocess.call(['sh', './killProcess.sh'])
+
+        
+        path = "./code/"
+        path = input("Type source code path(folder) : ")
 
         file_list = os.listdir(path)
 
@@ -62,7 +112,53 @@ while choice != 6:
             
 
         for i in range(len(c_list)) :
-            p = subprocess.Popen(['sh', './exe_c.sh', path, c_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            subprocess.Popen(['sh', './exe_c.sh', path, c_list[i]] + '.out', universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        for i in range(len(java_list)) :
+            subprocess.Popen(['sh', './exe_java.sh', path + java_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+    
+    elif choice == 3.2: # check stop process
+        time_out_second = 15
+
+        subprocess.call(['sh', './killProcess.sh'])
+
+        
+        path = "./code/"
+        path = input("Type source code path(folder) : ")
+
+        file_list = os.listdir(path)
+
+
+        py_list = [file for file in file_list if file.endswith(".py")]
+
+        c_list = [file for file in file_list if file.endswith(".c")]
+        for i in range(len(c_list)): c_list[i] = c_list[i].split('.')[0]
+
+        java_list = [file for file in file_list if file.endswith(".java")]
+        for i in range(len(java_list)): java_list[i] = java_list[i].split('.')[0]
+
+
+
+        for i in range(len(py_list)) :
+            p = subprocess.Popen(['python3', path + py_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            try:
+                out, err = p.communicate(timeout=time_out_second)
+            except Exception as ex:
+                out, err = None, ex
+            
+            if err == '':
+                pass
+            else:
+                err = str(err)
+                print("error - " + py_list[i])
+                print("error msg :\n", err)
+                subprocess.call(['sh', './continue.sh'])
+                subprocess.call(['sh', './error_autoCommitProcess.sh', err])
+            
+
+        for i in range(len(c_list)) :
+            p = subprocess.Popen(['sh', './sub_exe_c.sh', path, c_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             try:
                 out, err = p.communicate(timeout=time_out_second)
             except Exception as ex:
@@ -78,7 +174,7 @@ while choice != 6:
                 subprocess.call(['sh', './error_autoCommitProcess.sh ' + err])
 
         for i in range(len(java_list)) :
-            p = subprocess.Popen(['sh', './java_c.sh', path + java_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(['sh', './sub_exe_java.sh', path + java_list[i]], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             try:
                 out, err = p.communicate(timeout=time_out_second)
             except Exception as ex:
@@ -92,8 +188,7 @@ while choice != 6:
                 print("error msg :\n", err)
                 subprocess.call(['sh', './continue.sh'])
                 subprocess.call(['sh', './error_autoCommitProcess.sh ' + err])
-        
-    
+
 
     
     elif choice == 4:
@@ -124,6 +219,7 @@ while choice != 6:
 
     elif choice == 7:
         subprocess.call(['bash', './killProcess.sh'])
+        subprocess.call(['bash', './error_killProcess.sh'])
         break
 
     else:
